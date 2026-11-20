@@ -3,7 +3,8 @@ import { es, Translation } from './translations/es';
 import { pt } from './translations/pt';
 
 export type LanguageCode = 'es' | 'en' | 'pt';
-export type FlagCode = 'cl' | 'gb' | 'br';
+/** Banderas disponibles: idiomas del sitio + países de referencia (Ruta D.O.). */
+export type FlagCode = 'cl' | 'gb' | 'br' | 'es' | 'fr';
 
 export interface LanguageOption {
   code: LanguageCode;

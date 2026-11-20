@@ -1,45 +1,88 @@
 <section id="ruta-do" aria-labelledby="ruta-title" class="theme-light surface-sand section-edge relative py-20 sm:py-28 border-b border-line overflow-hidden">
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <app-section-heading
-      class="max-w-3xl mb-16 sm:mb-20"
-      align="left"
-      titleId="ruta-title"
-      [kicker]="t().roadmap.kicker"
-      [title]="t().roadmap.title"
-      [subtitle]="t().roadmap.subtitle" />
+  <div class="absolute inset-0 honeycomb-fine" aria-hidden="true"></div>
+  <div class="hidden md:block"><app-bee flight="b" class="absolute w-8 h-7 top-28 right-[6%] z-20 opacity-80" /></div>
 
-    <!-- Línea de tiempo editorial: vertical en móvil, horizontal en escritorio -->
-    <ol class="relative grid lg:grid-cols-4 gap-12 lg:gap-10">
-      <span class="timeline-line absolute lg:hidden left-[7px] top-2 bottom-2 w-px" aria-hidden="true"></span>
-      <span class="timeline-line timeline-line--h hidden lg:block absolute left-0 right-0 top-[7px] h-px" aria-hidden="true"></span>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Encabezado + sello de destino -->
+    <div class="grid lg:grid-cols-12 gap-10 items-center mb-16 sm:mb-20">
+      <app-section-heading
+        class="lg:col-span-8 max-w-3xl"
+        align="left"
+        titleId="ruta-title"
+        [kicker]="t().roadmap.kicker"
+        [title]="t().roadmap.title"
+        [subtitle]="t().roadmap.subtitle" />
+
+      <div class="hidden lg:flex lg:col-span-4 justify-end" appReveal [revealDelay]="150" aria-hidden="true">
+        <div class="seal relative w-48 h-48 rounded-full flex flex-col items-center justify-center text-center">
+          <svg class="seal-ring absolute inset-0 w-full h-full" viewBox="0 0 200 200" fill="none">
+            <circle cx="100" cy="100" r="94" stroke="#CD8651" stroke-width="1.5" stroke-dasharray="3 7" stroke-linecap="round" />
+          </svg>
+          <span class="w-16 h-16 rounded-full ragko-medallion flex items-center justify-center">
+            <app-ragko-mark class="w-10 h-10 text-amber" [strokeWidth]="6.5" />
+          </span>
+          <span class="mt-3 text-[11px] font-bold uppercase tracking-[0.2em] text-accent">{{ t().hero.card.seal }}</span>
+          <span class="font-serif text-lg font-semibold text-bone leading-tight">Caramávida</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Línea de tiempo: tarjetas unidas por celdas de panal numeradas -->
+    <ol class="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
+      <!-- Hilo conductor: horizontal en escritorio, vertical en móvil -->
+      <span class="timeline-line timeline-line--h hidden lg:block absolute left-[12.5%] right-[12.5%] top-7 h-0.5 rounded-full" aria-hidden="true"></span>
+      <span class="timeline-line sm:hidden absolute left-7 top-7 bottom-7 w-0.5 rounded-full" aria-hidden="true"></span>
 
       @for (step of t().roadmap.steps; track $index; let i = $index; let last = $last) {
-        <li appReveal [revealDelay]="i * 120" class="relative pl-12 lg:pl-0 lg:pt-14">
-          <svg class="absolute left-0 top-0 w-[15px] h-[15px]" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"
-                  [attr.fill]="last ? '#B8722C' : '#F0E0BD'" stroke="#B8722C" stroke-width="2" />
-          </svg>
-
-          <div class="flex items-baseline gap-4">
-            <span class="font-serif text-6xl leading-none text-amber/60 tabular-nums">0{{ i + 1 }}</span>
-            <span class="spec-label">{{ step.months }}</span>
+        <li appReveal [revealDelay]="i * 120" class="relative flex sm:flex-col gap-5 sm:gap-6">
+          <!-- Celda numerada -->
+          <div class="relative z-10 shrink-0 lg:mx-auto w-14 h-14 flex items-center justify-center">
+            @if (last) {
+              <span class="goal-pulse absolute inset-0" aria-hidden="true"></span>
+            }
+            <svg class="absolute inset-0 w-full h-full drop-shadow-[0_6px_10px_rgba(122,74,34,0.25)]" viewBox="0 0 56 56" aria-hidden="true">
+              <path d="M28 2.5l22.1 12.75v25.5L28 53.5 5.9 40.75v-25.5z"
+                    [attr.fill]="last ? '#CD8651' : '#FCF6E9'" stroke="#CD8651" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+            <span class="relative font-serif text-2xl font-semibold leading-none" [class]="last ? 'text-ink' : 'text-amber-deep'">0{{ i + 1 }}</span>
           </div>
-          <h3 class="font-serif text-2xl font-medium tracking-tight text-bone mt-4">{{ step.title }}</h3>
-          <p class="text-sm text-muted leading-relaxed mt-3 max-w-xs">{{ step.desc }}</p>
+
+          <!-- Tarjeta de la fase -->
+          <article class="flex-1 rounded-2xl p-6 transition-transform duration-500 hover:-translate-y-1"
+                   [class]="last ? 'theme-dark bg-ink border border-terracotta shadow-[0_24px_48px_-24px_rgba(30,26,22,0.7)]' : 'card-warm'">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="spec-label !text-accent">{{ t().roadmap.phase }} 0{{ i + 1 }}</span>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide border"
+                    [class]="last ? 'bg-terracotta text-ink border-terracotta' : 'bg-amber/10 text-accent border-amber/30'">
+                {{ step.months }}
+              </span>
+            </div>
+            <h3 class="font-serif text-2xl font-semibold tracking-tight text-bone mt-4 leading-tight">{{ step.title }}</h3>
+            <p class="text-sm text-bone/80 leading-relaxed mt-3">{{ step.desc }}</p>
+          </article>
         </li>
       }
     </ol>
 
     <!-- Referentes internacionales -->
-    <div class="mt-20 sm:mt-24 pt-10 border-t border-[var(--hairline)]" appReveal>
-      <div class="kicker-pill mb-10">{{ t().roadmap.benchKicker }}</div>
-      <div class="grid md:grid-cols-2 gap-10 md:gap-0 md:divide-x md:divide-[var(--hairline)]">
-        @for (bench of t().roadmap.benchmarks; track bench.code; let first = $first) {
-          <figure class="flex items-start gap-6" [class]="first ? 'md:pr-12' : 'md:pl-12'">
-            <span class="font-serif italic text-5xl text-amber leading-none shrink-0 w-14">{{ bench.code }}</span>
+    <div class="mt-20 sm:mt-24" appReveal>
+      <div class="mb-8">
+        <span class="kicker-pill">{{ t().roadmap.benchKicker }}</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        @for (bench of t().roadmap.benchmarks; track bench.code) {
+          <figure class="card-warm rounded-2xl p-6 sm:p-7 flex items-start gap-5">
+            <span class="relative shrink-0 w-14 h-14 flex items-center justify-center" aria-hidden="true">
+              <svg class="absolute inset-0 w-full h-full" viewBox="0 0 56 56">
+                <path d="M28 2.5l22.1 12.75v25.5L28 53.5 5.9 40.75v-25.5z" fill="#FCF6E9" stroke="#CD8651" stroke-width="1.5" stroke-linejoin="round" />
+              </svg>
+              <app-flag [code]="bench.code === 'ES' ? 'es' : 'fr'" class="relative !w-7 !h-5" />
+            </span>
             <figcaption>
-              <h4 class="font-serif text-xl font-medium text-bone tracking-tight">{{ bench.name }}</h4>
-              <p class="text-sm text-muted mt-2 leading-relaxed">{{ bench.desc }}</p>
+              <span class="spec-label !text-accent">{{ bench.code }}</span>
+              <h4 class="font-serif text-xl font-semibold text-bone tracking-tight mt-1">{{ bench.name }}</h4>
+              <p class="text-sm text-bone/80 mt-2 leading-relaxed">{{ bench.desc }}</p>
             </figcaption>
           </figure>
         }

@@ -6,7 +6,7 @@ let nextId = 0;
 
 /**
  * Banderas en SVG (los emojis de bandera no se ven en Windows).
- * Chile → español · Reino Unido → inglés · Brasil → portugués.
+ * Chile → español · Reino Unido → inglés · Brasil → portugués; España y Francia para los referentes D.O.
  */
 @Component({
   selector: 'app-flag',
@@ -47,6 +47,19 @@ let nextId = 0;
           <polygon points="1.7,7 10,1.3 18.3,7 10,12.7" fill="#FFDF00" />
           <circle cx="10" cy="7" r="3.4" fill="#002776" />
           <path d="M6.7 6.3 Q10 5.4 13.3 7.6" stroke="#fff" stroke-width="0.55" fill="none" />
+        </svg>
+      }
+      @case ('es') {
+        <svg viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" class="block w-full h-full">
+          <rect width="30" height="20" fill="#AA151B" />
+          <rect y="5" width="30" height="10" fill="#F1BF00" />
+        </svg>
+      }
+      @case ('fr') {
+        <svg viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" class="block w-full h-full">
+          <rect width="10" height="20" fill="#002654" />
+          <rect x="10" width="10" height="20" fill="#fff" />
+          <rect x="20" width="10" height="20" fill="#CE1126" />
         </svg>
       }
     }
