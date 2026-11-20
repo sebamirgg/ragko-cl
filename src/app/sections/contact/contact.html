@@ -1,15 +1,15 @@
-<section id="contacto" aria-labelledby="contacto-title" class="theme-light relative py-24 sm:py-32 bg-charcoal overflow-hidden">
+<section id="contacto" aria-labelledby="contacto-title" class="theme-light surface-cream section-edge relative py-24 sm:py-32 overflow-hidden">
   <app-bee flight="a" class="absolute hidden md:block w-8 h-7 top-20 left-[12%] z-20 opacity-75" />
 
   <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div appReveal class="rounded-[2.2rem] bg-gradient-to-b from-graphite to-charcoal border border-terracotta/40 p-7 sm:p-14 text-center shadow-2xl space-y-8">
+    <div appReveal class="rounded-[2.2rem] card-warm p-7 sm:p-14 text-center space-y-8">
 
       <div class="inline-flex items-center justify-center w-20 h-20 rounded-full ragko-medallion mx-auto">
         <app-ragko-mark class="w-11 h-11 text-accent" />
       </div>
 
       <div class="space-y-4 max-w-2xl mx-auto">
-        <span class="block text-xs font-bold uppercase tracking-[0.25em] text-accent">{{ t().contact.kicker }}</span>
+        <span class="kicker-pill">{{ t().contact.kicker }}</span>
         <h2 id="contacto-title" class="font-serif text-3xl sm:text-5xl font-semibold text-bone leading-tight">{{ t().contact.title }}</h2>
         <p class="text-sm sm:text-base text-muted leading-relaxed">{{ t().contact.subtitle }}</p>
       </div>

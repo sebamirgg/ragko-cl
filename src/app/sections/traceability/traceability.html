@@ -1,4 +1,4 @@
-<section id="trazabilidad" aria-labelledby="trazabilidad-title" class="theme-light relative py-24 sm:py-32 bg-obsidian border-b border-line overflow-hidden">
+<section id="trazabilidad" aria-labelledby="trazabilidad-title" class="theme-light surface-cream section-edge relative py-24 sm:py-32 border-b border-line overflow-hidden">
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <app-section-heading
       class="max-w-3xl mx-auto mb-12"
@@ -7,7 +7,7 @@
       [title]="t().trace.title"
       [subtitle]="t().trace.subtitle" />
 
-    <div class="rounded-[2rem] border border-terracotta/35 bg-gradient-to-b from-graphite to-charcoal shadow-2xl overflow-hidden" appReveal>
+    <div class="rounded-[2rem] card-warm overflow-hidden" appReveal>
 
       <!-- Buscador de lote -->
       <form (submit)="search($event)" class="p-5 sm:p-7 border-b border-line flex flex-col lg:flex-row lg:items-end gap-5">
@@ -163,7 +163,7 @@
           </div>
 
           <!-- Recorrido del lote -->
-          <div class="lg:col-span-5 p-5 sm:p-7 bg-obsidian/40 border-t lg:border-t-0 border-line flex flex-col">
+          <div class="lg:col-span-5 p-5 sm:p-7 bg-obsidian/70 border-t lg:border-t-0 border-line flex flex-col">
             <h3 class="text-xs font-bold uppercase tracking-[0.18em] text-hl mb-5">{{ t().trace.journeyTitle }}</h3>
 
             @for (key of [current.code]; track key) {

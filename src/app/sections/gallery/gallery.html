@@ -1,12 +1,12 @@
-<section id="galeria" aria-labelledby="galeria-title" class="theme-light relative py-24 sm:py-32 bg-obsidian border-b border-line overflow-hidden">
+<section id="galeria" aria-labelledby="galeria-title" class="theme-light surface-sand section-edge relative py-24 sm:py-32 border-b border-line overflow-hidden">
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14" appReveal>
       <div class="max-w-2xl space-y-3">
-        <span class="block text-xs font-bold uppercase tracking-[0.24em] text-accent">{{ t().gallery.kicker }}</span>
+        <span class="kicker-pill">{{ t().gallery.kicker }}</span>
         <h2 id="galeria-title" class="font-serif text-3xl sm:text-5xl font-semibold text-bone">{{ t().gallery.title }}</h2>
       </div>
-      <p class="text-sm text-muted max-w-md">{{ t().gallery.subtitle }}</p>
+      <p class="card-warm rounded-2xl px-5 py-4 text-sm text-muted max-w-md">{{ t().gallery.subtitle }}</p>
     </div>
 
     <!-- Bento grid -->
@@ -19,7 +19,7 @@
           (click)="selected.set(photo)"
           [attr.aria-label]="text.title"
           [class]="photo.span"
-          class="theme-dark relative text-left rounded-3xl overflow-hidden border border-line hover:border-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-honey bg-graphite group cursor-pointer shadow-xl transition-all duration-500">
+          class="theme-dark relative text-left rounded-3xl overflow-hidden border border-line hover:border-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-honey bg-graphite group cursor-pointer shadow-[0_20px_40px_-20px_rgba(122,74,34,0.55)] ring-1 ring-terracotta/30 transition-all duration-500">
           <img
             [src]="photo.image.src"
             [alt]="text.title"

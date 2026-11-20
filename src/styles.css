@@ -11,15 +11,19 @@
    ===================================================================== */
 :root,
 .theme-light {
-  --c-obsidian: 246 232 199; /* #F6E8C7 crema de marca: fondo principal */
-  --c-charcoal: 251 243 225; /* #FBF3E1 marfil: fondo alternativo */
-  --c-graphite: 255 251 242; /* #FFFBF2 blanco cálido: tarjetas */
-  --c-line: 229 210 170; /* #E5D2AA arena: bordes */
-  --c-bone: 43 33 24; /* #2B2118 café profundo: texto (13:1 sobre crema) */
-  --c-muted: 107 89 72; /* #6B5948 texto secundario (5,5:1) */
-  --c-accent: 154 82 34; /* #9A5222 terracota profunda: texto de acento (4,8:1) */
-  --c-hl: 138 79 34; /* #8A4F22 resaltados (5,4:1) */
-  --c-honey: 156 101 20; /* #9C6514 dorado tostado legible */
+  --c-obsidian: 246 232 199; /* #F6E8C7 crema de marca: fondo principal / pozos internos */
+  --c-charcoal: 241 221 178; /* #F1DDB2 arena: fondo alternativo */
+  --c-graphite: 255 248 233; /* #FFF8E9 crema clara: tarjetas (nunca blanco puro) */
+  --c-line: 220 192 143; /* #DCC08F arena tostada: bordes */
+  --c-bone: 43 33 24; /* #2B2118 café profundo: texto (≥ 11:1 en todas las superficies) */
+  --c-muted: 94 77 61; /* #5E4D3D texto secundario (≥ 5,6:1) */
+  --c-accent: 138 71 25; /* #8A4719 terracota profunda: texto de acento (≥ 4,9:1) */
+  --c-hl: 138 79 34; /* #8A4F22 resaltados */
+  --c-honey: 140 90 16; /* #8C5A10 dorado tostado legible */
+  /* Tarjeta cálida: borde terracota + sombra tostada */
+  --card-border: rgba(205, 134, 81, 0.38);
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 4px 12px -6px rgba(122, 74, 34, 0.2),
+    0 22px 44px -22px rgba(122, 74, 34, 0.38);
   color-scheme: light;
 }
 
@@ -33,7 +37,84 @@
   --c-accent: 205 134 81; /* #CD8651 terracota de marca (6:1) */
   --c-hl: 246 232 199; /* #F6E8C7 crema de marca */
   --c-honey: 233 178 92; /* #E9B25C */
+  --card-border: rgb(61 48 37);
+  --card-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
+}
+
+/* =====================================================================
+   SUPERFICIES CLARAS
+   Nada de blanco plano: crema de marca con degradados muy sutiles y un
+   resplandor terracota/miel en las esquinas que da volumen. Dos variantes
+   (crema y arena) para alternar secciones claras contiguas.
+   ===================================================================== */
+.surface-cream {
+  background-color: #f6e8c7;
+  background-image:
+    radial-gradient(ellipse 55% 45% at 0% 0%, rgba(205, 134, 81, 0.14), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 100% 100%, rgba(233, 178, 92, 0.18), transparent 70%),
+    linear-gradient(180deg, #f8ecd0 0%, #f6e8c7 45%, #f1dfb8 100%);
+}
+.surface-sand {
+  background-color: #f1ddb2;
+  background-image:
+    radial-gradient(ellipse 50% 45% at 100% 0%, rgba(205, 134, 81, 0.16), transparent 70%),
+    radial-gradient(ellipse 55% 50% at 0% 100%, rgba(255, 248, 233, 0.55), transparent 70%),
+    linear-gradient(180deg, #eed8aa 0%, #f1ddb2 50%, #f4e3be 100%);
+}
+
+/* Filo superior de cada sección clara: hilo terracota que marca la transición */
+.section-edge::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(205, 134, 81, 0.75) 20%, rgba(205, 134, 81, 0.75) 80%, transparent);
+  z-index: 1;
+}
+.section-edge::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 1px;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(122, 74, 34, 0.08), transparent);
+  pointer-events: none;
+}
+
+@layer components {
+  /* Tarjeta con presencia: guía la vista hacia la información */
+  .card-warm {
+    background-color: rgb(var(--c-graphite));
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+  }
+
+  /* Antetítulo en píldora: jerarquía clara sobre fondos claros u oscuros */
+  .kicker-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(205, 134, 81, 0.45);
+    background: rgba(205, 134, 81, 0.1);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--c-accent));
+  }
+  .kicker-pill::before {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: #cd8651;
+  }
 }
 
 /* =====================================================================
