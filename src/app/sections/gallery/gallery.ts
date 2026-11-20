@@ -3,11 +3,12 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { I18nService } from '../../core/i18n/i18n.service';
 import { ContactService } from '../../core/services/contact.service';
 import { GALLERY, GalleryPhoto } from '../../data/gallery.data';
+import { HexDividerComponent } from '../../shared/components/hex-divider/hex-divider';
 import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
 
 @Component({
   selector: 'app-gallery',
-  imports: [RevealOnScrollDirective],
+  imports: [HexDividerComponent, RevealOnScrollDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '(document:keydown.escape)': 'selected.set(null)' },
   templateUrl: './gallery.html',

@@ -15,7 +15,7 @@
           <span class="text-2xl font-bold tracking-tight text-accent leading-none">Ragk</span>
           <app-ragko-mark class="w-5 h-5 text-accent ml-0.5 mt-1" [strokeWidth]="8.5" />
         </div>
-        <span class="hidden sm:block whitespace-nowrap text-[10px] uppercase tracking-[0.24em] text-muted font-medium mt-0.5">
+        <span class="hidden sm:block whitespace-nowrap text-[11px] uppercase tracking-[0.24em] text-muted font-medium mt-0.5">
           {{ t().brand.subtitle }}
         </span>
       </div>
@@ -23,7 +23,7 @@
 
     <!-- Navegación escritorio -->
     <nav [attr.aria-label]="t().nav.mainNav"
-         class="hidden xl:flex items-center gap-4 2xl:gap-6 text-[10.5px] 2xl:text-[11px] font-medium tracking-[0.16em] uppercase text-bone/75">
+         class="hidden xl:flex items-center gap-3.5 2xl:gap-6 text-[10.5px] 2xl:text-xs font-medium tracking-[0.16em] uppercase text-bone/75">
       @for (item of navItems; track item.anchor) {
         <a [href]="'#' + item.anchor" class="whitespace-nowrap hover:text-accent transition">{{ t().nav[item.label] }}</a>
       }
@@ -74,7 +74,7 @@
         }
       </nav>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-6 space-y-4">
-        <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">{{ t().nav.language }}</div>
+        <div class="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">{{ t().nav.language }}</div>
         <app-language-switcher variant="inline" />
         <a href="#contacto" (click)="menuOpen.set(false)"
            class="btn-primary sm:hidden w-full !text-xs uppercase !tracking-[0.14em]">

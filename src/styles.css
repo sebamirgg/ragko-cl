@@ -17,8 +17,8 @@
   --c-graphite: 252 246 233; /* #FCF6E9 crema clara: tarjetas (nunca blanco puro) */
   --c-line: 222 199 156; /* #DEC79C arena tostada: bordes finos */
   --c-bone: 30 26 22; /* #1E1A16 carbón suave: texto (≥ 13:1) */
-  --c-muted: 92 78 64; /* #5C4E40 texto secundario (≥ 5,6:1) */
-  --c-accent: 142 84 24; /* #8E5418 ámbar profundo: texto de acento (≥ 4,9:1) */
+  --c-muted: 74 61 49; /* #4A3D31 texto secundario (≥ 7,5:1) */
+  --c-accent: 128 74 20; /* #804A14 ámbar profundo: texto de acento (≥ 6:1) */
   --c-hl: 132 80 30; /* #84501E resaltados */
   --c-honey: 140 96 30; /* #8C601E dorado tostado legible */
   --card-border: rgba(184, 114, 44, 0.24);
@@ -34,8 +34,8 @@
   --c-graphite: 42 37 32; /* #2A2520 tarjetas */
   --c-line: 64 56 47; /* #40382F bordes */
   --c-bone: 248 241 228; /* #F8F1E4 texto */
-  --c-muted: 186 174 158; /* #BAAE9E texto secundario (≥ 7:1) */
-  --c-accent: 214 160 96; /* #D6A060 miel dorada apagada (≥ 7:1) */
+  --c-muted: 212 201 184; /* #D4C9B8 texto secundario (≥ 10:1) */
+  --c-accent: 228 177 112; /* #E4B170 miel dorada (≥ 8:1) */
   --c-hl: 246 232 199; /* #F6E8C7 crema natural */
   --c-honey: 227 178 102; /* #E3B266 */
   --card-border: rgba(246, 232, 199, 0.1);
@@ -125,9 +125,9 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: rgb(var(--c-accent));
   }
@@ -142,9 +142,9 @@
   /* Títulos de sección: serif con carácter, interlineado apretado */
   .display-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.04;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.06;
     color: rgb(var(--c-bone));
     font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
     text-wrap: balance;
@@ -152,9 +152,9 @@
 
   /* Bajada de sección: limpia y aireada */
   .lead {
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-    font-weight: 300;
-    line-height: 1.75;
+    font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+    font-weight: 400;
+    line-height: 1.7;
     color: rgb(var(--c-muted));
   }
 
@@ -229,9 +229,9 @@
 
   /* Etiqueta pequeña tipo ficha técnica */
   .spec-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: rgb(var(--c-muted));
   }

@@ -29,7 +29,7 @@ export const GALLERY: readonly GalleryPhoto[] = [
   { id: 'panal-operculado', image: IMAGES.honeycombCloseUp, span: 'row-span-2 lg:row-span-1', position: '50% 40%' },
   { id: 'panal-cosecha', image: IMAGES.harvestFrame, span: '', position: '50% 42%', crop: { scale: 1.5, origin: '60% 0%' } },
   { id: 'apicultor-territorio', image: IMAGES.beekeeperPoncho, span: '', position: '35% 45%', crop: { scale: 1.45, origin: '25% 0%' } },
-  { id: 'carpinteria', image: IMAGES.woodworkshop, span: '', position: '50% 55%', crop: { scale: 1.35, origin: '50% 100%' } },
-  { id: 'vivero-nativo', image: IMAGES.nativeNursery, span: 'lg:col-span-2', position: '50% 32%' },
+  { id: 'carpinteria', image: IMAGES.woodworkshop, span: 'col-span-2 lg:col-span-1', position: '50% 55%', crop: { scale: 1.35, origin: '50% 100%' } },
+  { id: 'vivero-nativo', image: IMAGES.nativeNursery, span: 'col-span-2', position: '50% 32%' },
   { id: 'artesano', image: IMAGES.artisan, span: 'col-span-2', position: '65% 30%' },
 ];

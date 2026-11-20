@@ -13,28 +13,45 @@
     <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/10 to-obsidian/50"></div>
   </div>
 
-  <div class="relative z-10 flex-1 flex items-center max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-    <div class="max-w-3xl space-y-8 animate-fade-up">
+  <div class="hidden md:block"><app-bee flight="a" class="absolute w-10 h-9 top-[22%] right-[12%] z-[5] opacity-90" /></div>
+  <app-bee flight="b" class="absolute w-7 h-6 top-[16%] right-[10%] md:right-auto md:top-[36%] md:left-[62%] z-[5] opacity-75" />
 
+  <div class="relative z-10 flex-1 flex items-center max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+    <div class="w-full space-y-8 animate-fade-up">
       <span class="kicker-pill">{{ t().hero.kicker }}</span>
 
-      <h1 id="hero-title" class="hero-title font-serif font-medium text-cream tracking-tight">
+      <h1 id="hero-title" class="hero-title max-w-3xl font-serif font-medium text-cream tracking-tight">
         {{ t().hero.title }}
       </h1>
 
-      <p class="lead !text-cream/80 max-w-xl">{{ t().hero.subtitle }}</p>
+      <p class="lead !text-cream/90 max-w-xl">{{ t().hero.subtitle }}</p>
 
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3.5 pt-2">
-        <a href="#mieles" class="btn-primary">
-          <span>{{ t().hero.ctaHoneys }}</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5l5 5-5 5" />
-          </svg>
-        </a>
-        <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-ghost !border-cream/30 !text-cream hover:!border-cream">
-          <app-whatsapp-icon class="w-4 h-4" />
-          <span>{{ t().hero.ctaWhatsapp }}</span>
-        </a>
+      <!-- Acciones + firma de la cooperativa en la misma línea -->
+      <div class="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 pt-2">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3.5">
+          <a href="#mieles" class="btn-primary">
+            <span>{{ t().hero.ctaHoneys }}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5l5 5-5 5" />
+            </svg>
+          </a>
+          <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-ghost !border-cream/30 !text-cream hover:!border-cream">
+            <app-whatsapp-icon class="w-4 h-4" />
+            <span>{{ t().hero.ctaWhatsapp }}</span>
+          </a>
+        </div>
+
+        <!-- Firma de marca: Cooperativa Apícola Ragko -->
+        <div class="flex items-center gap-4 lg:pl-12 lg:border-l lg:border-cream/20">
+          <span class="w-16 h-16 sm:w-20 sm:h-20 rounded-full ragko-medallion flex items-center justify-center shrink-0">
+            <app-ragko-mark class="w-10 h-10 sm:w-12 sm:h-12 text-amber" [strokeWidth]="6.5" />
+          </span>
+          <span class="flex flex-col">
+            <span class="text-xs uppercase tracking-[0.3em] text-amber-light font-semibold">Cooperativa Apícola</span>
+            <span class="font-serif text-4xl sm:text-5xl font-semibold text-cream leading-none tracking-tight mt-1">Ragko</span>
+            <span class="text-[11px] uppercase tracking-[0.26em] text-cream/75 mt-1.5">{{ t().brand.subtitle }}</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -44,22 +61,22 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-wrap items-center justify-between gap-x-10 gap-y-5">
       <dl class="flex flex-wrap gap-x-12 gap-y-4">
         <div>
-          <dt class="text-[10px] uppercase tracking-[0.24em] text-cream/60">{{ t().hero.card.stat1Label }}</dt>
+          <dt class="text-[11px] uppercase tracking-[0.24em] text-cream/80">{{ t().hero.card.stat1Label }}</dt>
           <dd class="font-serif text-2xl text-cream mt-1">{{ t().hero.card.stat1Value }}
-            <span class="font-sans text-xs text-cream/60 ml-1">{{ t().hero.card.stat1Note }}</span>
+            <span class="font-sans text-xs text-cream/80 ml-1">{{ t().hero.card.stat1Note }}</span>
           </dd>
         </div>
         <div>
-          <dt class="text-[10px] uppercase tracking-[0.24em] text-cream/60">{{ t().hero.card.stat2Label }}</dt>
+          <dt class="text-[11px] uppercase tracking-[0.24em] text-cream/80">{{ t().hero.card.stat2Label }}</dt>
           <dd class="font-serif text-2xl text-cream mt-1">{{ t().hero.card.stat2Value }}</dd>
         </div>
         <div class="hidden md:block">
-          <dt class="text-[10px] uppercase tracking-[0.24em] text-cream/60">{{ t().hero.card.kicker }}</dt>
+          <dt class="text-[11px] uppercase tracking-[0.24em] text-cream/80">{{ t().hero.card.kicker }}</dt>
           <dd class="font-serif text-2xl text-cream mt-1">{{ t().hero.card.seal }}</dd>
         </div>
       </dl>
 
-      <a href="#valor" class="hidden sm:inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-cream/70 hover:text-cream transition">
+      <a href="#valor" class="hidden sm:inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-cream/70 hover:text-cream transition">
         {{ t().hero.scroll }}
         <span class="scroll-cue relative w-px h-10 bg-cream/25 overflow-hidden" aria-hidden="true"></span>
       </a>

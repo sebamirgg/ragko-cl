@@ -4,11 +4,12 @@ import { I18nService } from '../../core/i18n/i18n.service';
 import { ContactService } from '../../core/services/contact.service';
 import { IMAGES } from '../../data/images';
 import { BeeComponent } from '../../shared/components/bee/bee';
+import { HexDividerComponent } from '../../shared/components/hex-divider/hex-divider';
 import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
 
 @Component({
   selector: 'app-faq',
-  imports: [BeeComponent, RevealOnScrollDirective],
+  imports: [HexDividerComponent, BeeComponent, RevealOnScrollDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './faq.html',
   styleUrl: './faq.css',

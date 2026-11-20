@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { HexDividerComponent } from '../hex-divider/hex-divider';
+
 /**
  * Encabezado estándar de sección: antetítulo, título serif, ornamento hexagonal opcional y bajada.
  * El id del título permite enlazarlo con aria-labelledby desde la <section>.
  */
 @Component({
   selector: 'app-section-heading',
+  imports: [HexDividerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'block' },
   template: `
@@ -15,11 +18,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         {{ title() }}
       </h2>
       @if (ornament()) {
-        <div class="hex-ornament pt-1" [class.justify-center]="align() === 'center'" aria-hidden="true">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M12 2l8.66 5v10L12 22l-8.66-5V7z" />
-          </svg>
-        </div>
+        <app-hex-divider [align]="align()" />
       }
       @if (subtitle()) {
         <p class="lead">{{ subtitle() }}</p>
@@ -33,5 +32,5 @@ export class SectionHeadingComponent {
   readonly subtitle = input<string>();
   readonly titleId = input<string>();
   readonly align = input<'center' | 'left'>('center');
-  readonly ornament = input(false);
+  readonly ornament = input(true);
 }

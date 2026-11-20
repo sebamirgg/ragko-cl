@@ -12,7 +12,7 @@
           : 'border-line bg-graphite text-muted hover:text-bone hover:border-terracotta/50'">
         <app-flag [code]="lang.flag" class="w-7 h-5" />
         <span class="text-xs font-semibold">{{ lang.name }}</span>
-        <span class="text-[10px] font-bold tracking-widest opacity-70">{{ lang.short }}</span>
+        <span class="text-[11px] font-bold tracking-widest opacity-70">{{ lang.short }}</span>
       </button>
     }
   </div>
@@ -26,7 +26,7 @@
     [attr.aria-controls]="menuId"
     aria-haspopup="menu"
     [attr.aria-label]="t().nav.changeLanguage + ': ' + current().name"
-    class="flex items-center gap-2 rounded-full border border-line bg-graphite pl-2 pr-2.5 py-1.5 text-[11px] font-bold text-bone hover:border-accent transition cursor-pointer">
+    class="flex items-center gap-2 rounded-full border border-line bg-graphite pl-2 pr-2.5 py-1.5 text-xs font-bold text-bone hover:border-accent transition cursor-pointer">
     <app-flag [code]="current().flag" />
     <span class="tracking-wider">{{ current().short }}</span>
     <svg class="w-3 h-3 text-accent transition-transform duration-200" [class.rotate-180]="open()"
@@ -44,7 +44,7 @@
       (keydown.arrowUp)="moveFocus($event, -1)"
       (keydown.tab)="close()"
       class="absolute right-0 top-full mt-2 w-52 rounded-2xl border border-line bg-graphite/95 backdrop-blur-md p-1.5 shadow-2xl animate-fade-up z-50">
-      <div class="px-3 pt-1.5 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+      <div class="px-3 pt-1.5 pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
         {{ t().nav.language }}
       </div>
       @for (lang of i18n.languages; track lang.code) {
@@ -60,7 +60,7 @@
           [class.text-bone]="lang.code !== i18n.lang()">
           <app-flag [code]="lang.flag" class="w-6 h-4" />
           <span class="flex-1 font-medium">{{ lang.name }}</span>
-          <span class="text-[10px] font-bold tracking-widest text-muted">{{ lang.short }}</span>
+          <span class="text-[11px] font-bold tracking-widest text-muted">{{ lang.short }}</span>
           <svg class="w-4 h-4 text-honey" [class.invisible]="lang.code !== i18n.lang()"
                fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />

@@ -59,7 +59,7 @@
                   </svg>
                 </span>
                 <div>
-                  <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                  <div class="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
                     @if (item.number) {
                       {{ t().trace.componentLabel }} 0{{ item.number }} / 06
                     } @else {
@@ -73,7 +73,7 @@
               @if (item.share !== null) {
                 <div class="mt-7">
                   <div class="flex items-baseline justify-between gap-4 mb-2">
-                    <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">{{ t().trace.shareLabel }}</span>
+                    <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-muted">{{ t().trace.shareLabel }}</span>
                     <span class="font-serif text-2xl font-semibold text-hl">{{ item.value }}</span>
                   </div>
                   <div class="h-1 rounded-full bg-cream/10 overflow-hidden" aria-hidden="true">
@@ -82,16 +82,16 @@
                 </div>
               }
 
-              <p class="mt-6 text-base font-light text-bone/90 leading-relaxed">{{ item.desc }}</p>
+              <p class="mt-6 text-base text-bone/90 leading-relaxed">{{ item.desc }}</p>
 
               <div class="mt-7 border-l border-accent/60 pl-5 py-1">
-                <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-accent mb-1">{{ t().trace.whyLabel }}</div>
+                <div class="text-[11px] font-bold uppercase tracking-[0.18em] text-accent mb-1">{{ t().trace.whyLabel }}</div>
                 <p class="text-sm text-bone leading-relaxed">{{ item.fact }}</p>
               </div>
             </div>
           }
         </article>
-        <p class="mt-4 text-[11px] text-muted leading-relaxed">{{ t().trace.note }}</p>
+        <p class="mt-4 text-xs text-muted leading-relaxed">{{ t().trace.note }}</p>
       </div>
     </div>
   </div>

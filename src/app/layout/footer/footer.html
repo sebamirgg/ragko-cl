@@ -15,10 +15,10 @@
               <span class="text-2xl font-bold text-accent tracking-tight leading-none">Ragk</span>
               <app-ragko-mark class="w-5 h-5 text-accent ml-0.5 mt-1" [strokeWidth]="8.5" />
             </div>
-            <span class="text-[10px] uppercase tracking-[0.24em] text-muted block mt-1">{{ t().brand.cooperative }}</span>
+            <span class="text-[11px] uppercase tracking-[0.24em] text-muted block mt-1">{{ t().brand.cooperative }}</span>
           </div>
         </div>
-        <p class="text-sm font-light text-muted leading-relaxed max-w-sm">{{ t().footer.desc }}</p>
+        <p class="text-sm text-muted leading-relaxed max-w-sm">{{ t().footer.desc }}</p>
         <p class="text-xs text-accent">{{ t().footer.location }}</p>
 
         <div class="pt-2 space-y-3">
@@ -30,7 +30,7 @@
       <!-- Mapa del sitio -->
       <nav class="md:col-span-4 space-y-5" [attr.aria-label]="t().footer.navTitle">
         <div class="spec-label">{{ t().footer.navTitle }}</div>
-        <ol class="grid grid-cols-2 gap-x-6 gap-y-3 text-sm font-light text-muted">
+        <ol class="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-muted">
           @for (item of navItems; track item.anchor; let i = $index) {
             <li>
               <a [href]="'#' + item.anchor" class="hover:text-bone transition">{{ t().nav[item.label] }}</a>
@@ -42,7 +42,7 @@
       <!-- Marco normativo -->
       <div class="md:col-span-3 space-y-5">
         <div class="spec-label">{{ t().footer.legalTitle }}</div>
-        <ul class="space-y-3 text-xs font-light text-muted leading-relaxed">
+        <ul class="space-y-3 text-sm text-muted leading-relaxed">
           @for (line of t().footer.legal; track $index) {
             <li class="pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1.5 before:h-px before:bg-accent">{{ line }}</li>
           }
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-muted text-center sm:text-left">
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted text-center sm:text-left">
       <div>{{ i18n.format(t().footer.rights, { year: year }) }}</div>
       <div class="text-accent/80">{{ t().footer.credit }}</div>
     </div>
