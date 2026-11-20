@@ -4,7 +4,6 @@ import { I18nService } from '../../core/i18n/i18n.service';
 import { ContactService } from '../../core/services/contact.service';
 import { IMAGES, SiteImage } from '../../data/images';
 import { HoneyId, POLLEN_REPORTS, SPECIES, pollenShares } from '../../data/pollen.data';
-import { WhatsappIconComponent } from '../../shared/components/icons/whatsapp-icon';
 import { SectionHeadingComponent } from '../../shared/components/section-heading/section-heading';
 import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
 
@@ -16,7 +15,7 @@ interface HoneyCard {
 
 @Component({
   selector: 'app-honeys',
-  imports: [SectionHeadingComponent, RevealOnScrollDirective, WhatsappIconComponent],
+  imports: [SectionHeadingComponent, RevealOnScrollDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './honeys.html',
 })

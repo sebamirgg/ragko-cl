@@ -15,15 +15,12 @@
           <span class="text-2xl font-bold tracking-tight text-accent leading-none">Ragk</span>
           <app-ragko-mark class="w-5 h-5 text-accent ml-0.5 mt-1" [strokeWidth]="8.5" />
         </div>
-        <span class="hidden sm:block whitespace-nowrap text-[11px] uppercase tracking-[0.24em] text-muted font-medium mt-0.5">
-          {{ t().brand.subtitle }}
-        </span>
       </div>
     </a>
 
     <!-- Navegación escritorio -->
     <nav [attr.aria-label]="t().nav.mainNav"
-         class="hidden xl:flex items-center gap-3.5 2xl:gap-6 text-[10.5px] 2xl:text-xs font-medium tracking-[0.16em] uppercase text-bone/75">
+         class="hidden xl:flex items-center gap-3.5 2xl:gap-6 mr-auto ml-6 2xl:ml-8 pl-6 2xl:pl-8 border-l border-bone/25 h-8 text-[10.5px] 2xl:text-xs font-medium tracking-[0.16em] uppercase text-bone/75">
       @for (item of navItems; track item.anchor) {
         <a [href]="'#' + item.anchor" class="whitespace-nowrap hover:text-accent transition">{{ t().nav[item.label] }}</a>
       }

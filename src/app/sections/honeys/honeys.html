@@ -11,7 +11,7 @@
 
     <!-- Pestañas (solo móvil) -->
     <div class="flex justify-center mb-10 md:hidden">
-      <div role="tablist" [attr.aria-label]="t().honeys.tabsLabel" class="inline-flex rounded-full p-1 border border-[var(--hairline)]">
+      <div role="tablist" [attr.aria-label]="t().honeys.tabsLabel" class="inline-flex rounded-full bg-graphite p-1 border border-line">
         @for (card of cards; track card.id) {
           <button
             type="button"
@@ -19,7 +19,7 @@
             [attr.aria-selected]="active() === card.id"
             [attr.aria-controls]="'honey-' + card.id"
             (click)="active.set(card.id)"
-            class="px-6 py-2 rounded-full text-xs font-semibold uppercase tracking-[0.16em] transition"
+            class="px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.16em] transition"
             [class]="active() === card.id ? 'bg-cream text-ink' : 'text-muted'">
             {{ t().honeys[card.id].name }}
           </button>
@@ -27,77 +27,78 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-10 lg:gap-14">
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
       @for (card of cards; track card.id; let i = $index) {
         @let honey = t().honeys[card.id];
+        <!-- Tarjeta: estructura de la versión original (foto arriba, ficha en recuadros, barra inferior)
+             con la fotografía más grande y los acabados de la versión nueva -->
         <article
           [id]="'honey-' + card.id"
           appReveal [revealDelay]="i * 120"
           [class.hidden]="active() !== card.id"
-          class="md:!flex flex-col group rounded-3xl bg-graphite border border-cream/15 p-3 sm:p-4 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.75)] hover:border-accent/50 transition-colors duration-500">
+          class="md:!flex flex-col justify-between bg-graphite rounded-3xl border border-cream/15 hover:border-accent/60 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.75)] overflow-hidden group transition-colors duration-500">
+          <div>
+            <!-- Fotografía protagonista -->
+            <div class="relative h-72 sm:h-96 overflow-hidden bg-ink">
+              <img
+                [src]="card.image.src"
+                [alt]="honey.imageAlt"
+                [width]="card.image.width"
+                [height]="card.image.height"
+                [style.object-position]="card.position"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-graphite via-ink/30 to-transparent"></div>
 
-          <!-- Fotografía protagonista -->
-          <div class="relative aspect-[5/4] rounded-2xl overflow-hidden bg-ink">
-            <img
-              [src]="card.image.src"
-              [alt]="honey.imageAlt"
-              [width]="card.image.width"
-              [height]="card.image.height"
-              [style.object-position]="card.position"
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+              <span class="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-ink/50 backdrop-blur-md border border-cream/20 text-cream text-[11px] font-semibold uppercase tracking-[0.2em]">
+                {{ honey.badge }}
+              </span>
 
-            <span class="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-ink/50 backdrop-blur-md border border-cream/20 text-cream text-[11px] font-semibold uppercase tracking-[0.2em]">
-              {{ honey.badge }}
-            </span>
-
-            <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex items-end justify-between gap-4">
-              <div>
-                <h3 class="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-cream leading-none">{{ honey.name }}</h3>
-                <p class="font-serif italic text-lg text-amber-light mt-2">{{ purity()[card.id].scientific }}</p>
-              </div>
-              <div class="text-right shrink-0">
-                <div class="font-serif text-4xl text-cream leading-none">{{ purity()[card.id].value }}%</div>
-                <div class="text-[11px] uppercase tracking-[0.2em] text-cream/70 mt-1.5">
-                  {{ t().honeys.purity }} · {{ t().honeys.reportShort }} {{ purity()[card.id].report }}
+              <div class="absolute bottom-5 left-6 right-6 flex items-end justify-between gap-4">
+                <div>
+                  <h3 class="font-serif text-4xl sm:text-5xl font-semibold tracking-tight text-cream leading-none">{{ honey.name }}</h3>
+                  <p class="font-serif italic text-lg text-amber-light mt-2">{{ purity()[card.id].scientific }}</p>
+                </div>
+                <div class="text-right shrink-0 bg-ink/85 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-cream/15">
+                  <div class="font-serif text-3xl font-semibold text-cream leading-none">{{ purity()[card.id].value }}%</div>
+                  <div class="text-[11px] uppercase tracking-[0.16em] text-accent font-semibold mt-1.5">
+                    {{ t().honeys.purity }} · {{ t().honeys.reportShort }} {{ purity()[card.id].report }}
+                  </div>
                 </div>
               </div>
             </div>
+
+            <!-- Ficha -->
+            <div class="p-6 sm:p-8 space-y-6">
+              <p class="text-base text-bone/85 leading-relaxed">{{ honey.desc }}</p>
+              <dl class="grid grid-cols-2 gap-3.5">
+                <div class="p-4 rounded-2xl bg-charcoal border border-line">
+                  <dt class="spec-label !text-accent">{{ t().honeys.labels.bloom }}</dt>
+                  <dd class="text-sm font-semibold text-bone mt-1">{{ honey.bloom }}</dd>
+                </div>
+                <div class="p-4 rounded-2xl bg-charcoal border border-line">
+                  <dt class="spec-label !text-accent">{{ t().honeys.labels.color }}</dt>
+                  <dd class="text-sm font-semibold text-bone mt-1">{{ honey.color }}</dd>
+                </div>
+                <div class="p-4 rounded-2xl bg-charcoal border border-line">
+                  <dt class="spec-label !text-accent">{{ t().honeys.labels.sensory }}</dt>
+                  <dd class="text-sm font-semibold text-bone mt-1">{{ honey.sensory }}</dd>
+                </div>
+                <div class="p-4 rounded-2xl bg-charcoal border border-line">
+                  <dt class="spec-label !text-accent">{{ t().honeys.labels.attribute }}</dt>
+                  <dd class="text-sm font-semibold text-hl mt-1">{{ honey.attribute }}</dd>
+                </div>
+              </dl>
+            </div>
           </div>
 
-          <!-- Ficha -->
-          <div class="px-3 sm:px-5 pt-7 pb-3 sm:pb-4 flex-1 flex flex-col">
-            <p class="text-base text-bone/85 leading-relaxed">{{ honey.desc }}</p>
-
-            <dl class="mt-7 grid grid-cols-2 gap-x-8 border-t border-[var(--hairline)]">
-              <div class="py-4 border-b border-[var(--hairline)]">
-                <dt class="spec-label">{{ t().honeys.labels.bloom }}</dt>
-                <dd class="text-sm text-bone mt-1">{{ honey.bloom }}</dd>
-              </div>
-              <div class="py-4 border-b border-[var(--hairline)]">
-                <dt class="spec-label">{{ t().honeys.labels.color }}</dt>
-                <dd class="text-sm text-bone mt-1">{{ honey.color }}</dd>
-              </div>
-              <div class="py-4 border-b border-[var(--hairline)]">
-                <dt class="spec-label">{{ t().honeys.labels.sensory }}</dt>
-                <dd class="text-sm text-bone mt-1">{{ honey.sensory }}</dd>
-              </div>
-              <div class="py-4 border-b border-[var(--hairline)]">
-                <dt class="spec-label">{{ t().honeys.labels.attribute }}</dt>
-                <dd class="text-sm text-accent mt-1">{{ honey.attribute }}</dd>
-              </div>
-            </dl>
-
-            <div class="mt-auto pt-7 flex flex-wrap items-center justify-between gap-4">
-              <span class="text-xs text-muted">{{ t().honeys.b2bNote }}</span>
-              <a [href]="contact.honeyUrl(honey.name)" target="_blank" rel="noopener noreferrer"
-                 class="btn-ghost !py-3 !px-5 !text-xs uppercase !tracking-[0.14em]">
-                <app-whatsapp-icon class="w-4 h-4" />
-                {{ t().honeys.inquire }}
-              </a>
-            </div>
+          <div class="px-6 sm:px-8 py-4 bg-charcoal border-t border-line flex flex-wrap items-center justify-between gap-3">
+            <span class="text-sm text-muted">{{ t().honeys.b2bNote }}</span>
+            <a [href]="contact.honeyUrl(honey.name)" target="_blank" rel="noopener noreferrer"
+               class="text-xs font-bold text-hl hover:text-accent uppercase tracking-wider transition">
+              {{ t().honeys.inquire }} →
+            </a>
           </div>
         </article>
       }

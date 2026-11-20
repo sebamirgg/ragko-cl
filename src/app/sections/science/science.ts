@@ -18,23 +18,12 @@ import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scrol
       border: 1px solid var(--hairline);
     }
 
-    /* Acceso a la ficha de laboratorio: tarjeta-enlace sobria */
-    .lab-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.1rem 1.6rem 1.1rem 1.1rem;
-      border-radius: 1rem;
-      border: 1px solid #f6e8c7;
-      background: linear-gradient(135deg, #fcf6e9 0%, #f6e8c7 55%, #ecd3a0 100%);
-      color: #1e1a16;
-      cursor: pointer;
-      box-shadow: 0 0 0 6px rgba(227, 168, 87, 0.12), 0 24px 50px -20px rgba(227, 168, 87, 0.45);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Botón de la ficha palinológica: halo cálido para que destaque sobre el fondo carbón */
+    .lab-pill {
+      box-shadow: 0 0 0 5px rgba(205, 134, 81, 0.12), 0 18px 40px -16px rgba(205, 134, 81, 0.45);
     }
-    .lab-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 0 8px rgba(227, 168, 87, 0.18), 0 28px 60px -20px rgba(227, 168, 87, 0.6);
+    .lab-pill:hover {
+      box-shadow: 0 0 0 7px rgba(205, 134, 81, 0.18), 0 22px 46px -16px rgba(205, 134, 81, 0.6);
     }
   `,
 })

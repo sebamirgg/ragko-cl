@@ -13,19 +13,13 @@
       </div>
 
       <div class="lg:col-span-5 lg:justify-self-end w-full lg:w-auto">
-        <button type="button" (click)="ui.openLabReport()" class="lab-link group w-full lg:w-auto">
-          <span class="w-14 h-14 rounded-full bg-ink text-cream flex items-center justify-center shrink-0 group-hover:bg-amber-deep transition-colors duration-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </span>
-          <span class="flex-1 text-left">
-            <span class="block text-xs font-semibold uppercase tracking-[0.22em] text-amber-deep">Meliflora SpA · PDF</span>
-            <span class="block font-serif text-2xl font-semibold text-ink mt-0.5 leading-tight">{{ t().science.reportButton }}</span>
-          </span>
-          <svg class="w-6 h-6 text-ink shrink-0 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5l5 5-5 5" />
+        <!-- Píldora de la versión original, con un poco más de tamaño y halo para que destaque -->
+        <button type="button" (click)="ui.openLabReport()"
+                class="lab-pill group w-full lg:w-auto inline-flex items-center justify-center gap-3 bg-graphite hover:bg-cream text-hl hover:text-ink border border-terracotta font-bold text-sm uppercase tracking-[0.12em] px-8 py-4 rounded-full transition-colors duration-300 cursor-pointer">
+          <svg class="w-5 h-5 text-terracotta group-hover:text-amber-deep transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
+          <span>{{ t().science.reportButton }}</span>
         </button>
       </div>
     </div>
