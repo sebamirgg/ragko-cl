@@ -14,7 +14,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { anchor: 'mieles', label: 'honeys' },
   { anchor: 'galeria', label: 'gallery' },
   { anchor: 'ciencia', label: 'science' },
-  { anchor: 'trazabilidad', label: 'traceability' },
+  { anchor: 'composicion', label: 'traceability' },
   { anchor: 'ruta-do', label: 'roadmap' },
   { anchor: 'faq', label: 'faq' },
 ];

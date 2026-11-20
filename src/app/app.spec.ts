@@ -5,7 +5,6 @@ import { I18nService } from './core/i18n/i18n.service';
 import { en } from './core/i18n/translations/en';
 import { es } from './core/i18n/translations/es';
 import { pt } from './core/i18n/translations/pt';
-import { findLot } from './data/lots.data';
 import { POLLEN_REPORTS, pollenShares } from './data/pollen.data';
 
 describe('AppComponent', () => {
@@ -58,13 +57,7 @@ describe('Traducciones', () => {
   });
 });
 
-describe('Trazabilidad', () => {
-  it('encuentra lotes ignorando mayúsculas, espacios y guiones', () => {
-    expect(findLot('rgk ul 416')?.honey).toBe('ulmo');
-    expect(findLot('RGKTI411')?.honey).toBe('tineo');
-    expect(findLot('RGK-XX-000')).toBeUndefined();
-  });
-
+describe('Polen', () => {
   it('reproduce los porcentajes de los informes de laboratorio', () => {
     expect(pollenShares(POLLEN_REPORTS.ulmo)[0].percentage).toBe(81.0);
     expect(pollenShares(POLLEN_REPORTS.tineo)[0].percentage).toBe(69.6);

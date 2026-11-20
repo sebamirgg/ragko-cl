@@ -1,48 +1,162 @@
-/* Celdas del panal: aparecen una a una (escalonado) cuando el panal entra en pantalla */
-.cell {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: cellIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--i) * 9ms);
-  transition: opacity 0.25s ease, filter 0.25s ease;
+/* =====================================================================
+   PANAL DE COMPOSICIÓN: 7 celdas hexagonales "flat-top" (centro + 6)
+   El botón lleva la sombra; el borde dorado (rim) y el relleno de miel
+   van recortados en hexágono, así el clic solo cuenta dentro de la celda.
+   ===================================================================== */
+.comb {
+  position: relative;
+  width: 100%;
+  max-width: 34rem;
+  margin-inline: auto;
+  aspect-ratio: 2.5 / 2.598;
+  container-type: inline-size;
+}
+
+.hex {
+  --hex: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  position: absolute;
+  width: 40%;
+  height: calc(100% / 3);
+  padding: 0;
+  border: 0;
+  background: none;
+  pointer-events: none;
+  scale: 0.94;
+  filter: drop-shadow(0 10px 14px rgba(122, 74, 34, 0.26));
+  transition: scale 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  animation: hexIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i) * 80ms);
+}
+.hex:focus {
+  outline: none;
+}
+
+.hex__rim {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--hex);
+  pointer-events: auto;
   cursor: pointer;
-}
-.cell.is-dimmed {
-  opacity: 0.18;
-}
-.cell.is-active {
-  filter: brightness(1.15);
+  background: linear-gradient(160deg, #fde7a8 0%, #eab55c 45%, #c98a2e 100%);
+  transition: background 0.3s ease;
 }
 
-/* Mientras el bloque no es visible (directiva appReveal), la animación queda en pausa */
-.fingerprint.reveal:not(.is-visible) .cell {
-  animation-play-state: paused;
+.hex__fill {
+  position: absolute;
+  inset: 6.5% 5.5%;
+  clip-path: var(--hex);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15em;
+  color: #3a2108;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 28%, rgba(255, 236, 170, 0.55), transparent 70%),
+    radial-gradient(circle at 50% 45%, #f6b649 0%, #e8932a 55%, #c96f1e 100%);
+  transition: filter 0.3s ease;
+}
+/* Brillo de la miel, como una gota dentro de la celda */
+.hex__fill::after {
+  content: '';
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 7%;
+  height: 5%;
+  border-radius: 50%;
+  background: rgba(255, 246, 214, 0.45);
 }
 
-@keyframes cellIn {
-  from { opacity: 0; transform: scale(0.35) rotate(-30deg); }
+.hex__icon {
+  width: clamp(1rem, 5.5cqw, 1.75rem);
+  height: clamp(1rem, 5.5cqw, 1.75rem);
+  opacity: 0.8;
+}
+.hex__value {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 5.6cqw, 2rem);
+  line-height: 1;
+}
+.hex__name {
+  font-size: clamp(0.58rem, 2.4cqw, 0.8rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.15;
+  max-width: 70%;
+}
+
+/* Celda central: la miel completa, en café profundo */
+.hex--core .hex__fill {
+  color: #f6e8c7;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 28%, rgba(233, 178, 92, 0.22), transparent 70%),
+    radial-gradient(circle at 50% 45%, #4a301b 0%, #2f1f13 60%, #1f150d 100%);
+}
+.hex--core .hex__icon {
+  color: #e9b25c;
+  opacity: 1;
+}
+.hex--core .hex__fill::after {
+  background: rgba(233, 178, 92, 0.25);
+}
+
+/* Estados: la celda elegida se levanta; las demás bajan un poco el tono */
+.hex:not(.is-active) .hex__fill {
+  filter: saturate(0.82) brightness(0.97);
+}
+.hex.is-active {
+  scale: 1.02;
+  z-index: 2;
+  filter: drop-shadow(0 16px 22px rgba(122, 74, 34, 0.42));
+}
+.hex.is-active .hex__rim {
+  background: linear-gradient(160deg, #fff4d6 0%, #f2c66e 40%, #cd8651 100%);
+}
+.hex:focus-visible .hex__rim {
+  background: linear-gradient(160deg, #cd8651, #8a4719);
+}
+
+@keyframes hexIn {
+  from { opacity: 0; transform: translateY(14px) rotate(-8deg); }
   to { opacity: 1; transform: none; }
 }
 
-/* Línea de tiempo: el trazo vertical se dibuja de arriba hacia abajo */
-.journey-line {
-  transform-origin: top;
-  animation: drawLine 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-@keyframes drawLine {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
+/* Mientras el panal no es visible (directiva appReveal), la animación queda en pausa */
+.reveal:not(.is-visible) .hex {
+  animation-play-state: paused;
 }
 
-.step {
-  animation: stepIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(120ms + var(--i) * 110ms);
+/* ---------- Detalle ---------- */
+.detail-badge {
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  background: linear-gradient(160deg, #f6b649, #cd8651);
+  width: 3.75rem;
+  height: 3.25rem;
 }
-@keyframes stepIn {
-  from { opacity: 0; transform: translateX(-10px); }
+
+.meter {
+  background: linear-gradient(90deg, #e9b25c, #cd8651);
+  transform-origin: left;
+  animation: meterIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.detail {
+  animation: detailIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes meterIn {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes detailIn {
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cell, .journey-line, .step { animation: none; }
+  .hex, .meter, .detail { animation: none; transition: none; }
 }

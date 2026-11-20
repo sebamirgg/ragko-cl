@@ -23,11 +23,6 @@ export class ContactService {
     return this.whatsapp(this.i18n.format(t.whatsapp.honey, { honey: honeyName }));
   }
 
-  /** Mensaje para consultar por un lote rastreado. */
-  lotUrl(code: string, honeyName: string): string {
-    const t = this.i18n.t();
-    return this.whatsapp(this.i18n.format(t.whatsapp.lot, { code, honey: honeyName }));
-  }
 
   private whatsapp(text: string): string {
     return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;

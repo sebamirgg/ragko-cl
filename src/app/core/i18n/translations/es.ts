@@ -23,7 +23,7 @@ export const es = {
     honeys: 'Mieles',
     gallery: 'Galería',
     science: 'Ciencia',
-    traceability: 'Trazabilidad',
+    traceability: 'Composición',
     roadmap: 'Ruta INAPI',
     faq: 'FAQ',
     cta: 'Contacto Directo',
@@ -259,55 +259,67 @@ export const es = {
   },
 
   trace: {
-    kicker: 'Del Panal a tu Mesa · Trazabilidad Interactiva',
-    title: 'Rastrea tu Lote',
+    kicker: 'Composición de la Miel',
+    title: '¿Qué hay dentro de cada gota?',
     subtitle:
-      'Cada frasco Ragko lleva un código de lote en su etiqueta. Ingrésalo y descubre de qué floración viene, dónde se cosechó y qué revela su análisis de laboratorio.',
-    inputLabel: 'Código de lote',
-    placeholder: 'Ej: RGK-UL-416',
-    submit: 'Rastrear',
-    examples: 'Prueba con un lote piloto:',
-    notFound: 'No encontramos el lote «{code}». Revisa el código impreso en la etiqueta o escríbenos por WhatsApp.',
-    lot: 'Lote',
-    verified: 'Verificado en laboratorio',
-    purity: 'Pureza polínica',
-    fingerprintTitle: 'Huella Polínica',
-    fingerprintHint: 'Cada celda del panal representa el 1% de los granos de polen contados en laboratorio.',
-    fingerprintAria: 'Huella polínica del lote {code}: panal de 100 celdas según la proporción de cada especie',
-    table: {
-      caption: 'Composición polínica del lote {code}',
-      species: 'Especie',
-      grains: 'Granos',
-      share: '%',
+      'Nuestra miel es mucho más que dulzor. Recorre el panal y descubre de qué está compuesta y qué aporta cada uno de sus elementos.',
+    aria: 'Panal con los componentes de la miel',
+    hint: 'Toca o pasa el cursor sobre una celda del panal para ver de qué está compuesta.',
+    componentLabel: 'Componente',
+    shareLabel: 'Proporción aproximada',
+    whyLabel: 'Por qué importa',
+    note: 'Valores de referencia para una miel floral madura; cada floración y temporada los hace variar levemente.',
+    core: {
+      name: 'Miel Cruda Ragko',
+      short: 'Miel cruda',
+      value: '100%',
+      desc: 'Las abejas la elaboran a partir del néctar del Ulmo y del Tineo. Casi toda es azúcar natural y agua, pero el pequeño porcentaje restante (polen, enzimas, minerales y antioxidantes) es lo que le da su identidad.',
+      fact: 'No la pasteurizamos ni la mezclamos: cada componente llega al frasco tal como sale del panal.',
     },
-    journeyTitle: 'Recorrido del Lote',
-    steps: {
-      bloom: 'Floración',
-      apiary: 'Apiario de origen',
-      harvest: 'Cosecha',
-      extraction: 'Extracción',
-      lab: 'Análisis de laboratorio',
-      bottling: 'Envasado',
-    },
-    apiaryDetail: 'Núcleo Apícola Ragko · Caramávida, Curanilahue',
-    apiaryNote: 'Ubicación exacta resguardada según Ley N° 21.489',
-    extractionDetail: 'En frío, sin pasteurizar ni filtrar en exceso',
-    labDetail: 'Meliflora SpA · Informe N° {report} · Muestra {sample} · {grains} granos',
-    bottlingDetail: 'Formatos 300 g y 500 g, sellados con su código de lote',
-    lots: {
-      ulmo: {
-        honey: 'Miel Monofloral de Ulmo',
-        bloom: 'Ulmo (Eucryphia cordifolia) · Enero – Marzo',
-        harvest: 'Al cierre de la floración estival del Ulmo',
+    parts: {
+      fructose: {
+        name: 'Fructosa',
+        short: 'Fructosa',
+        value: '≈ 38%',
+        desc: 'Es el azúcar más abundante de la miel. Proviene del néctar de las flores y le da su dulzor intenso.',
+        fact: 'Mientras más fructosa tiene una miel, más tiempo se mantiene líquida.',
       },
-      tineo: {
-        honey: 'Miel Monofloral de Tineo',
-        bloom: 'Tineo (Weinmannia trichosperma) · Noviembre – Diciembre',
-        harvest: 'Cosecha temprana, al término de la floración del Tineo',
+      glucose: {
+        name: 'Glucosa',
+        short: 'Glucosa',
+        value: '≈ 31%',
+        desc: 'Es el segundo azúcar en importancia. El cuerpo la absorbe rápido, por eso la miel entrega energía inmediata.',
+        fact: 'La glucosa es la que cristaliza: una miel que se pone cremosa es una miel cruda y genuina.',
+      },
+      water: {
+        name: 'Agua',
+        short: 'Agua',
+        value: '≈ 17%',
+        desc: 'Es la humedad que queda después de que las abejas deshidratan el néctar dentro de la colmena.',
+        fact: 'Con menos de 20% de humedad la miel no fermenta, y por eso se conserva por años sin aditivos.',
+      },
+      sugars: {
+        name: 'Otros azúcares',
+        short: 'Otros azúcares',
+        value: '≈ 10%',
+        desc: 'Maltosa, sacarosa y oligosacáridos: azúcares más complejos que se forman gracias a las enzimas de las abejas.',
+        fact: 'Algunos oligosacáridos actúan como prebióticos que alimentan la flora intestinal.',
+      },
+      pollen: {
+        name: 'Polen',
+        short: 'Polen',
+        value: 'Trazas',
+        desc: 'Son granos microscópicos de las flores que visitaron las abejas. Aparecen en cantidades mínimas, pero son la huella botánica de cada miel.',
+        fact: 'Al contarlos en laboratorio se certifica que una miel es monofloral de Ulmo o de Tineo.',
+      },
+      bioactive: {
+        name: 'Enzimas, minerales y antioxidantes',
+        short: 'Bioactivos',
+        value: '≈ 3%',
+        desc: 'Incluye enzimas (invertasa, diastasa, glucosa oxidasa), ácidos orgánicos, minerales como potasio, calcio y magnesio, y antioxidantes como polifenoles y flavonoides.',
+        fact: 'Son sensibles al calor. La extracción en frío los mantiene activos.',
       },
     },
-    orderLot: 'Consultar disponibilidad de este lote',
-    demoNote: 'Lotes piloto basados en los informes N° 411 y 416 de Meliflora SpA.',
   },
 
   roadmap: {
@@ -434,7 +446,7 @@ export const es = {
       'Articulación territorial junto a Comité Apícola Nahuelbuta, Bosques y Praderas y Bosque Arauco.',
     ],
     rights: '© {year} Cooperativa Apícola Ragko · Caramávida, Chile.',
-    credit: 'Presentación Boutique B2B & de Origen',
+    credit: 'SRG · Diseño y Desarrollo Web',
   },
 
   lab: {
@@ -453,7 +465,6 @@ export const es = {
       'Hola Cooperativa Ragko, me gustaría recibir el dossier comercial y conocer más sobre las mieles de Ulmo y Tineo de Caramávida.',
     honey:
       'Hola Cooperativa Ragko, me interesa consultar disponibilidad B2B y ficha técnica de la {honey} de Caramávida.',
-    lot: 'Hola Cooperativa Ragko, quiero consultar la disponibilidad del lote {code} ({honey}).',
   },
 };
 
