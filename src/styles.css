@@ -3,6 +3,40 @@
 @tailwind utilities;
 
 /* =====================================================================
+   TEMAS
+   Paleta de marca: crema #F6E8C7 · terracota #CD8651.
+   Cada sección declara .theme-light o .theme-dark y los componentes usan
+   los mismos nombres de color (bg-graphite, text-bone, text-accent…),
+   que se resuelven según el tema. Valores en canales RGB para admitir opacidad.
+   ===================================================================== */
+:root,
+.theme-light {
+  --c-obsidian: 246 232 199; /* #F6E8C7 crema de marca: fondo principal */
+  --c-charcoal: 251 243 225; /* #FBF3E1 marfil: fondo alternativo */
+  --c-graphite: 255 251 242; /* #FFFBF2 blanco cálido: tarjetas */
+  --c-line: 229 210 170; /* #E5D2AA arena: bordes */
+  --c-bone: 43 33 24; /* #2B2118 café profundo: texto (13:1 sobre crema) */
+  --c-muted: 107 89 72; /* #6B5948 texto secundario (5,5:1) */
+  --c-accent: 154 82 34; /* #9A5222 terracota profunda: texto de acento (4,8:1) */
+  --c-hl: 138 79 34; /* #8A4F22 resaltados (5,4:1) */
+  --c-honey: 156 101 20; /* #9C6514 dorado tostado legible */
+  color-scheme: light;
+}
+
+.theme-dark {
+  --c-obsidian: 23 18 14; /* #17120E café nocturno */
+  --c-charcoal: 30 23 18; /* #1E1712 */
+  --c-graphite: 38 30 23; /* #261E17 tarjetas */
+  --c-line: 61 48 37; /* #3D3025 bordes */
+  --c-bone: 251 243 227; /* #FBF3E3 texto */
+  --c-muted: 188 174 156; /* #BCAE9C texto secundario (8:1) */
+  --c-accent: 205 134 81; /* #CD8651 terracota de marca (6:1) */
+  --c-hl: 246 232 199; /* #F6E8C7 crema de marca */
+  --c-honey: 233 178 92; /* #E9B25C */
+  color-scheme: dark;
+}
+
+/* =====================================================================
    BASE
    ===================================================================== */
 @layer base {
@@ -17,69 +51,72 @@
   }
 
   ::selection {
-    background: rgba(242, 181, 68, 0.35);
-    color: #f8f9fa;
+    background: rgba(205, 134, 81, 0.35);
   }
 }
 
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0e1012; }
-::-webkit-scrollbar-thumb { background: linear-gradient(#f2b544, #e08244); border-radius: 4px; }
+::-webkit-scrollbar-track { background: #f6e8c7; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#e0a860, #cd8651); border-radius: 4px; }
 
 /* =====================================================================
-   PANAL DE ABEJA (fondo decorativo)
+   PANAL DE ABEJA (solo en secciones oscuras)
+   Trazo más grueso y contrastado para que el hexágono se distinga;
+   las máscaras lo concentran en bordes/esquinas para no competir con el texto.
    ===================================================================== */
 .honeycomb-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0 34.64 10v20L17.32 40 0 30V10zM17.32 40v20' fill='none' stroke='%23F2B544' stroke-opacity='.11' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0 34.64 10v20L17.32 40 0 30V10zM17.32 40v20' fill='none' stroke='%23E9B25C' stroke-opacity='.26' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-size: 46px 80px;
 }
 
-/* Variantes de desvanecimiento para ir alternando entre secciones */
 .honeycomb-top {
-  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
-  mask-image: linear-gradient(180deg, #000, transparent 85%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 90%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 90%);
 }
 .honeycomb-corner-tr {
-  -webkit-mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 10%, transparent 75%);
-  mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 100% 0%, #000 15%, transparent 78%);
+  mask-image: radial-gradient(ellipse 60% 70% at 100% 0%, #000 15%, transparent 78%);
 }
 .honeycomb-corner-bl {
-  -webkit-mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 10%, transparent 75%);
-  mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 0% 100%, #000 15%, transparent 78%);
+  mask-image: radial-gradient(ellipse 60% 70% at 0% 100%, #000 15%, transparent 78%);
 }
 
 /* =====================================================================
    DETALLES DE MARCA
    ===================================================================== */
 .ragko-medallion {
-  background-color: #fce8c3;
-  border: 2.5px solid #e08244;
-  box-shadow: 0 0 0 5px #1a1d21, 0 12px 30px rgba(0, 0, 0, 0.55);
+  background-color: #f6e8c7;
+  border: 2.5px solid #cd8651;
+  box-shadow: 0 0 0 5px rgb(var(--c-graphite)), 0 12px 30px rgba(43, 33, 24, 0.22);
+}
+.theme-dark .ragko-medallion {
+  box-shadow: 0 0 0 5px rgb(var(--c-graphite)), 0 12px 30px rgba(0, 0, 0, 0.55);
 }
 
 .whatsapp-glow {
-  box-shadow: 0 10px 35px -5px rgba(224, 130, 68, 0.35), 0 0 0 1px rgba(252, 232, 195, 0.25);
+  box-shadow: 0 10px 35px -5px rgba(205, 134, 81, 0.4), 0 0 0 1px rgba(246, 232, 199, 0.3);
 }
 .whatsapp-glow:hover {
-  box-shadow: 0 16px 45px -4px rgba(224, 130, 68, 0.55), 0 0 0 1px rgba(252, 232, 195, 0.5);
+  box-shadow: 0 16px 45px -4px rgba(205, 134, 81, 0.55), 0 0 0 1px rgba(246, 232, 199, 0.5);
 }
 
-/* Ornamento: líneas doradas con hexágono central */
+/* Ornamento: líneas con hexágono central */
 .hex-ornament {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #f2b544;
+  color: rgb(var(--c-honey));
 }
 .hex-ornament::before,
 .hex-ornament::after {
   content: '';
   height: 1px;
   width: 56px;
-  background: linear-gradient(90deg, transparent, rgba(242, 181, 68, 0.7));
+  background: linear-gradient(90deg, transparent, rgb(var(--c-honey) / 0.7));
 }
 .hex-ornament::after {
-  background: linear-gradient(90deg, rgba(242, 181, 68, 0.7), transparent);
+  background: linear-gradient(90deg, rgb(var(--c-honey) / 0.7), transparent);
 }
 
 /* =====================================================================

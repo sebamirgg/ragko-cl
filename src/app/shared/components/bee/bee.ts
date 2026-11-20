@@ -39,8 +39,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
   template: `
     <svg viewBox="0 0 48 40" class="block w-full h-full" fill="none">
-      <ellipse class="wing" cx="19" cy="12" rx="7" ry="9" fill="#FCE8C3" fill-opacity="0.55" stroke="#FCE8C3" stroke-opacity="0.8" stroke-width="1" />
-      <ellipse class="wing" cx="28" cy="13" rx="6" ry="8" fill="#FCE8C3" fill-opacity="0.4" stroke="#FCE8C3" stroke-opacity="0.7" stroke-width="1" />
+      <ellipse class="wing" cx="19" cy="12" rx="7" ry="9" fill="#F6E8C7" fill-opacity="0.55" stroke="#F6E8C7" stroke-opacity="0.8" stroke-width="1" />
+      <ellipse class="wing" cx="28" cy="13" rx="6" ry="8" fill="#F6E8C7" fill-opacity="0.4" stroke="#F6E8C7" stroke-opacity="0.7" stroke-width="1" />
       <ellipse cx="24" cy="26" rx="13" ry="8.5" fill="currentColor" />
       <path d="M19 18.5v15M25 17.6v16.8M31 19v14" stroke="#14171A" stroke-width="2.6" stroke-linecap="round" />
       <circle cx="38" cy="25" r="4.6" fill="#14171A" />

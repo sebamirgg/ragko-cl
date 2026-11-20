@@ -1,4 +1,4 @@
-<footer class="relative bg-obsidian text-bone pt-16 pb-12 border-t border-line overflow-hidden">
+<footer class="theme-dark relative bg-obsidian text-bone pt-16 pb-12 border-t border-line overflow-hidden">
   <div class="absolute inset-0 honeycomb-bg honeycomb-top pointer-events-none" aria-hidden="true"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -8,27 +8,27 @@
       <div class="md:col-span-5 space-y-5">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded-full bg-cream border-2 border-terracotta flex items-center justify-center shadow-md">
-            <app-ragko-mark class="w-7 h-7 text-terracotta" />
+            <app-ragko-mark class="w-7 h-7 text-accent" />
           </div>
           <div>
             <div class="flex items-center">
-              <span class="text-2xl font-bold text-terracotta tracking-tight leading-none">Ragk</span>
-              <app-ragko-mark class="w-5 h-5 text-terracotta ml-0.5 mt-1" [strokeWidth]="8.5" />
+              <span class="text-2xl font-bold text-accent tracking-tight leading-none">Ragk</span>
+              <app-ragko-mark class="w-5 h-5 text-accent ml-0.5 mt-1" [strokeWidth]="8.5" />
             </div>
-            <span class="text-[11px] uppercase tracking-[0.2em] text-cream block mt-0.5">{{ t().brand.cooperative }}</span>
+            <span class="text-[11px] uppercase tracking-[0.2em] text-hl block mt-0.5">{{ t().brand.cooperative }}</span>
           </div>
         </div>
         <p class="text-xs text-muted leading-relaxed max-w-sm">{{ t().footer.desc }}</p>
-        <div class="text-xs text-terracotta font-semibold">{{ t().footer.location }}</div>
+        <div class="text-xs text-accent font-semibold">{{ t().footer.location }}</div>
       </div>
 
       <!-- Mapa del sitio -->
       <nav class="md:col-span-4 space-y-3" [attr.aria-label]="t().footer.navTitle">
-        <div class="text-xs font-bold uppercase tracking-widest text-cream">{{ t().footer.navTitle }}</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-hl">{{ t().footer.navTitle }}</div>
         <ol class="grid grid-cols-2 gap-2.5 text-xs text-muted">
           @for (item of navItems; track item.anchor; let i = $index) {
             <li>
-              <a [href]="'#' + item.anchor" class="hover:text-terracotta transition">
+              <a [href]="'#' + item.anchor" class="hover:text-accent transition">
                 {{ i + 1 }}. {{ t().nav[item.label] }}
               </a>
             </li>
@@ -38,7 +38,7 @@
 
       <!-- Marco normativo -->
       <div class="md:col-span-3 space-y-3 text-xs text-muted">
-        <div class="text-xs font-bold uppercase tracking-widest text-cream">{{ t().footer.legalTitle }}</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-hl">{{ t().footer.legalTitle }}</div>
         @for (line of t().footer.legal; track $index) {
           <p>• {{ line }}</p>
         }
@@ -47,7 +47,7 @@
 
     <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-muted text-center sm:text-left">
       <div>{{ i18n.format(t().footer.rights, { year: year }) }}</div>
-      <div class="text-terracotta font-medium">{{ t().footer.credit }}</div>
+      <div class="text-accent font-medium">{{ t().footer.credit }}</div>
     </div>
   </div>
 </footer>

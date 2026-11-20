@@ -7,21 +7,23 @@ export interface Species {
   scientific: string;
   /**
    * Color fijo por especie (el color sigue a la entidad en todos los gráficos).
-   * Paleta categórica validada para fondo oscuro (#14171A): banda de luminosidad,
-   * croma, separación para daltonismo y contraste ≥ 3:1 en el orden en que aparece en cada lote.
+   * Paleta categórica validada para la tarjeta clara de trazabilidad (#FFFBF2): banda de luminosidad,
+   * croma y separación para daltonismo en el orden en que aparece en cada lote.
+   * Ulmo (amarillo) y Capachito (rosa) quedan bajo 3:1 de contraste con el fondo, por eso el gráfico
+   * siempre va acompañado de la tabla con los valores (regla de alivio).
    */
   color: string;
 }
 
 export const SPECIES: Record<SpeciesId, Species> = {
-  eucryphia: { scientific: 'Eucryphia cordifolia', color: '#c98500' },
-  weinmannia: { scientific: 'Weinmannia trichosperma', color: '#d95926' },
-  myrtaceae: { scientific: 'Myrtaceae spp.', color: '#3987e5' },
-  tepualia: { scientific: 'Tepualia stipularis', color: '#199e70' },
-  aristotelia: { scientific: 'Aristotelia chilensis', color: '#9085e9' },
-  caldcluvia: { scientific: 'Caldcluvia paniculata', color: '#0ca30c' },
-  calceolaria: { scientific: 'Calceolaria thyrsiflora', color: '#d55181' },
-  other: { scientific: '—', color: '#5b616b' },
+  eucryphia: { scientific: 'Eucryphia cordifolia', color: '#eda100' },
+  weinmannia: { scientific: 'Weinmannia trichosperma', color: '#eb6834' },
+  myrtaceae: { scientific: 'Myrtaceae spp.', color: '#2a78d6' },
+  tepualia: { scientific: 'Tepualia stipularis', color: '#1baf7a' },
+  aristotelia: { scientific: 'Aristotelia chilensis', color: '#6250d6' },
+  caldcluvia: { scientific: 'Caldcluvia paniculata', color: '#008300' },
+  calceolaria: { scientific: 'Calceolaria thyrsiflora', color: '#e87ba4' },
+  other: { scientific: '—', color: '#b3a691' },
 };
 
 export interface PollenCount {

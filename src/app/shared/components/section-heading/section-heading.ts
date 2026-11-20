@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   host: { class: 'block' },
   template: `
     <div class="space-y-4" [class.text-center]="align() === 'center'" [class.mx-auto]="align() === 'center'">
-      <span class="block text-xs font-bold uppercase tracking-[0.24em] text-terracotta">{{ kicker() }}</span>
+      <span class="block text-xs font-bold uppercase tracking-[0.24em] text-accent">{{ kicker() }}</span>
       <h2 [id]="titleId()" class="font-serif text-3xl sm:text-5xl font-semibold text-bone leading-tight">
         {{ title() }}
       </h2>

@@ -1,9 +1,9 @@
-<section id="galeria" aria-labelledby="galeria-title" class="relative py-24 sm:py-32 bg-obsidian border-b border-line overflow-hidden">
+<section id="galeria" aria-labelledby="galeria-title" class="theme-light relative py-24 sm:py-32 bg-obsidian border-b border-line overflow-hidden">
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14" appReveal>
       <div class="max-w-2xl space-y-3">
-        <span class="block text-xs font-bold uppercase tracking-[0.24em] text-terracotta">{{ t().gallery.kicker }}</span>
+        <span class="block text-xs font-bold uppercase tracking-[0.24em] text-accent">{{ t().gallery.kicker }}</span>
         <h2 id="galeria-title" class="font-serif text-3xl sm:text-5xl font-semibold text-bone">{{ t().gallery.title }}</h2>
       </div>
       <p class="text-sm text-muted max-w-md">{{ t().gallery.subtitle }}</p>
@@ -19,7 +19,7 @@
           (click)="selected.set(photo)"
           [attr.aria-label]="text.title"
           [class]="photo.span"
-          class="relative text-left rounded-3xl overflow-hidden border border-line hover:border-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-honey bg-graphite group cursor-pointer shadow-xl transition-all duration-500">
+          class="theme-dark relative text-left rounded-3xl overflow-hidden border border-line hover:border-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-honey bg-graphite group cursor-pointer shadow-xl transition-all duration-500">
           <img
             [src]="photo.image.src"
             [alt]="text.title"
@@ -31,11 +31,11 @@
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
           <div class="absolute inset-0 bg-gradient-to-t from-obsidian/95 via-obsidian/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
 
-          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/80 backdrop-blur-md border border-terracotta/50 text-[10px] font-bold uppercase tracking-widest text-cream">
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/80 backdrop-blur-md border border-terracotta/50 text-[10px] font-bold uppercase tracking-widest text-hl">
             {{ text.tag }}
           </span>
 
-          <span class="absolute top-4 right-4 w-9 h-9 rounded-full bg-cream text-obsidian flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 shadow-lg" aria-hidden="true">
+          <span class="absolute top-4 right-4 w-9 h-9 rounded-full bg-cream text-ink flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 shadow-lg" aria-hidden="true">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
             </svg>
@@ -54,24 +54,24 @@
 <!-- Lightbox -->
 @if (selected(); as photo) {
   @let text = t().gallery.items[photo.id];
-  <div (click)="selected.set(null)" class="fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+  <div (click)="selected.set(null)" class="theme-dark fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
     <div role="dialog" aria-modal="true" [attr.aria-label]="text.title" (click)="$event.stopPropagation()"
          class="bg-graphite border border-terracotta/50 rounded-3xl max-w-3xl w-full max-h-[94vh] overflow-y-auto shadow-2xl animate-fade-up">
       <div class="relative h-[55vh] sm:h-[62vh] bg-obsidian">
         <img [src]="photo.image.src" [alt]="text.title" decoding="async" class="w-full h-full object-contain" />
         <button type="button" (click)="selected.set(null)" [attr.aria-label]="t().common.close"
-                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/85 text-cream hover:bg-terracotta hover:text-obsidian flex items-center justify-center font-bold transition cursor-pointer">
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/85 text-hl hover:bg-terracotta hover:text-ink flex items-center justify-center font-bold transition cursor-pointer">
           ✕
         </button>
       </div>
       <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-widest text-terracotta">{{ text.tag }}</span>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-accent">{{ text.tag }}</span>
           <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-bone mt-1">{{ text.title }}</h3>
           <p class="text-sm text-muted mt-1">{{ text.desc }}</p>
         </div>
         <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
-           class="shrink-0 px-5 py-3 rounded-full bg-terracotta text-obsidian text-xs font-bold uppercase tracking-wider hover:bg-cream transition">
+           class="shrink-0 px-5 py-3 rounded-full bg-terracotta text-ink text-xs font-bold uppercase tracking-wider hover:bg-terracotta-dark transition">
           {{ t().gallery.inquire }}
         </a>
       </div>

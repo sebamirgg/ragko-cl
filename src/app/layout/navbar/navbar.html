@@ -1,5 +1,5 @@
 <header
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  class="theme-light fixed top-0 left-0 right-0 z-50 transition-all duration-300"
   [class]="scrolled() || menuOpen()
     ? 'bg-obsidian/95 backdrop-blur-md py-3 border-b border-line shadow-2xl'
     : 'bg-gradient-to-b from-obsidian/90 to-transparent py-5'">
@@ -15,7 +15,7 @@
           <span class="text-2xl font-bold tracking-tight text-terracotta leading-none">Ragk</span>
           <app-ragko-mark class="w-5 h-5 text-terracotta ml-0.5 mt-1" [strokeWidth]="8.5" />
         </div>
-        <span class="hidden sm:block whitespace-nowrap text-[10px] uppercase tracking-[0.24em] text-cream/85 font-medium mt-0.5">
+        <span class="hidden sm:block whitespace-nowrap text-[10px] uppercase tracking-[0.24em] text-hl/85 font-medium mt-0.5">
           {{ t().brand.subtitle }}
         </span>
       </div>
@@ -25,7 +25,7 @@
     <nav [attr.aria-label]="t().nav.mainNav"
          class="hidden xl:flex items-center gap-4 2xl:gap-6 text-[10.5px] 2xl:text-[11px] font-semibold tracking-[0.14em] uppercase text-muted">
       @for (item of navItems; track item.anchor) {
-        <a [href]="'#' + item.anchor" class="whitespace-nowrap hover:text-cream transition">{{ t().nav[item.label] }}</a>
+        <a [href]="'#' + item.anchor" class="whitespace-nowrap hover:text-hl transition">{{ t().nav[item.label] }}</a>
       }
     </nav>
 
@@ -34,7 +34,7 @@
       <app-language-switcher />
 
       <a href="#contacto"
-         class="hidden sm:inline-flex whitespace-nowrap items-center gap-2 bg-cream hover:bg-terracotta text-obsidian font-bold text-[11px] uppercase tracking-wider px-4 py-2.5 rounded-full transition shadow-lg">
+         class="hidden sm:inline-flex whitespace-nowrap items-center gap-2 bg-terracotta hover:bg-terracotta-dark text-ink font-bold text-[11px] uppercase tracking-wider px-4 py-2.5 rounded-full transition shadow-lg">
         <span>{{ t().nav.cta }}</span>
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -47,7 +47,7 @@
         [attr.aria-expanded]="menuOpen()"
         aria-controls="mobile-menu"
         [attr.aria-label]="menuOpen() ? t().nav.closeMenu : t().nav.openMenu"
-        class="xl:hidden w-10 h-10 rounded-full border border-line bg-graphite text-cream flex items-center justify-center hover:border-terracotta/60 transition cursor-pointer">
+        class="xl:hidden w-10 h-10 rounded-full border border-line bg-graphite text-hl flex items-center justify-center hover:border-terracotta/60 transition cursor-pointer">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           @if (menuOpen()) {
             <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
@@ -65,7 +65,7 @@
       <nav [attr.aria-label]="t().nav.mainNav" class="max-w-7xl mx-auto px-4 sm:px-6 py-5 grid sm:grid-cols-2 gap-1.5">
         @for (item of navItems; track item.anchor) {
           <a [href]="'#' + item.anchor" (click)="menuOpen.set(false)"
-             class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-bone hover:bg-graphite hover:text-cream transition">
+             class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-bone hover:bg-graphite hover:text-hl transition">
             <svg class="w-3.5 h-3.5 text-honey shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M12 2l8.66 5v10L12 22l-8.66-5V7z" />
             </svg>
@@ -74,10 +74,10 @@
         }
       </nav>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-6 space-y-4">
-        <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-terracotta">{{ t().nav.language }}</div>
+        <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">{{ t().nav.language }}</div>
         <app-language-switcher variant="inline" />
         <a href="#contacto" (click)="menuOpen.set(false)"
-           class="sm:hidden flex items-center justify-center gap-2 bg-cream text-obsidian font-bold text-xs uppercase tracking-wider px-4 py-3.5 rounded-full">
+           class="sm:hidden flex items-center justify-center gap-2 bg-terracotta hover:bg-terracotta-dark text-ink font-bold text-xs uppercase tracking-wider px-4 py-3.5 rounded-full">
           {{ t().nav.cta }}
         </a>
       </div>

@@ -1,4 +1,4 @@
-<section id="trazabilidad" aria-labelledby="trazabilidad-title" class="relative py-24 sm:py-32 bg-obsidian border-b border-line overflow-hidden">
+<section id="trazabilidad" aria-labelledby="trazabilidad-title" class="theme-light relative py-24 sm:py-32 bg-obsidian border-b border-line overflow-hidden">
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <app-section-heading
       class="max-w-3xl mx-auto mb-12"
@@ -12,7 +12,7 @@
       <!-- Buscador de lote -->
       <form (submit)="search($event)" class="p-5 sm:p-7 border-b border-line flex flex-col lg:flex-row lg:items-end gap-5">
         <div class="flex-1">
-          <label for="lot-code" class="block text-[10px] font-bold uppercase tracking-[0.2em] text-terracotta mb-2">
+          <label for="lot-code" class="block text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-2">
             {{ t().trace.inputLabel }}
           </label>
           <div class="flex gap-2.5">
@@ -31,10 +31,10 @@
                 [placeholder]="t().trace.placeholder"
                 [attr.aria-invalid]="notFound() !== null"
                 aria-describedby="lot-examples"
-                class="w-full rounded-full bg-obsidian border border-line focus:border-honey focus:outline-none focus:ring-2 focus:ring-honey/30 pl-11 pr-4 py-3.5 font-mono text-sm tracking-widest uppercase text-cream placeholder:text-muted/60 placeholder:normal-case placeholder:tracking-normal transition" />
+                class="w-full rounded-full bg-obsidian border border-line focus:border-honey focus:outline-none focus:ring-2 focus:ring-honey/30 pl-11 pr-4 py-3.5 font-mono text-sm tracking-widest uppercase text-hl placeholder:text-muted/60 placeholder:normal-case placeholder:tracking-normal transition" />
             </div>
             <button type="submit"
-                    class="shrink-0 rounded-full bg-terracotta hover:bg-cream text-obsidian font-bold text-xs uppercase tracking-wider px-5 sm:px-7 transition cursor-pointer">
+                    class="shrink-0 rounded-full bg-terracotta hover:bg-terracotta-dark text-ink font-bold text-xs uppercase tracking-wider px-5 sm:px-7 transition cursor-pointer">
               {{ t().trace.submit }}
             </button>
           </div>
@@ -46,7 +46,7 @@
                     class="font-mono rounded-full border px-3 py-1.5 transition cursor-pointer"
                     [class]="lot().code === example.code && !notFound()
                       ? 'border-honey bg-honey/10 text-honey'
-                      : 'border-line text-muted hover:text-cream hover:border-terracotta/60'">
+                      : 'border-line text-muted hover:text-hl hover:border-terracotta/60'">
               {{ example.code }}
             </button>
           }
@@ -56,9 +56,9 @@
       <div aria-live="polite">
         @if (notFound(); as code) {
           <div class="m-5 sm:m-7 rounded-2xl border border-terracotta/50 bg-terracotta/10 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-up">
-            <p class="text-sm text-cream">{{ i18n.format(t().trace.notFound, { code: code }) }}</p>
+            <p class="text-sm text-hl">{{ i18n.format(t().trace.notFound, { code: code }) }}</p>
             <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
-               class="shrink-0 inline-flex items-center gap-2 rounded-full bg-terracotta text-obsidian font-bold text-xs uppercase tracking-wider px-5 py-3">
+               class="shrink-0 inline-flex items-center gap-2 rounded-full bg-terracotta text-ink font-bold text-xs uppercase tracking-wider px-5 py-3">
               <app-whatsapp-icon class="w-4 h-4" /> WhatsApp
             </a>
           </div>
@@ -71,8 +71,8 @@
           <div class="lg:col-span-7 p-5 sm:p-7 lg:border-r border-line">
             <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
               <div>
-                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-terracotta">
-                  {{ t().trace.lot }} <span class="font-mono text-cream ml-1">{{ current.code }}</span>
+                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                  {{ t().trace.lot }} <span class="font-mono text-hl ml-1">{{ current.code }}</span>
                 </div>
                 <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-bone mt-1">{{ honeyName() }}</h3>
                 <span class="inline-flex items-center gap-1.5 mt-2 text-[11px] font-semibold text-honey">
@@ -83,15 +83,15 @@
                 </span>
               </div>
               <div class="rounded-2xl border border-honey/40 bg-obsidian px-4 py-3 text-right">
-                <div class="text-3xl font-bold text-cream leading-none">{{ i18n.decimal(primary().percentage) }}%</div>
-                <div class="text-[10px] uppercase tracking-wider text-terracotta font-bold mt-1">{{ t().trace.purity }}</div>
+                <div class="text-3xl font-bold text-hl leading-none">{{ i18n.decimal(primary().percentage) }}%</div>
+                <div class="text-[10px] uppercase tracking-wider text-accent font-bold mt-1">{{ t().trace.purity }}</div>
               </div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6 items-start">
               <!-- Panal de 100 celdas -->
               <figure class="fingerprint" appReveal>
-                <figcaption class="text-xs font-bold uppercase tracking-[0.18em] text-cream mb-3">{{ t().trace.fingerprintTitle }}</figcaption>
+                <figcaption class="text-xs font-bold uppercase tracking-[0.18em] text-hl mb-3">{{ t().trace.fingerprintTitle }}</figcaption>
                 <svg [attr.viewBox]="viewBox" class="w-full h-auto max-w-sm" role="img"
                      [attr.aria-label]="i18n.format(t().trace.fingerprintAria, { code: current.code })"
                      (mouseleave)="highlighted.set(null)">
@@ -152,7 +152,7 @@
                         </span>
                       </th>
                       <td class="text-right font-mono text-muted py-2.5">{{ i18n.integer(share.grains) }}</td>
-                      <td class="text-right font-mono py-2.5 pl-3" [class]="share.isPrimary ? 'text-cream font-bold' : 'text-bone'">
+                      <td class="text-right font-mono py-2.5 pl-3" [class]="share.isPrimary ? 'text-hl font-bold' : 'text-bone'">
                         {{ i18n.decimal(share.percentage) }}
                       </td>
                     </tr>
@@ -164,7 +164,7 @@
 
           <!-- Recorrido del lote -->
           <div class="lg:col-span-5 p-5 sm:p-7 bg-obsidian/40 border-t lg:border-t-0 border-line flex flex-col">
-            <h3 class="text-xs font-bold uppercase tracking-[0.18em] text-cream mb-5">{{ t().trace.journeyTitle }}</h3>
+            <h3 class="text-xs font-bold uppercase tracking-[0.18em] text-hl mb-5">{{ t().trace.journeyTitle }}</h3>
 
             @for (key of [current.code]; track key) {
               <div class="relative flex-1">
@@ -178,7 +178,7 @@
                       </svg>
                     </span>
                     <div class="pt-1">
-                      <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-terracotta">0{{ i + 1 }} · {{ step.title }}</div>
+                      <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-accent">0{{ i + 1 }} · {{ step.title }}</div>
                       <p class="text-sm text-bone mt-0.5 leading-snug">{{ step.detail }}</p>
                       @if (step.note) {
                         <p class="text-[11px] text-muted mt-0.5">{{ step.note }}</p>
@@ -191,7 +191,7 @@
             }
 
             <a [href]="contact.lotUrl(current.code, honeyName())" target="_blank" rel="noopener noreferrer"
-               class="mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-terracotta hover:bg-cream text-obsidian font-bold text-xs uppercase tracking-wider px-6 py-3.5 transition whatsapp-glow">
+               class="mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-terracotta hover:bg-terracotta-dark text-ink font-bold text-xs uppercase tracking-wider px-6 py-3.5 transition whatsapp-glow">
               <app-whatsapp-icon class="w-4 h-4" />
               {{ t().trace.orderLot }}
             </a>

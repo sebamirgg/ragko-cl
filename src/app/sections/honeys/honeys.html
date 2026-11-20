@@ -1,4 +1,4 @@
-<section id="mieles" aria-labelledby="mieles-title" class="relative py-24 sm:py-32 bg-charcoal border-b border-line overflow-hidden">
+<section id="mieles" aria-labelledby="mieles-title" class="theme-dark relative py-24 sm:py-32 bg-charcoal border-b border-line overflow-hidden">
   <div class="absolute inset-0 honeycomb-bg honeycomb-corner-bl pointer-events-none" aria-hidden="true"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,7 +20,7 @@
             [attr.aria-controls]="'honey-' + card.id"
             (click)="active.set(card.id)"
             class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition"
-            [class]="active() === card.id ? 'bg-terracotta text-obsidian' : 'text-muted'">
+            [class]="active() === card.id ? 'bg-terracotta text-ink' : 'text-muted'">
             {{ t().honeys[card.id].name }}
           </button>
         }
@@ -49,7 +49,7 @@
               <div class="absolute inset-0 bg-gradient-to-t from-graphite via-obsidian/45 to-transparent"></div>
 
               <div class="absolute top-5 left-5">
-                <span class="px-3.5 py-1 rounded-full bg-obsidian/90 border text-cream text-[11px] font-bold uppercase tracking-wider"
+                <span class="px-3.5 py-1 rounded-full bg-obsidian/90 border text-hl text-[11px] font-bold uppercase tracking-wider"
                       [class.border-terracotta]="card.accent === 'terracotta'"
                       [class.border-cream]="card.accent === 'cream'">
                   {{ honey.badge }}
@@ -60,14 +60,14 @@
                 <div>
                   <h3 class="font-serif text-3xl sm:text-4xl font-semibold text-bone">{{ honey.name }}</h3>
                   <p class="font-serif italic text-lg"
-                     [class.text-terracotta]="card.accent === 'terracotta'"
-                     [class.text-cream]="card.accent === 'cream'">
+                     [class.text-accent]="card.accent === 'terracotta'"
+                     [class.text-hl]="card.accent === 'cream'">
                     {{ purity()[card.id].scientific }}
                   </p>
                 </div>
                 <div class="text-right bg-obsidian/90 px-3.5 py-2 rounded-2xl border border-line shrink-0">
-                  <div class="text-2xl font-bold text-cream">{{ purity()[card.id].value }}%</div>
-                  <div class="text-[9px] uppercase tracking-wider text-terracotta font-bold">
+                  <div class="text-2xl font-bold text-hl">{{ purity()[card.id].value }}%</div>
+                  <div class="text-[9px] uppercase tracking-wider text-accent font-bold">
                     {{ t().honeys.purity }} · {{ t().honeys.reportShort }} {{ purity()[card.id].report }}
                   </div>
                 </div>
@@ -78,20 +78,20 @@
               <p class="text-sm text-muted leading-relaxed">{{ honey.desc }}</p>
               <dl class="grid grid-cols-2 gap-3.5 text-xs">
                 <div class="p-3.5 rounded-2xl bg-charcoal border border-line">
-                  <dt class="text-terracotta font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.bloom }}</dt>
+                  <dt class="text-accent font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.bloom }}</dt>
                   <dd class="font-semibold text-bone text-sm mt-0.5">{{ honey.bloom }}</dd>
                 </div>
                 <div class="p-3.5 rounded-2xl bg-charcoal border border-line">
-                  <dt class="text-terracotta font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.color }}</dt>
+                  <dt class="text-accent font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.color }}</dt>
                   <dd class="font-semibold text-bone text-sm mt-0.5">{{ honey.color }}</dd>
                 </div>
                 <div class="p-3.5 rounded-2xl bg-charcoal border border-line">
-                  <dt class="text-terracotta font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.sensory }}</dt>
+                  <dt class="text-accent font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.sensory }}</dt>
                   <dd class="font-semibold text-bone text-sm mt-0.5">{{ honey.sensory }}</dd>
                 </div>
                 <div class="p-3.5 rounded-2xl bg-charcoal border border-line">
-                  <dt class="text-terracotta font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.attribute }}</dt>
-                  <dd class="font-semibold text-cream text-sm mt-0.5">{{ honey.attribute }}</dd>
+                  <dt class="text-accent font-bold uppercase tracking-wider text-[10px]">{{ t().honeys.labels.attribute }}</dt>
+                  <dd class="font-semibold text-hl text-sm mt-0.5">{{ honey.attribute }}</dd>
                 </div>
               </dl>
             </div>
@@ -100,7 +100,7 @@
           <div class="px-6 sm:px-7 py-4 bg-charcoal border-t border-line flex flex-wrap items-center justify-between gap-3 text-xs">
             <span class="text-muted">{{ t().honeys.b2bNote }}</span>
             <a [href]="contact.honeyUrl(honey.name)" target="_blank" rel="noopener noreferrer"
-               class="font-bold text-cream hover:text-terracotta uppercase tracking-wider transition">
+               class="font-bold text-hl hover:text-accent uppercase tracking-wider transition">
               {{ t().honeys.inquire }} →
             </a>
           </div>
