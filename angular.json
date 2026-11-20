@@ -23,6 +23,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*.{jpg,jpeg,png,webp,avif,svg}",
+                "input": "src/resources",
+                "output": "resources"
               }
             ],
             "styles": [

@@ -23,7 +23,22 @@ titleEs: string;
 titleEn: string;
 descEs: string;
 descEn: string;
+width: number;
+height: number;
+position?: string;
 }
+
+interface FaqItem {
+id: string;
+catEs: string;
+catEn: string;
+qEs: string;
+qEn: string;
+aEs: string;
+aEn: string;
+}
+
+const IMG = 'resources/images/ragko/';
 
 @Component({
 selector: 'app-root',
@@ -57,9 +72,24 @@ template: `
       }
 
       /* Patrón sutil de panal hexagonal con líneas finas y desvanecimiento radial */
+      /* Panal continuo: hexágonos unidos en trazo dorado fino */
       .honeycomb-bg {
-        background-image: url("data:image/svg+xml,%3Csvg width='56' height='98' viewBox='0 0 56 98' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23E08244' stroke-opacity='0.065' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23FCE8C3' stroke-opacity='0.035' stroke-width='0.8'/%3E%3C/svg%3E");
-        background-size: 56px 98px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0 34.64 10v20L17.32 40 0 30V10zM17.32 40v20' fill='none' stroke='%23F2B544' stroke-opacity='.11' stroke-width='1'/%3E%3C/svg%3E");
+        background-size: 46px 80px;
+      }
+
+      /* Variantes de desvanecimiento para ir alternando */
+      .honeycomb-top {
+        -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+        mask-image: linear-gradient(180deg, #000, transparent 85%);
+      }
+      .honeycomb-corner-tr {
+        -webkit-mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 10%, transparent 75%);
+        mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 10%, transparent 75%);
+      }
+      .honeycomb-corner-bl {
+        -webkit-mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 10%, transparent 75%);
+        mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 10%, transparent 75%);
       }
 
       .honeycomb-mask {
@@ -92,8 +122,91 @@ template: `
 
       ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #0E1012; }
-      ::-webkit-scrollbar-thumb { background: #E08244; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb { background: linear-gradient(#F2B544, #E08244); border-radius: 4px; }
+
+      /* ===== AMBIENTACIÓN APÍCOLA ===== */
+
+      /* Ornamento central: líneas doradas con hexágono */
+      .hex-ornament {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #F2B544;
+      }
+      .hex-ornament::before,
+      .hex-ornament::after {
+        content: '';
+        height: 1px;
+        width: 56px;
+        background: linear-gradient(90deg, transparent, rgba(242, 181, 68, 0.7));
+      }
+      .hex-ornament::after {
+        background: linear-gradient(90deg, rgba(242, 181, 68, 0.7), transparent);
+      }
+
+      /* Texto con degradado miel */
+      .text-honey {
+        background: linear-gradient(100deg, #FCE8C3 0%, #F2B544 45%, #E08244 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Abejas decorativas con vuelo suave */
+      .bee {
+        position: absolute;
+        pointer-events: none;
+        color: #F2B544;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+      }
+      .bee-wing { transform-origin: 50% 100%; animation: wingFlap 0.18s ease-in-out infinite alternate; }
+      @keyframes wingFlap { from { transform: scaleY(1); } to { transform: scaleY(0.55); } }
+      .bee-fly-a { animation: beeFlyA 14s ease-in-out infinite; }
+      .bee-fly-b { animation: beeFlyB 18s ease-in-out infinite; }
+      @keyframes beeFlyA {
+        0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+        25% { transform: translate(38px, -22px) rotate(6deg); }
+        50% { transform: translate(70px, 6px) rotate(-4deg); }
+        75% { transform: translate(28px, 20px) rotate(10deg); }
+      }
+      @keyframes beeFlyB {
+        0%, 100% { transform: translate(0, 0) rotate(12deg) scaleX(-1); }
+        30% { transform: translate(-46px, 18px) rotate(-6deg) scaleX(-1); }
+        60% { transform: translate(-80px, -16px) rotate(8deg) scaleX(-1); }
+        85% { transform: translate(-30px, -28px) rotate(-10deg) scaleX(-1); }
+      }
+
+      /* Acordeón FAQ: altura animada con grid-template-rows */
+      .faq-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .faq-panel.is-open { grid-template-rows: 1fr; }
+      .faq-panel > div { overflow: hidden; }
+      .faq-hex { transition: color 0.3s ease; }
+      .faq-hex-shape { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+      .faq-item.is-open .faq-hex-shape { transform: rotate(90deg); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .bee-wing, .bee-fly-a, .bee-fly-b, .animate-fade-up { animation: none !important; }
+        .faq-panel, .faq-hex, .faq-hex-shape { transition: none; }
+      }
     </style>
+
+    <!-- Plantilla reutilizable: abeja minimalista en trazo dorado -->
+    <ng-template #beeIcon>
+      <svg viewBox="0 0 48 40" class="w-full h-full" fill="none" aria-hidden="true">
+        <ellipse class="bee-wing" cx="19" cy="12" rx="7" ry="9" fill="#FCE8C3" fill-opacity="0.55" stroke="#FCE8C3" stroke-opacity="0.8" stroke-width="1"/>
+        <ellipse class="bee-wing" cx="28" cy="13" rx="6" ry="8" fill="#FCE8C3" fill-opacity="0.4" stroke="#FCE8C3" stroke-opacity="0.7" stroke-width="1"/>
+        <ellipse cx="24" cy="26" rx="13" ry="8.5" fill="currentColor"/>
+        <path d="M19 18.5v15M25 17.6v16.8M31 19v14" stroke="#14171A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="38" cy="25" r="4.6" fill="#14171A"/>
+        <path d="M40 21c2-3 4-4 6-4M39 21c1-3 2-5 4-6" stroke="#14171A" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M11 26l-4 1" stroke="#14171A" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </ng-template>
 
     <!-- =====================================================================
          HEADER BOUTIQUE FIJO CON LOGOTIPO OFICIAL DE COOPERATIVA RAGKO
@@ -150,6 +263,7 @@ template: `
           <a href="#galeria" class="hover:text-[#FCE8C3] transition">{{ t('nav.gallery') }}</a>
           <a href="#ciencia" class="hover:text-[#FCE8C3] transition">{{ t('nav.science') }}</a>
           <a href="#ruta-do" class="hover:text-[#FCE8C3] transition">{{ t('nav.roadmap') }}</a>
+          <a href="#faq" class="hover:text-[#FCE8C3] transition">{{ t('nav.faq') }}</a>
         </nav>
 
         <!-- Selector ES / EN + Botón Directo WhatsApp Header -->
@@ -187,13 +301,21 @@ template: `
       <!-- Fotografía Editorial de Fondo con Overlay Oscuro Sofisticado -->
       <div class="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=2000&q=85"
-          alt="Miel artesanal pura del bosque nativo de Caramávida"
-          class="w-full h-full object-cover object-center scale-105 opacity-35"/>
-        <div class="absolute inset-0 bg-gradient-to-r from-[#0E1012] via-[#0E1012]/90 to-[#0E1012]/65"></div>
+          src="resources/images/ragko/519673547_122181544526360516_8621292655219364027_n.jpg"
+          alt="Apicultor de Cooperativa Ragko revisando un marco en el apiario de Caramávida"
+          width="1920" height="1080"
+          fetchpriority="high" decoding="async"
+          class="w-full h-full object-cover object-center scale-105 opacity-45"/>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0E1012] via-[#0E1012]/88 to-[#0E1012]/50"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#0E1012] via-transparent to-[#0E1012]/70"></div>
-        <!-- Textura Panal Sutil Superpuesta -->
-        <div class="absolute inset-0 honeycomb-bg honeycomb-mask opacity-90"></div>
+      </div>
+
+      <!-- Abejas decorativas (ocultas en móvil para no recargar) -->
+      <div class="bee bee-fly-a hidden md:block w-9 h-8 top-[18%] right-[8%] z-[5] opacity-80" aria-hidden="true">
+        <ng-container [ngTemplateOutlet]="beeIcon"></ng-container>
+      </div>
+      <div class="bee bee-fly-b hidden lg:block w-6 h-5 bottom-[14%] left-[46%] z-[5] opacity-60" aria-hidden="true">
+        <ng-container [ngTemplateOutlet]="beeIcon"></ng-container>
       </div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -297,9 +419,11 @@ template: `
               <!-- Fotografía de Panal y Miel Pura -->
               <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=1000&q=85"
-                  alt="Miel de Ulmo y Tineo Cooperativa Ragko Caramávida"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                  src="resources/images/ragko/537420222_17991340805834096_7377982852245683548_n.jpg"
+                  alt="Marco de panal con miel operculada y abejas de Cooperativa Ragko"
+                  width="1440" height="1920"
+                  decoding="async"
+                  class="w-full h-full object-cover object-[50%_40%] group-hover:scale-105 transition-transform duration-700"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0E1012] via-[#0E1012]/20 to-transparent"></div>
 
                 <!-- Sello Flotante D.O. -->
@@ -342,7 +466,7 @@ template: `
          SECCIÓN 2: PROPUESTA DE VALOR & TRIPLE IMPACTO TERRITORIAL
     ====================================================================== -->
     <section id="valor" class="relative py-24 sm:py-32 bg-[#14171A] border-y border-[#272B31] overflow-hidden">
-      <div class="absolute inset-0 honeycomb-bg opacity-45 pointer-events-none"></div>
+      <div class="absolute inset-0 honeycomb-bg honeycomb-corner-tr pointer-events-none" aria-hidden="true"></div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -353,6 +477,9 @@ template: `
           <h2 class="font-serif-editorial text-3xl sm:text-5xl font-semibold text-[#F8F9FA] leading-tight">
             {{ t('sec2.title') }}
           </h2>
+          <div class="hex-ornament pt-1" aria-hidden="true">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>
+          </div>
           <p class="text-base sm:text-lg text-[#A3A8B0] leading-relaxed">
             {{ t('sec2.lead') }}
           </p>
@@ -454,8 +581,8 @@ template: `
     <!-- =====================================================================
          SECCIÓN 3: EL TERRITORIO — BOSQUE NATIVO DE CARAMÁVIDA (AAVC)
     ====================================================================== -->
-    <section id="territorio" class="py-24 sm:py-32 bg-[#0E1012] border-b border-[#272B31]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="territorio" class="relative py-24 sm:py-32 bg-[#0E1012] border-b border-[#272B31] overflow-hidden">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-12 gap-12 items-center">
           
           <!-- Narrativa + Fotografía Editorial del Bosque (5 cols) -->
@@ -473,9 +600,11 @@ template: `
             <!-- Fotografía del Bosque Templado Lluvioso -->
             <div class="relative h-52 rounded-2xl overflow-hidden border border-[#272B31] group">
               <img
-                src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=80"
-                alt="Bosque templado lluvioso Cordillera de Nahuelbuta"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                src="resources/images/ragko/752620232_1012315631599638_1931829109803749546_n.jpg"
+                alt="Apicultor de Cooperativa Ragko junto a sus colmenas en la Cordillera de Nahuelbuta"
+                width="2048" height="1356"
+                loading="lazy" decoding="async"
+                class="w-full h-full object-cover object-[50%_45%] group-hover:scale-105 transition-transform duration-700"/>
               <div class="absolute inset-0 bg-gradient-to-t from-[#0E1012] via-transparent to-transparent"></div>
               <div class="absolute bottom-3 left-4 text-xs font-semibold text-[#FCE8C3]">
                 Ladera Occidental · Cordillera de Nahuelbuta, Curanilahue
@@ -607,8 +736,9 @@ template: `
     <!-- =====================================================================
          SECCIÓN 4: NUESTRAS MIELES MONOFLORALES (BOUTIQUE B2B SIN E-COMMERCE)
     ====================================================================== -->
-    <section id="mieles" class="py-24 sm:py-32 bg-[#14171A] border-b border-[#272B31]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="mieles" class="relative py-24 sm:py-32 bg-[#14171A] border-b border-[#272B31] overflow-hidden">
+      <div class="absolute inset-0 honeycomb-bg honeycomb-corner-bl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
           <span class="text-xs font-bold uppercase tracking-[0.24em] text-[#E08244]">
@@ -617,6 +747,9 @@ template: `
           <h2 class="font-serif-editorial text-3xl sm:text-5xl font-semibold text-[#F8F9FA]">
             {{ t('sec4.title') }}
           </h2>
+          <div class="hex-ornament pt-1" aria-hidden="true">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>
+          </div>
           <p class="text-sm sm:text-base text-[#A3A8B0]">
             {{ t('sec4.subtitle') }}
           </p>
@@ -648,9 +781,11 @@ template: `
               <!-- Fotografía Superior de Producto / Textura Ámbar Oscuro -->
               <div class="relative h-60 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=1000&q=85"
-                  alt="Miel de Tineo Caramávida"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                  src="resources/images/ragko/469778389_122145428474360516_7176839494713472223_n.jpg"
+                  alt="Marco de panal con miel de Tineo operculada, Caramávida"
+                  width="1080" height="1080"
+                  loading="lazy" decoding="async"
+                  class="w-full h-full object-cover object-[50%_55%] group-hover:scale-105 transition-transform duration-700"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#1A1D21] via-[#0E1012]/45 to-transparent"></div>
 
                 <div class="absolute top-5 left-5">
@@ -716,9 +851,11 @@ template: `
               <!-- Fotografía Superior Flor Blanca / Miel Dorada -->
               <div class="relative h-60 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=1000&q=85"
-                  alt="Miel de Ulmo Caramávida"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                  src="resources/images/ragko/517713686_122181544478360516_4059500393000600636_n.jpg"
+                  alt="Apicultor de Ragko envasando miel de Ulmo de tono ámbar claro"
+                  width="1920" height="1080"
+                  loading="lazy" decoding="async"
+                  class="w-full h-full object-cover object-[60%_50%] group-hover:scale-105 transition-transform duration-700"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#1A1D21] via-[#0E1012]/45 to-transparent"></div>
 
                 <div class="absolute top-5 left-5">
@@ -785,8 +922,8 @@ template: `
     <!-- =====================================================================
          SECCIÓN 5: GALERÍA EDITORIAL BENTO GRID (ORIGEN, PROCESO Y PRODUCTO)
     ====================================================================== -->
-    <section id="galeria" class="py-24 sm:py-32 bg-[#0E1012] border-b border-[#272B31]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="galeria" class="relative py-24 sm:py-32 bg-[#0E1012] border-b border-[#272B31] overflow-hidden">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div class="max-w-2xl space-y-3">
@@ -803,15 +940,24 @@ template: `
         </div>
 
         <!-- Bento Grid Asimétrico de Alta Fotografía con Micro-Interacciones -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 auto-rows-[260px]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 sm:gap-5 auto-rows-[240px] sm:auto-rows-[260px]">
           @for (photo of galleryItems; track photo.id) {
             <div
               (click)="selectedPhoto.set(photo)"
+              (keydown.enter)="selectedPhoto.set(photo)"
+              tabindex="0"
+              role="button"
+              [attr.aria-label]="lang() === 'es' ? photo.titleEs : photo.titleEn"
               [class]="photo.spanClass"
-              class="relative rounded-3xl overflow-hidden border border-[#272B31] hover:border-[#E08244] bg-[#1A1D21] group cursor-pointer shadow-xl transition-all duration-500">
+              class="relative rounded-3xl overflow-hidden border border-[#272B31] hover:border-[#E08244] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F2B544] bg-[#1A1D21] group cursor-pointer shadow-xl transition-all duration-500">
               <img
                 [src]="photo.imageUrl"
                 [alt]="lang() === 'es' ? photo.titleEs : photo.titleEn"
+                [attr.width]="photo.width"
+                [attr.height]="photo.height"
+                [style.object-position]="photo.position || 'center'"
+                loading="lazy"
+                decoding="async"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"/>
               
               <!-- Overlay Gradiente -->
@@ -850,7 +996,7 @@ template: `
          SECCIÓN 6: CIENCIA, TRAZABILIDAD Y EVIDENCIA PALINOLÓGICA
     ====================================================================== -->
     <section id="ciencia" class="relative py-24 sm:py-32 bg-[#14171A] border-b border-[#272B31] overflow-hidden">
-      <div class="absolute inset-0 honeycomb-bg opacity-35 pointer-events-none"></div>
+      <div class="absolute inset-0 honeycomb-bg honeycomb-corner-tr pointer-events-none" aria-hidden="true"></div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -963,8 +1109,8 @@ template: `
     <!-- =====================================================================
          SECCIÓN 7: RUTA ESTRATÉGICA DENOMINACIÓN DE ORIGEN & GOBERNANZA
     ====================================================================== -->
-    <section id="ruta-do" class="py-24 sm:py-32 bg-[#0E1012] border-b border-[#272B31]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="ruta-do" class="relative py-24 sm:py-32 bg-[#0E1012] border-b border-[#272B31] overflow-hidden">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
           <span class="text-xs font-bold uppercase tracking-[0.24em] text-[#E08244]">
@@ -973,6 +1119,9 @@ template: `
           <h2 class="font-serif-editorial text-3xl sm:text-5xl font-semibold text-[#F8F9FA]">
             {{ t('sec6.title') }}
           </h2>
+          <div class="hex-ornament pt-1" aria-hidden="true">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>
+          </div>
           <p class="text-sm sm:text-base text-[#A3A8B0]">
             {{ t('sec6.subtitle') }}
           </p>
@@ -1064,11 +1213,104 @@ template: `
     </section>
 
     <!-- =====================================================================
-         SECCIÓN 8: CONVERSIÓN DIRECTA & REDES SOCIALES (SIN FORMULARIOS)
+         SECCIÓN 8: PREGUNTAS FRECUENTES (ACORDEÓN ACCESIBLE)
+    ====================================================================== -->
+    <section id="faq" class="relative py-24 sm:py-32 bg-[#0E1012] border-b border-[#272B31] overflow-hidden">
+      <div class="absolute inset-0 honeycomb-bg honeycomb-corner-bl pointer-events-none" aria-hidden="true"></div>
+      <div class="bee bee-fly-b hidden md:block w-8 h-7 top-24 right-[10%] opacity-70" aria-hidden="true">
+        <ng-container [ngTemplateOutlet]="beeIcon"></ng-container>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-14">
+
+          <!-- Encabezado + Imagen de apoyo (4 cols) -->
+          <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-28 self-start">
+            <span class="text-xs font-bold uppercase tracking-[0.24em] text-[#E08244]">
+              {{ t('faq.kicker') }}
+            </span>
+            <h2 class="font-serif-editorial text-3xl sm:text-5xl font-semibold text-[#F8F9FA] leading-tight">
+              {{ t('faq.title') }}
+            </h2>
+            <p class="text-sm sm:text-base text-[#A3A8B0] leading-relaxed">
+              {{ t('faq.subtitle') }}
+            </p>
+
+            <div class="relative hidden lg:block h-64 rounded-3xl overflow-hidden border border-[#272B31]">
+              <img
+                src="resources/images/ragko/536906883_17991340778834096_1412348170191393273_n.jpg"
+                alt="Colmenas de colores de Cooperativa Ragko en la pradera"
+                width="1440" height="1920"
+                loading="lazy" decoding="async"
+                class="w-full h-full object-cover object-[50%_60%]"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0E1012] via-[#0E1012]/20 to-transparent"></div>
+            </div>
+
+            <a [href]="whatsappUrl()" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FCE8C3] hover:text-[#F2B544] transition">
+              {{ t('faq.more') }} →
+            </a>
+          </div>
+
+          <!-- Acordeón (8 cols) -->
+          <div class="lg:col-span-8 space-y-3">
+            @for (item of faqItems; track item.id; let i = $index) {
+              <div class="faq-item rounded-2xl border bg-[#14171A] transition-colors duration-300"
+                   [class.is-open]="openFaq() === i"
+                   [ngClass]="openFaq() === i ? 'border-[#E08244]/60 shadow-[0_12px_40px_-12px_rgba(224,130,68,0.35)]' : 'border-[#272B31] hover:border-[#E08244]/35'">
+                <h3>
+                  <button
+                    type="button"
+                    (click)="toggleFaq(i)"
+                    [attr.aria-expanded]="openFaq() === i"
+                    [attr.aria-controls]="'faq-panel-' + item.id"
+                    [id]="'faq-btn-' + item.id"
+                    class="w-full flex items-center gap-4 text-left px-5 sm:px-6 py-5 cursor-pointer group">
+                    <span class="faq-hex relative shrink-0 w-9 h-9 flex items-center justify-center"
+                          [ngClass]="openFaq() === i ? 'text-[#0E1012]' : 'text-[#F2B544]'">
+                      <svg viewBox="0 0 24 24" class="faq-hex-shape absolute inset-0 w-9 h-9" aria-hidden="true">
+                        <path d="M12 1.5l9.1 5.25v10.5L12 22.5l-9.1-5.25V6.75z"
+                              [attr.fill]="openFaq() === i ? '#F2B544' : 'none'"
+                              stroke="#F2B544" stroke-width="1.4"/>
+                      </svg>
+                      <svg viewBox="0 0 24 24" class="relative w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                        <path [attr.d]="openFaq() === i ? 'M6 12h12' : 'M12 6v12M6 12h12'"/>
+                      </svg>
+                    </span>
+                    <span class="flex-1 text-sm sm:text-base font-semibold text-[#F8F9FA] group-hover:text-[#FCE8C3] transition">
+                      {{ lang() === 'es' ? item.qEs : item.qEn }}
+                    </span>
+                    <span class="hidden sm:inline text-[10px] uppercase tracking-[0.18em] text-[#E08244] font-bold">
+                      {{ lang() === 'es' ? item.catEs : item.catEn }}
+                    </span>
+                  </button>
+                </h3>
+                <div class="faq-panel" [class.is-open]="openFaq() === i"
+                     [id]="'faq-panel-' + item.id"
+                     role="region"
+                     [attr.aria-labelledby]="'faq-btn-' + item.id"
+                     [attr.aria-hidden]="openFaq() !== i">
+                  <div>
+                    <p class="px-5 sm:px-6 pb-6 pl-[4.25rem] sm:pl-[4.75rem] text-sm text-[#A3A8B0] leading-relaxed">
+                      {{ lang() === 'es' ? item.aEs : item.aEn }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECCIÓN 9: CONVERSIÓN DIRECTA & REDES SOCIALES (SIN FORMULARIOS)
     ====================================================================== -->
     <section id="contacto" class="relative py-24 sm:py-32 bg-[#14171A] overflow-hidden">
-      <!-- Patrón Panal Sutil con Máscara Radial -->
-      <div class="absolute inset-0 honeycomb-bg honeycomb-mask opacity-75 pointer-events-none"></div>
+      <div class="bee bee-fly-a hidden md:block w-8 h-7 top-20 left-[12%] z-20 opacity-75" aria-hidden="true">
+        <ng-container [ngTemplateOutlet]="beeIcon"></ng-container>
+      </div>
 
       <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="rounded-[2.2rem] bg-gradient-to-b from-[#1A1D21] to-[#111316] border border-[#E08244]/40 p-8 sm:p-14 text-center shadow-2xl space-y-8">
@@ -1177,8 +1419,9 @@ template: `
     <!-- =====================================================================
          FOOTER INSTITUCIONAL CON LOGOTIPO OFICIAL DE COOPERATIVA RAGKO
     ====================================================================== -->
-    <footer class="bg-[#0E1012] text-[#F8F9FA] pt-16 pb-12 border-t border-[#272B31]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer class="relative bg-[#0E1012] text-[#F8F9FA] pt-16 pb-12 border-t border-[#272B31] overflow-hidden">
+      <div class="absolute inset-0 honeycomb-bg honeycomb-top pointer-events-none" aria-hidden="true"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-12 gap-10 pb-12 border-b border-[#272B31]">
           
           <!-- Identidad y Logo Oficial Ragko -->
@@ -1235,7 +1478,8 @@ template: `
               <a href="#galeria" class="hover:text-[#E08244] transition">5. Galería Bento</a>
               <a href="#ciencia" class="hover:text-[#E08244] transition">6. Ciencia & Polen</a>
               <a href="#ruta-do" class="hover:text-[#E08244] transition">7. Ruta D.O. INAPI</a>
-              <a href="#contacto" class="hover:text-[#E08244] transition">8. Contacto Directo</a>
+              <a href="#faq" class="hover:text-[#E08244] transition">8. Preguntas Frecuentes</a>
+              <a href="#contacto" class="hover:text-[#E08244] transition">9. Contacto Directo</a>
             </div>
           </div>
 
@@ -1263,9 +1507,9 @@ template: `
     ====================================================================== -->
     @if (selectedPhoto(); as photo) {
       <div (click)="selectedPhoto.set(null)" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-        <div (click)="$event.stopPropagation()" class="bg-[#1A1D21] border border-[#E08244]/50 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl animate-fade-up">
-          <div class="relative h-80 sm:h-96">
-            <img [src]="photo.imageUrl" [alt]="photo.titleEs" class="w-full h-full object-cover"/>
+        <div (click)="$event.stopPropagation()" class="bg-[#1A1D21] border border-[#E08244]/50 rounded-3xl max-w-3xl w-full max-h-[94vh] overflow-y-auto shadow-2xl animate-fade-up">
+          <div class="relative h-[55vh] sm:h-[62vh] bg-[#0E1012]">
+            <img [src]="photo.imageUrl" [alt]="lang() === 'es' ? photo.titleEs : photo.titleEn" decoding="async" class="w-full h-full object-contain"/>
             <button
               (click)="selectedPhoto.set(null)"
               class="absolute top-4 right-4 w-10 h-10 rounded-full bg-[#0E1012]/85 text-[#FCE8C3] hover:bg-[#E08244] hover:text-[#0E1012] flex items-center justify-center font-bold transition cursor-pointer">
@@ -1361,6 +1605,7 @@ isScrolled = signal<boolean>(false);
 activeHoney = signal<HoneyTab>('ulmo');
 showLabModal = signal<boolean>(false);
 selectedPhoto = signal<GalleryItem | null>(null);
+openFaq = signal<number | null>(0);
 
 // Número WhatsApp institucional configurable de Cooperativa Ragko
 private readonly whatsappNumber = '56900000000';
@@ -1383,59 +1628,168 @@ tineoPollenData: PollenDatum[] = [
 
 galleryItems: GalleryItem[] = [
 {
-id: 'origen-bosque',
+id: 'somos-ragko',
 spanClass: 'md:col-span-7 md:row-span-2',
-imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1400&q=85',
-tagEs: 'Origen · AAVC Caramávida',
-tagEn: 'Origin · Caramávida HCVA',
-titleEs: 'Santuario Templado Lluvioso en Nahuelbuta',
-titleEn: 'Temperate Rainforest Sanctuary in Nahuelbuta',
-descEs: '5.739 hectáreas de bosque nativo con aislamiento natural libre de agroquímicos en Curanilahue, Provincia de Arauco.',
-descEn: '5,739 hectares of native rainforest with natural agrochemical-free isolation in Curanilahue, Arauco Province.'
+imageUrl: IMG + '536906883_17991340778834096_1412348170191393273_n.jpg',
+width: 1440, height: 1920, position: '50% 58%',
+tagEs: 'Origen · Apiarios de Caramávida',
+tagEn: 'Origin · Caramávida Apiaries',
+titleEs: 'Somos Ragko: Colmenas entre Praderas y Bosque',
+titleEn: 'We Are Ragko: Hives Between Meadows and Forest',
+descEs: 'Apiarios instalados en praderas floridas al borde del bosque nativo, lejos de cultivos intensivos y agroquímicos.',
+descEn: 'Apiaries set in flowering meadows at the edge of the native forest, far from intensive crops and agrochemicals.'
 },
 {
-id: 'flor-ulmo',
+id: 'inspeccion-marco',
 spanClass: 'md:col-span-5 md:row-span-1',
-imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=85',
-tagEs: 'Botánica · Eucryphia cordifolia',
-tagEn: 'Botanical · Eucryphia cordifolia',
-titleEs: 'Floración Estival de Ulmo',
-titleEn: 'Summer Ulmo Blossoming',
-descEs: 'Flores blancas aromáticas de enero a marzo que dan origen a nuestra miel más cremosa y bioactiva.',
-descEn: 'Aromatic white blossoms from January to March yielding our creamiest, most bioactive honey.'
+imageUrl: IMG + '537557789_17991340787834096_7760877650663504961_n.jpg',
+width: 1440, height: 1920, position: '50% 38%',
+tagEs: 'Oficio · Manejo Sanitario',
+tagEn: 'Craft · Hive Health',
+titleEs: 'Inspección Cuidadosa de Cada Colmena',
+titleEn: 'Careful Inspection of Every Hive',
+descEs: 'Revisión periódica de marcos y colonias con manejo sanitario trazable bajo Ley N° 21.489.',
+descEn: 'Regular frame and colony checks with traceable hive health management under Law N° 21.489.'
 },
 {
-id: 'oficio-apicola',
+id: 'miel-cruda',
 spanClass: 'md:col-span-5 md:row-span-1',
-imageUrl: 'https://images.unsplash.com/photo-1568526381923-caf3fd520382?auto=format&fit=crop&w=1000&q=85',
-tagEs: 'Oficio · Cooperativa Ragko',
-tagEn: 'Craft · Cooperativa Ragko',
-titleEs: 'Apicultura Respetuosa del Ciclo Nativo',
-titleEn: 'Beekeeping Respecting Native Cycles',
-descEs: 'Manejo sanitario trazable bajo Ley N° 21.489, protegiendo las colonias y la biodiversidad local.',
-descEn: 'Traceable hive stewardship under Law N° 21.489, safeguarding colonies and local biodiversity.'
+imageUrl: IMG + '504433901_122181544532360516_4371677576195456262_n.jpg',
+width: 1920, height: 1080, position: '62% 45%',
+tagEs: 'Producto · Miel Cruda',
+tagEn: 'Product · Raw Honey',
+titleEs: 'Miel Pura, Tal Como Sale de la Colmena',
+titleEn: 'Pure Honey, Straight from the Hive',
+descEs: 'Sin pasteurizar ni mezclar: conserva sus enzimas, aromas y la textura natural del bosque.',
+descEn: 'Unpasteurised and unblended: it keeps its enzymes, aromas and the natural texture of the forest.'
 },
 {
-id: 'cosecha-panal',
-spanClass: 'md:col-span-6 md:row-span-1',
-imageUrl: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=85',
+id: 'panal-cosecha',
+spanClass: 'md:col-span-4 md:row-span-1',
+imageUrl: IMG + '471162984_122148022298360516_8803662300688134095_n.jpg',
+width: 1080, height: 1080, position: '50% 42%',
 tagEs: 'Cosecha · Trazabilidad por Lote',
 tagEn: 'Harvest · Batch Traceability',
-titleEs: 'Extracción Artesanal en Frío',
-titleEn: 'Cold Artisanal Extraction',
-descEs: 'Preservamos intactos los compuestos polifenólicos, enzimas naturales y notas aromáticas del bosque.',
-descEn: 'Preserving polyphenolic compounds, natural enzymes, and aromatic forest notes intact.'
+titleEs: 'Marcos Listos para la Extracción',
+titleEn: 'Frames Ready for Extraction',
+descEs: 'Cada marco cosechado se registra por lote para asegurar la trazabilidad desde el apiario hasta el envase.',
+descEn: 'Every harvested frame is logged by batch to ensure traceability from apiary to jar.'
 },
 {
-id: 'producto-boutique',
+id: 'apicultor-territorio',
+spanClass: 'md:col-span-4 md:row-span-1',
+imageUrl: IMG + '469585389_122145187406360516_7796380910404264648_n.jpg',
+width: 1080, height: 1080, position: '35% 45%',
+tagEs: 'Comunidad · Apicultores',
+tagEn: 'Community · Beekeepers',
+titleEs: 'Raíces en la Cordillera de Nahuelbuta',
+titleEn: 'Rooted in the Nahuelbuta Range',
+descEs: 'Apicultores locales que conocen cada floración del territorio y cuidan sus colmenas todo el año.',
+descEn: 'Local beekeepers who know every bloom of the territory and tend their hives all year round.'
+},
+{
+id: 'carpinteria',
+spanClass: 'md:col-span-4 md:row-span-1',
+imageUrl: IMG + '470211605_122146318676360516_2544973137349315083_n.jpg',
+width: 1080, height: 1080, position: '50% 55%',
+tagEs: 'Oficios · Madera',
+tagEn: 'Trades · Woodwork',
+titleEs: 'Manos que Construyen el Territorio',
+titleEn: 'Hands That Build the Territory',
+descEs: 'Oficios locales de la madera que forman parte de la red comunitaria de Ragko.',
+descEn: 'Local woodworking trades that are part of the Ragko community network.'
+},
+{
+id: 'vivero-nativo',
 spanClass: 'md:col-span-6 md:row-span-1',
-imageUrl: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=1000&q=85',
-tagEs: 'Producto Gourmet · Export & B2B',
-tagEn: 'Gourmet Product · Export & B2B',
-titleEs: 'Envasado de Origen Caramávida',
-titleEn: 'Caramávida Origin Bottling',
-descEs: 'Formatos boutique de 300g y 500g respaldados por informes melisopalinológicos certificados.',
-descEn: 'Boutique 300g and 500g formats backed by certified melissopalynological laboratory reports.'
+imageUrl: IMG + '470178672_122146522922360516_4337231496104999354_n.jpg',
+width: 1080, height: 1080, position: '50% 32%',
+tagEs: 'Conservación · Vivero Nativo',
+tagEn: 'Conservation · Native Nursery',
+titleEs: 'Especies Nativas para el Bosque del Mañana',
+titleEn: 'Native Species for Tomorrow\'s Forest',
+descEs: 'Plantas melíferas nativas que fortalecen el bosque y la alimentación de las abejas.',
+descEn: 'Native nectar-bearing plants that strengthen the forest and feed the bees.'
+},
+{
+id: 'artesano',
+spanClass: 'md:col-span-6 md:row-span-1',
+imageUrl: IMG + '471325302_122148031820360516_5120646425514352722_n.jpg',
+width: 960, height: 960, position: '65% 30%',
+tagEs: 'Comunidad · Caramávida',
+tagEn: 'Community · Caramávida',
+titleEs: 'Tradición y Trabajo de Generaciones',
+titleEn: 'Generations of Tradition and Work',
+descEs: 'Rostros de la comunidad que sostienen la identidad productiva de Curanilahue.',
+descEn: 'Faces of the community that sustain Curanilahue\'s productive identity.'
+}
+];
+
+// TEXTOS PROVISIONALES: revisar y reemplazar por la información oficial de envíos, plazos y formatos.
+faqItems: FaqItem[] = [
+{
+id: 'pureza',
+catEs: 'Miel pura', catEn: 'Pure honey',
+qEs: '¿Cómo sé que su miel es 100% pura?',
+qEn: 'How do I know your honey is 100% pure?',
+aEs: 'Cada lote se analiza en laboratorio (análisis melisopalinológico de Meliflora SpA) para verificar su origen botánico y su pureza. No agregamos azúcares, jarabes ni aditivos, y no mezclamos miel de otras zonas: lo que envasamos es exactamente lo que producen nuestras colmenas.',
+aEn: 'Each batch is lab-tested (melissopalynological analysis by Meliflora SpA) to verify its botanical origin and purity. We never add sugars, syrups or additives, and we never blend honey from other areas: what we pack is exactly what our hives produce.'
+},
+{
+id: 'cristalizacion',
+catEs: 'Miel pura', catEn: 'Pure honey',
+qEs: 'Mi miel se cristalizó, ¿está mala?',
+qEn: 'My honey crystallised. Has it gone bad?',
+aEs: 'No. La cristalización es un proceso natural y una buena señal de miel cruda y sin procesar. La miel de Ulmo tiende a cristalizar de forma fina y cremosa. Si la prefieres líquida, entibia el frasco a baño María sin superar los 40 °C para no dañar sus enzimas.',
+aEn: 'No. Crystallisation is a natural process and a good sign of raw, unprocessed honey. Ulmo honey tends to set into a fine, creamy texture. If you prefer it runny, warm the jar in a water bath without exceeding 40 °C so its enzymes are not damaged.'
+},
+{
+id: 'diferencias',
+catEs: 'Productos', catEn: 'Products',
+qEs: '¿Qué diferencia hay entre la miel de Ulmo y la de Tineo?',
+qEn: 'What is the difference between Ulmo and Tineo honey?',
+aEs: 'La miel de Ulmo es de color ámbar claro, textura cremosa y aroma floral intenso; el Ulmo florece entre enero y marzo. La de Tineo es más escasa, de tono dorado profundo y notas especiadas y amaderadas; se cosecha temprano, entre noviembre y diciembre. Ambas son monoflorales y provienen del bosque nativo de Caramávida.',
+aEn: 'Ulmo honey is light amber, creamy and intensely floral; the tree blooms from January to March. Tineo honey is rarer, deep gold, with spiced and woody notes; it is harvested early, between November and December. Both are monofloral and come from the native forest of Caramávida.'
+},
+{
+id: 'conservacion',
+catEs: 'Conservación', catEn: 'Storage',
+qEs: '¿Cómo debo conservar la miel y cuánto dura?',
+qEn: 'How should I store honey and how long does it last?',
+aEs: 'Guárdala bien cerrada, a temperatura ambiente, en un lugar seco y lejos de la luz directa. No es necesario refrigerarla (el frío acelera la cristalización). Bien almacenada, la miel no se echa a perder; recomendamos consumirla dentro de 2 años para disfrutar de su mejor aroma.',
+aEn: 'Keep it tightly closed at room temperature, in a dry place away from direct sunlight. There is no need to refrigerate it (cold speeds up crystallisation). Properly stored, honey does not spoil; we recommend enjoying it within 2 years for the best aroma.'
+},
+{
+id: 'ninos',
+catEs: 'Conservación', catEn: 'Storage',
+qEs: '¿Pueden consumirla niños pequeños?',
+qEn: 'Can young children eat it?',
+aEs: 'Como toda miel cruda, no se recomienda para menores de 12 meses. A partir del año de edad puede formar parte de una dieta equilibrada.',
+aEn: 'As with all raw honey, it is not recommended for babies under 12 months. From one year of age it can be part of a balanced diet.'
+},
+{
+id: 'envios-chile',
+catEs: 'Envíos', catEn: 'Shipping',
+qEs: '¿Hacen envíos a todo Chile?',
+qEn: 'Do you ship across Chile?',
+aEs: 'Sí. Despachamos a todo el país mediante courier, con un plazo estimado de 3 a 7 días hábiles según la región. Los frascos van protegidos con embalaje reforzado. Coordina tu pedido directamente por WhatsApp.',
+aEn: 'Yes. We ship nationwide by courier, with an estimated delivery of 3 to 7 business days depending on the region. Jars travel in reinforced packaging. Arrange your order directly via WhatsApp.'
+},
+{
+id: 'b2b-export',
+catEs: 'Envíos', catEn: 'Shipping',
+qEs: '¿Venden al por mayor o para exportación?',
+qEn: 'Do you sell wholesale or for export?',
+aEs: 'Sí. Atendemos a tiendas gourmet, restaurantes, distribuidores e importadores con formatos de 300 g y 500 g, además de volúmenes a granel según disponibilidad de temporada. Podemos enviar muestras y fichas técnicas para evaluación.',
+aEn: 'Yes. We supply gourmet shops, restaurants, distributors and importers in 300 g and 500 g formats, plus bulk volumes depending on seasonal availability. We can send samples and technical sheets for evaluation.'
+},
+{
+id: 'temporada',
+catEs: 'Productos', catEn: 'Products',
+qEs: '¿Siempre hay stock de ambas mieles?',
+qEn: 'Are both honeys always in stock?',
+aEs: 'Nuestra producción es limitada y depende de cada floración. La miel de Tineo, en particular, es escasa y suele agotarse antes. Te recomendamos consultar disponibilidad y reservar con anticipación.',
+aEn: 'Our production is limited and depends on each bloom. Tineo honey in particular is scarce and tends to sell out first. We recommend checking availability and reserving in advance.'
 }
 ];
 
@@ -1448,6 +1802,11 @@ es: {
 'nav.science': 'Ciencia',
 'nav.roadmap': 'Ruta INAPI',
 'nav.cta': 'Contacto Directo',
+      'nav.faq': 'FAQ',
+      'faq.kicker': 'Preguntas Frecuentes',
+      'faq.title': 'Todo lo que Quieres Saber sobre Nuestra Miel',
+      'faq.subtitle': 'Pureza, conservación, envíos y pedidos B2B. Si tu duda no está aquí, escríbenos directamente.',
+      'faq.more': '¿Otra pregunta? Escríbenos por WhatsApp',
 
       'hero.kicker': 'Carta de Presentación Boutique · Origen Certificado',
       'hero.title': 'La Esencia de Nahuelbuta: Mieles con Denominación de Origen de Caramávida',
@@ -1539,7 +1898,7 @@ es: {
       'sec8.socialLabel': 'Síguenos y conoce nuestro trabajo territorial',
 
       'footer.desc': 'Mieles monoflorales de Ulmo y Tineo del bosque nativo de Nahuelbuta. Proyecto de Denominación de Origen y valorización territorial.',
-      'footer.navTitle': 'Mapa del Sitio (8 Secciones)',
+      'footer.navTitle': 'Mapa del Sitio (9 Secciones)',
       'footer.legalTitle': 'Marco Normativo y Gobernanza'
     },
     en: {
@@ -1550,6 +1909,11 @@ es: {
       'nav.science': 'Science',
       'nav.roadmap': 'Roadmap',
       'nav.cta': 'Direct Contact',
+      'nav.faq': 'FAQ',
+      'faq.kicker': 'Frequently Asked Questions',
+      'faq.title': 'Everything You Want to Know About Our Honey',
+      'faq.subtitle': 'Purity, storage, shipping and B2B orders. If your question is not here, write to us directly.',
+      'faq.more': 'Another question? Message us on WhatsApp',
 
       'hero.kicker': 'Boutique Institutional Presentation · Certified Origin',
       'hero.title': 'The Essence of Nahuelbuta: Designation of Origin Honeys from Caramávida',
@@ -1641,7 +2005,7 @@ es: {
       'sec8.socialLabel': 'Follow our territorial beekeeping work',
 
       'footer.desc': 'Monofloral Ulmo and Tineo honeys from the native forest of Nahuelbuta. Designation of Origin and territorial value creation project.',
-      'footer.navTitle': 'Site Map (8 Sections)',
+      'footer.navTitle': 'Site Map (9 Sections)',
       'footer.legalTitle': 'Regulatory Framework & Governance'
     }
 };
@@ -1655,6 +2019,10 @@ this.isScrolled.set(window.scrollY > 40);
 @HostListener('window:scroll', [])
 onWindowScroll(): void {
 this.isScrolled.set(window.scrollY > 40);
+}
+
+toggleFaq(index: number): void {
+this.openFaq.update(current => (current === index ? null : index));
 }
 
 setLang(language: Language): void {
