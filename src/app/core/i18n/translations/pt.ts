@@ -10,6 +10,7 @@ export const pt: Translation = {
   common: {
     close: 'Fechar',
     skipToContent: 'Pular para o conteúdo',
+    whatsappFab: 'Fale conosco pelo WhatsApp',
   },
 
   nav: {
@@ -50,6 +51,8 @@ export const pt: Translation = {
     },
     ctaWhatsapp: 'Conversar pelo WhatsApp',
     ctaExplore: 'Explorar Galeria e Origem',
+    ctaHoneys: 'Conheça nossos méis',
+    scroll: 'Role',
     card: {
       imageAlt: 'Quadro de favo com mel operculado e abelhas da Cooperativa Ragko',
       seal: 'INAPI · Rota D.O.',
@@ -183,6 +186,11 @@ export const pt: Translation = {
       'Clique em qualquer fotografia para explorar os detalhes do ecossistema de Caramávida e o trabalho dos nossos apicultores.',
     inquire: 'Consultar Lote →',
     items: {
+      'panal-operculado': {
+        tag: 'Produto · Favo Operculado',
+        title: 'Mel Maduro, Selado pelas Abelhas',
+        desc: 'Quando o mel atinge seu ponto, as abelhas selam cada célula com cera: é o sinal de que está pronto para a colheita.',
+      },
       'somos-ragko': {
         tag: 'Origem · Apiários de Caramávida',
         title: 'Somos Ragko: Colmeias entre Pradarias e Floresta',
@@ -434,6 +442,7 @@ export const pt: Translation = {
     desc: 'Méis monoflorais de Ulmo e Tineo da floresta nativa de Nahuelbuta. Projeto de Denominação de Origem e valorização territorial.',
     location: 'Curanilahue · Cordilheira de Nahuelbuta · Província de Arauco, Chile.',
     navTitle: 'Mapa do Site',
+    followTitle: 'Siga-nos',
     legalTitle: 'Marco Normativo e Governança',
     legal: [
       'Lei N° 19.039 (Selo de Origem / Denominação de Origem INAPI).',

@@ -1,71 +1,50 @@
-<section id="contacto" aria-labelledby="contacto-title" class="theme-light surface-cream section-edge relative py-24 sm:py-32 overflow-hidden">
-  <app-bee flight="a" class="absolute hidden md:block w-8 h-7 top-20 left-[12%] z-20 opacity-75" />
+<section id="contacto" aria-labelledby="contacto-title" class="theme-light surface-cream section-edge relative py-20 sm:py-28 overflow-hidden">
+  <div class="absolute inset-0 honeycomb-fine" aria-hidden="true"></div>
 
-  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div appReveal class="rounded-[2.2rem] card-warm p-7 sm:p-14 text-center space-y-8">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Tarjeta de cierre boutique: sin formularios, conversación directa -->
+    <div appReveal class="card-warm rounded-[2rem] overflow-hidden grid lg:grid-cols-5">
 
-      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full ragko-medallion mx-auto">
-        <app-ragko-mark class="w-11 h-11 text-accent" />
-      </div>
+      <figure class="relative lg:col-span-2 h-64 sm:h-80 lg:h-auto bg-ink">
+        <img
+          [src]="photo.src"
+          [alt]="t().territory.photoAlt"
+          [width]="photo.width"
+          [height]="photo.height"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover object-[22%_50%]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-ink/10"></div>
+        <figcaption class="absolute bottom-5 left-6 right-6 flex items-center gap-3 text-cream">
+          <span class="w-10 h-10 rounded-full ragko-medallion flex items-center justify-center shrink-0">
+            <app-ragko-mark class="w-6 h-6 text-amber" [strokeWidth]="6.5" />
+          </span>
+          <span class="text-[10px] uppercase tracking-[0.24em] text-cream/85">{{ t().brand.cooperative }}</span>
+        </figcaption>
+      </figure>
 
-      <div class="space-y-4 max-w-2xl mx-auto">
+      <div class="lg:col-span-3 p-7 sm:p-12 lg:p-14 flex flex-col justify-center">
         <span class="kicker-pill">{{ t().contact.kicker }}</span>
-        <h2 id="contacto-title" class="font-serif text-3xl sm:text-5xl font-semibold text-bone leading-tight">{{ t().contact.title }}</h2>
-        <p class="text-sm sm:text-base text-muted leading-relaxed">{{ t().contact.subtitle }}</p>
-      </div>
+        <h2 id="contacto-title" class="display-title mt-5">{{ t().contact.title }}</h2>
+        <p class="lead mt-5">{{ t().contact.subtitle }}</p>
 
-      <div class="pt-2 flex flex-col items-center gap-4">
-        <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center justify-center gap-3.5 bg-terracotta hover:bg-terracotta-dark text-ink font-bold text-base sm:text-lg px-7 sm:px-9 py-5 rounded-full transition-all duration-300 whatsapp-glow hover:-translate-y-0.5 w-full sm:w-auto">
-          <app-whatsapp-icon class="w-6 h-6" />
-          <span>{{ t().contact.whatsappButton }}</span>
-        </a>
-
-        <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
+        <div class="mt-9 flex flex-col items-start gap-5">
+          <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
+             class="btn-primary w-full sm:w-auto sm:whitespace-nowrap !text-base !py-[1.15rem] !px-8">
+            <app-whatsapp-icon class="w-5 h-5" />
+            <span>{{ t().contact.whatsappButton }}</span>
+          </a>
           <button type="button" (click)="ui.openLabReport()"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-obsidian border border-line hover:border-terracotta text-xs font-semibold text-hl transition cursor-pointer">
-            <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            <span>{{ t().contact.dossierButton }}</span>
+                  class="inline-flex items-center gap-2 text-sm font-medium text-bone hover:text-accent transition cursor-pointer underline decoration-amber/40 underline-offset-[6px] hover:decoration-amber">
+            {{ t().contact.dossierButton }}
           </button>
+        </div>
 
-          <a [href]="contact.emailUrl()"
-             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-obsidian border border-line hover:border-terracotta text-xs font-semibold text-muted hover:text-bone transition break-all">
-            <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <span>{{ contact.email }}</span>
-          </a>
+        <div class="mt-10 pt-8 border-t border-[var(--hairline)] flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <span class="spec-label max-w-[16rem] leading-relaxed">{{ t().contact.socialLabel }}</span>
+          <app-social-links [whatsapp]="false" />
         </div>
       </div>
-
-      <div class="pt-6 border-t border-line flex flex-col items-center gap-4">
-        <span class="text-[11px] uppercase tracking-[0.22em] text-muted">{{ t().contact.socialLabel }}</span>
-        <div class="flex flex-wrap items-center justify-center gap-4">
-          <a [href]="contact.social.instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram · Cooperativa Ragko"
-             class="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-obsidian border border-line hover:border-terracotta transition">
-            <span class="w-9 h-9 rounded-full bg-cream border border-terracotta text-accent flex items-center justify-center group-hover:scale-105 transition-transform">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-              </svg>
-            </span>
-            <span class="text-xs font-semibold text-bone group-hover:text-hl">Instagram</span>
-          </a>
-          <a [href]="contact.social.facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook · Cooperativa Ragko"
-             class="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-obsidian border border-line hover:border-terracotta transition">
-            <span class="w-9 h-9 rounded-full bg-cream border border-terracotta text-accent flex items-center justify-center group-hover:scale-105 transition-transform">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z" />
-              </svg>
-            </span>
-            <span class="text-xs font-semibold text-bone group-hover:text-hl">Facebook</span>
-          </a>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>

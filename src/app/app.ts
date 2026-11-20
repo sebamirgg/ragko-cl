@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, afterNextRender, inject } from '@an
 import { I18nService } from './core/i18n/i18n.service';
 import { FooterComponent } from './layout/footer/footer';
 import { NavbarComponent } from './layout/navbar/navbar';
+import { WhatsappFabComponent } from './layout/whatsapp-fab/whatsapp-fab';
 import { ContactComponent } from './sections/contact/contact';
 import { FaqComponent } from './sections/faq/faq';
 import { GalleryComponent } from './sections/gallery/gallery';
@@ -31,6 +32,7 @@ import { LabReportModalComponent } from './shared/components/lab-report-modal/la
     ContactComponent,
     FooterComponent,
     LabReportModalComponent,
+    WhatsappFabComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.html',

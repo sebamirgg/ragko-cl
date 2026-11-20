@@ -10,6 +10,7 @@ export const en: Translation = {
   common: {
     close: 'Close',
     skipToContent: 'Skip to content',
+    whatsappFab: 'Message us on WhatsApp',
   },
 
   nav: {
@@ -50,6 +51,8 @@ export const en: Translation = {
     },
     ctaWhatsapp: 'Chat on WhatsApp',
     ctaExplore: 'Explore Gallery & Origin',
+    ctaHoneys: 'Discover our honeys',
+    scroll: 'Scroll',
     card: {
       imageAlt: 'Honeycomb frame with capped honey and bees from Cooperativa Ragko',
       seal: 'INAPI · D.O. Pathway',
@@ -182,6 +185,11 @@ export const en: Translation = {
       'Click any photograph to explore details of the Caramávida ecosystem and the artisanal work of our beekeepers.',
     inquire: 'Ask About This Batch →',
     items: {
+      'panal-operculado': {
+        tag: 'Product · Capped Comb',
+        title: 'Ripe Honey, Sealed by the Bees',
+        desc: 'When honey reaches its peak, bees seal each cell with wax: the sign that it is ready to harvest.',
+      },
       'somos-ragko': {
         tag: 'Origin · Caramávida Apiaries',
         title: 'We Are Ragko: Hives Between Meadows and Forest',
@@ -433,6 +441,7 @@ export const en: Translation = {
     desc: 'Monofloral Ulmo and Tineo honeys from the native forest of Nahuelbuta. Designation of Origin and territorial value creation project.',
     location: 'Curanilahue · Nahuelbuta Range · Arauco Province, Chile.',
     navTitle: 'Site Map',
+    followTitle: 'Follow us',
     legalTitle: 'Regulatory Framework & Governance',
     legal: [
       'Law N° 19.039 (Seal of Origin / INAPI Designation of Origin).',

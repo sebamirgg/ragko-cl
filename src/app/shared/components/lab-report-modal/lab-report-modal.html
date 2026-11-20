@@ -1,21 +1,21 @@
 @if (ui.labReportOpen()) {
-  <div (click)="ui.closeLabReport()" class="theme-dark fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+  <div (click)="ui.closeLabReport()" class="theme-dark fixed inset-0 z-[60] bg-ink/90 backdrop-blur-md flex items-center justify-center p-4">
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="lab-modal-title"
       (click)="$event.stopPropagation()"
-      class="bg-graphite text-bone rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-terracotta animate-fade-up max-h-[90vh] overflow-y-auto">
-      <div class="flex items-start justify-between gap-4 border-b border-line pb-4 mb-5">
+      class="bg-graphite text-bone rounded-2xl max-w-2xl w-full p-6 sm:p-10 shadow-2xl border border-[var(--hairline)] animate-fade-up max-h-[90vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-4 border-b border-[var(--hairline)] pb-6 mb-6">
         <div>
-          <span class="text-[10px] font-bold uppercase tracking-widest text-accent">{{ t().lab.kicker }}</span>
-          <h3 id="lab-modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-hl">{{ t().lab.title }}</h3>
+          <span class="spec-label !text-accent">{{ t().lab.kicker }}</span>
+          <h3 id="lab-modal-title" class="font-serif text-3xl sm:text-4xl font-medium tracking-tight text-bone mt-2">{{ t().lab.title }}</h3>
         </div>
         <button
           type="button"
           (click)="ui.closeLabReport()"
           [attr.aria-label]="t().common.close"
-          class="shrink-0 w-9 h-9 rounded-full bg-obsidian text-hl hover:bg-terracotta hover:text-ink flex items-center justify-center transition cursor-pointer">
+          class="icon-btn shrink-0 cursor-pointer">
           ✕
         </button>
       </div>
@@ -26,7 +26,7 @@
         </p>
         <div class="grid sm:grid-cols-2 gap-4">
           @for (item of reports; track item.honey) {
-            <div class="p-4 rounded-2xl bg-charcoal border border-line">
+            <div class="p-5 rounded-xl border border-[var(--hairline)] bg-obsidian/40">
               <div class="font-bold text-hl text-sm">
                 {{ i18n.format(t().lab.reportTitle, { report: item.report.report, honey: t().honeys[item.honey].name }) }}
               </div>
@@ -52,11 +52,11 @@
 
       <div class="mt-6 flex flex-wrap justify-end gap-3">
         <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
-           class="px-5 py-2.5 rounded-full bg-terracotta text-ink text-xs font-bold uppercase tracking-wider hover:bg-terracotta-dark transition">
+           class="btn-primary !py-3 !text-xs uppercase !tracking-[0.14em]">
           {{ t().lab.requestButton }}
         </a>
         <button type="button" (click)="ui.closeLabReport()"
-                class="px-5 py-2.5 rounded-full bg-obsidian border border-line text-bone text-xs font-bold uppercase tracking-wider cursor-pointer">
+                class="btn-ghost !py-3 !text-xs uppercase !tracking-[0.14em] cursor-pointer">
           {{ t().common.close }}
         </button>
       </div>

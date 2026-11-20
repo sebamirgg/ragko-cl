@@ -20,9 +20,12 @@ module.exports = {
         honey: themed('honey'), // dorado de detalles
 
         // ---- Marca (fijos en ambos temas) ----
-        cream: '#F6E8C7',
-        terracotta: { DEFAULT: '#CD8651', dark: '#B8703A' },
-        ink: '#241A12', // texto sobre botones crema / terracota
+        cream: { DEFAULT: '#F6E8C7', light: '#FCF6E9', deep: '#EEDCB3' }, // crema natural
+        amber: { DEFAULT: '#B8722C', deep: '#9A5B1E', light: '#E3A857' }, // miel ámbar profundo
+        terracotta: { DEFAULT: '#CD8651', dark: '#B8703A' }, // acento histórico de la marca
+        gold: '#B89A5E', // dorado apagado
+        sage: { DEFAULT: '#7C8A6A', deep: '#4F5B43' }, // verde botánico
+        ink: { DEFAULT: '#1E1A16', soft: '#2B2520' }, // carbón suave: texto sobre crema / botones
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],

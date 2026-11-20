@@ -104,6 +104,32 @@
   background: rgba(233, 178, 92, 0.25);
 }
 
+/* Sobre fondo carbón la celda central pasa a crema para destacar */
+.theme-dark .hex--core .hex__fill {
+  color: #1e1a16;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 28%, rgba(255, 255, 255, 0.5), transparent 70%),
+    radial-gradient(circle at 50% 45%, #fcf6e9 0%, #f6e8c7 60%, #e9d6aa 100%);
+}
+.theme-dark .hex--core .hex__icon {
+  color: #9a5b1e;
+}
+.theme-dark .hex--core .hex__fill::after {
+  background: rgba(184, 114, 44, 0.18);
+}
+.theme-dark .hex {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
+}
+.theme-dark .hex.is-active {
+  filter: drop-shadow(0 16px 26px rgba(227, 168, 87, 0.28));
+}
+
+/* Tarjeta de detalle: misma superficie que las fichas de Ciencia */
+.detail-card {
+  background: linear-gradient(180deg, rgb(var(--c-graphite) / 0.75), rgb(var(--c-graphite) / 0.35));
+  border: 1px solid var(--hairline);
+}
+
 /* Estados: la celda elegida se levanta; las demás bajan un poco el tono */
 .hex:not(.is-active) .hex__fill {
   filter: saturate(0.82) brightness(0.97);

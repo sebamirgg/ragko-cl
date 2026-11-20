@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { I18nService } from '../../core/i18n/i18n.service';
 import { NAV_ITEMS } from '../../data/navigation';
 import { RagkoMarkComponent } from '../../shared/components/ragko-mark/ragko-mark';
+import { SocialLinksComponent } from '../../shared/components/social-links/social-links';
 
 @Component({
   selector: 'app-footer',
-  imports: [RagkoMarkComponent],
+  imports: [RagkoMarkComponent, SocialLinksComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './footer.html',
 })

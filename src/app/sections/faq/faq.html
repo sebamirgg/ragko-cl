@@ -1,5 +1,6 @@
-<section id="faq" aria-labelledby="faq-title" class="theme-dark relative py-24 sm:py-32 bg-obsidian border-b border-line overflow-hidden">
+<section id="faq" aria-labelledby="faq-title" class="theme-dark relative py-20 sm:py-28 bg-obsidian border-b border-line overflow-hidden">
   <div class="absolute inset-0 honeycomb-bg honeycomb-corner-bl pointer-events-none" aria-hidden="true"></div>
+
   <app-bee flight="b" class="absolute hidden md:block w-8 h-7 top-24 right-[10%] opacity-70" />
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -8,8 +9,8 @@
       <!-- Encabezado -->
       <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-28 self-start" appReveal>
         <span class="kicker-pill">{{ t().faq.kicker }}</span>
-        <h2 id="faq-title" class="font-serif text-3xl sm:text-5xl font-semibold text-bone leading-tight">{{ t().faq.title }}</h2>
-        <p class="text-sm sm:text-base text-muted leading-relaxed">{{ t().faq.subtitle }}</p>
+        <h2 id="faq-title" class="display-title">{{ t().faq.title }}</h2>
+        <p class="lead">{{ t().faq.subtitle }}</p>
 
         <div class="relative hidden lg:block h-64 rounded-3xl overflow-hidden border border-line">
           <img [src]="image.src" [alt]="t().faq.imageAlt" [width]="image.width" [height]="image.height"

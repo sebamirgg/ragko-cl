@@ -1,7 +1,8 @@
-<section id="composicion" aria-labelledby="composicion-title" class="theme-light surface-cream section-edge relative py-24 sm:py-32 border-b border-line overflow-hidden">
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="composicion" aria-labelledby="composicion-title" class="theme-dark relative bg-charcoal pb-20 sm:pb-28 border-b border-line overflow-hidden">
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 border-t border-[var(--hairline)]">
     <app-section-heading
-      class="max-w-3xl mx-auto mb-14"
+      class="max-w-3xl mb-14"
+      align="left"
       titleId="composicion-title"
       [kicker]="t().trace.kicker"
       [title]="t().trace.title"
@@ -44,8 +45,8 @@
       <!-- Detalle del componente seleccionado -->
       <div class="lg:col-span-6">
         @let item = detail();
-        <article id="composicion-detail" aria-live="polite" class="card-warm rounded-[2rem] p-6 sm:p-9 relative overflow-hidden">
-          <svg class="absolute -right-10 -top-10 w-44 h-44 text-terracotta/10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <article id="composicion-detail" aria-live="polite" class="detail-card rounded-2xl p-6 sm:p-9 relative overflow-hidden">
+          <svg class="absolute -right-10 -top-10 w-44 h-44 text-cream/[0.04]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2l8.66 5v10L12 22l-8.66-5V7z" />
           </svg>
 
@@ -65,7 +66,7 @@
                       Ragko
                     }
                   </div>
-                  <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-bone leading-tight mt-0.5">{{ item.name }}</h3>
+                  <h3 class="font-serif text-3xl font-medium tracking-tight text-bone leading-tight mt-0.5">{{ item.name }}</h3>
                 </div>
               </div>
 
@@ -75,15 +76,15 @@
                     <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">{{ t().trace.shareLabel }}</span>
                     <span class="font-serif text-2xl font-semibold text-hl">{{ item.value }}</span>
                   </div>
-                  <div class="h-2.5 rounded-full bg-line/60 overflow-hidden" aria-hidden="true">
+                  <div class="h-1 rounded-full bg-cream/10 overflow-hidden" aria-hidden="true">
                     <div class="meter h-full rounded-full" [style.width.%]="item.share < 1.5 ? 1.5 : item.share"></div>
                   </div>
                 </div>
               }
 
-              <p class="mt-6 text-base text-bone leading-relaxed">{{ item.desc }}</p>
+              <p class="mt-6 text-base font-light text-bone/90 leading-relaxed">{{ item.desc }}</p>
 
-              <div class="mt-6 rounded-2xl border-l-[3px] border-terracotta bg-obsidian/70 px-5 py-4">
+              <div class="mt-7 border-l border-accent/60 pl-5 py-1">
                 <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-accent mb-1">{{ t().trace.whyLabel }}</div>
                 <p class="text-sm text-bone leading-relaxed">{{ item.fact }}</p>
               </div>

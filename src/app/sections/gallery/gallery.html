@@ -1,49 +1,45 @@
-<section id="galeria" aria-labelledby="galeria-title" class="theme-light surface-sand section-edge relative py-24 sm:py-32 border-b border-line overflow-hidden">
+<section id="galeria" aria-labelledby="galeria-title" class="theme-light surface-sand section-edge relative py-20 sm:py-28 border-b border-line overflow-hidden">
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14" appReveal>
-      <div class="max-w-2xl space-y-3">
+    <div class="grid lg:grid-cols-12 gap-6 lg:gap-10 items-end mb-12 sm:mb-16" appReveal>
+      <div class="lg:col-span-7 space-y-5">
         <span class="kicker-pill">{{ t().gallery.kicker }}</span>
-        <h2 id="galeria-title" class="font-serif text-3xl sm:text-5xl font-semibold text-bone">{{ t().gallery.title }}</h2>
+        <h2 id="galeria-title" class="display-title">{{ t().gallery.title }}</h2>
       </div>
-      <p class="card-warm rounded-2xl px-5 py-4 text-sm text-muted max-w-md">{{ t().gallery.subtitle }}</p>
+      <p class="lg:col-span-5 lead">{{ t().gallery.subtitle }}</p>
     </div>
 
-    <!-- Bento grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 sm:gap-5 auto-rows-[240px] sm:auto-rows-[260px]">
+    <!-- Bento grid asimétrico -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 grid-flow-dense auto-rows-[170px] sm:auto-rows-[230px] lg:auto-rows-[250px] gap-3 sm:gap-4">
       @for (photo of photos; track photo.id; let i = $index) {
         @let text = t().gallery.items[photo.id];
         <button
           type="button"
-          appReveal [revealDelay]="(i % 3) * 90"
+          appReveal [revealDelay]="(i % 4) * 80"
           (click)="selected.set(photo)"
           [attr.aria-label]="text.title"
           [class]="photo.span"
-          class="theme-dark relative text-left rounded-3xl overflow-hidden border border-line hover:border-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-honey bg-graphite group cursor-pointer shadow-[0_20px_40px_-20px_rgba(122,74,34,0.55)] ring-1 ring-terracotta/30 transition-all duration-500">
-          <img
-            [src]="photo.image.src"
-            [alt]="text.title"
-            [width]="photo.image.width"
-            [height]="photo.image.height"
-            [style.object-position]="photo.position"
-            loading="lazy"
-            decoding="async"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-          <div class="absolute inset-0 bg-gradient-to-t from-obsidian/95 via-obsidian/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
-
-          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/80 backdrop-blur-md border border-terracotta/50 text-[10px] font-bold uppercase tracking-widest text-hl">
-            {{ text.tag }}
+          class="relative text-left rounded-2xl overflow-hidden bg-ink group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber shadow-[0_24px_48px_-30px_rgba(30,26,22,0.6)]">
+          <span class="absolute inset-0 block"
+                [style.transform]="photo.crop ? 'scale(' + photo.crop.scale + ')' : null"
+                [style.transform-origin]="photo.crop?.origin">
+            <img
+              [src]="photo.image.src"
+              [alt]="text.title"
+              [width]="photo.image.width"
+              [height]="photo.image.height"
+              [style.object-position]="photo.position"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </span>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/5 to-transparent transition-opacity duration-500 opacity-80 group-hover:opacity-100"></div>
 
-          <span class="absolute top-4 right-4 w-9 h-9 rounded-full bg-cream text-ink flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 shadow-lg" aria-hidden="true">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-            </svg>
-          </span>
-
-          <span class="absolute bottom-5 left-6 right-6 block transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-            <span class="block font-serif text-2xl font-semibold text-bone">{{ text.title }}</span>
-            <span class="block text-xs text-muted mt-1 line-clamp-2">{{ text.desc }}</span>
+          <span class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 block">
+            <span class="hidden sm:block text-[10px] uppercase tracking-[0.24em] text-cream/75 mb-1.5 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+              {{ text.tag }}
+            </span>
+            <span class="block font-serif text-lg sm:text-2xl leading-tight tracking-tight text-cream">{{ text.title }}</span>
           </span>
         </button>
       }
@@ -54,24 +50,25 @@
 <!-- Lightbox -->
 @if (selected(); as photo) {
   @let text = t().gallery.items[photo.id];
-  <div (click)="selected.set(null)" class="theme-dark fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+  <div (click)="selected.set(null)" class="theme-dark fixed inset-0 z-[60] bg-ink/90 backdrop-blur-md flex items-center justify-center p-4">
     <div role="dialog" aria-modal="true" [attr.aria-label]="text.title" (click)="$event.stopPropagation()"
-         class="bg-graphite border border-terracotta/50 rounded-3xl max-w-3xl w-full max-h-[94vh] overflow-y-auto shadow-2xl animate-fade-up">
-      <div class="relative h-[55vh] sm:h-[62vh] bg-obsidian">
+         class="bg-graphite border border-[var(--hairline)] rounded-2xl max-w-4xl w-full max-h-[94vh] overflow-y-auto shadow-2xl animate-fade-up">
+      <div class="relative h-[55vh] sm:h-[66vh] bg-obsidian">
         <img [src]="photo.image.src" [alt]="text.title" decoding="async" class="w-full h-full object-contain" />
         <button type="button" (click)="selected.set(null)" [attr.aria-label]="t().common.close"
-                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/85 text-hl hover:bg-terracotta hover:text-ink flex items-center justify-center font-bold transition cursor-pointer">
-          ✕
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/80 text-cream hover:bg-cream hover:text-ink flex items-center justify-center transition cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+          </svg>
         </button>
       </div>
-      <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-widest text-accent">{{ text.tag }}</span>
-          <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-bone mt-1">{{ text.title }}</h3>
-          <p class="text-sm text-muted mt-1">{{ text.desc }}</p>
+          <span class="spec-label !text-accent">{{ text.tag }}</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-bone mt-1.5">{{ text.title }}</h3>
+          <p class="text-sm font-light text-muted mt-2 max-w-xl leading-relaxed">{{ text.desc }}</p>
         </div>
-        <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
-           class="shrink-0 px-5 py-3 rounded-full bg-terracotta text-ink text-xs font-bold uppercase tracking-wider hover:bg-terracotta-dark transition">
+        <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-primary shrink-0 !py-3 !text-xs uppercase !tracking-[0.14em]">
           {{ t().gallery.inquire }}
         </a>
       </div>

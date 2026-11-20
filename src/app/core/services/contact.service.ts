@@ -23,7 +23,6 @@ export class ContactService {
     return this.whatsapp(this.i18n.format(t.whatsapp.honey, { honey: honeyName }));
   }
 
-
   private whatsapp(text: string): string {
     return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
   }

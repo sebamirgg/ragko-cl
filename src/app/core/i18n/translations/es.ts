@@ -14,6 +14,7 @@ export const es = {
   common: {
     close: 'Cerrar',
     skipToContent: 'Saltar al contenido',
+    whatsappFab: 'Escríbenos por WhatsApp',
   },
 
   nav: {
@@ -54,6 +55,8 @@ export const es = {
     },
     ctaWhatsapp: 'Conversar por WhatsApp',
     ctaExplore: 'Explorar Galería y Origen',
+    ctaHoneys: 'Descubrir nuestras mieles',
+    scroll: 'Desliza',
     card: {
       imageAlt: 'Marco de panal con miel operculada y abejas de Cooperativa Ragko',
       seal: 'INAPI · Ruta D.O.',
@@ -187,6 +190,11 @@ export const es = {
       'Haz clic sobre cualquier fotografía para explorar los detalles del ecosistema de Caramávida y el trabajo de nuestros apicultores.',
     inquire: 'Consultar Lote →',
     items: {
+      'panal-operculado': {
+        tag: 'Producto · Panal Operculado',
+        title: 'Miel Madura, Sellada por las Abejas',
+        desc: 'Cuando la miel alcanza su punto, las abejas sellan cada celda con cera: es la señal de que está lista para cosechar.',
+      },
       'somos-ragko': {
         tag: 'Origen · Apiarios de Caramávida',
         title: 'Somos Ragko: Colmenas entre Praderas y Bosque',
@@ -439,6 +447,7 @@ export const es = {
     desc: 'Mieles monoflorales de Ulmo y Tineo del bosque nativo de Nahuelbuta. Proyecto de Denominación de Origen y valorización territorial.',
     location: 'Curanilahue · Cordillera de Nahuelbuta · Provincia de Arauco, Chile.',
     navTitle: 'Mapa del Sitio',
+    followTitle: 'Síguenos',
     legalTitle: 'Marco Normativo y Gobernanza',
     legal: [
       'Ley N° 19.039 (Sello de Origen / Denominación de Origen INAPI).',

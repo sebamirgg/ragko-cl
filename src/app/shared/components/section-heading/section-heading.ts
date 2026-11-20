@@ -9,9 +9,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'block' },
   template: `
-    <div class="space-y-4" [class.text-center]="align() === 'center'" [class.mx-auto]="align() === 'center'">
+    <div class="space-y-5" [class.text-center]="align() === 'center'" [class.mx-auto]="align() === 'center'">
       <span class="kicker-pill">{{ kicker() }}</span>
-      <h2 [id]="titleId()" class="font-serif text-3xl sm:text-5xl font-semibold text-bone leading-tight">
+      <h2 [id]="titleId()" class="display-title">
         {{ title() }}
       </h2>
       @if (ornament()) {
@@ -22,7 +22,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         </div>
       }
       @if (subtitle()) {
-        <p class="text-sm sm:text-base text-muted leading-relaxed">{{ subtitle() }}</p>
+        <p class="lead">{{ subtitle() }}</p>
       }
     </div>
   `,
@@ -33,5 +33,5 @@ export class SectionHeadingComponent {
   readonly subtitle = input<string>();
   readonly titleId = input<string>();
   readonly align = input<'center' | 'left'>('center');
-  readonly ornament = input(true);
+  readonly ornament = input(false);
 }

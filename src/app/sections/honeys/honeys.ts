@@ -4,6 +4,7 @@ import { I18nService } from '../../core/i18n/i18n.service';
 import { ContactService } from '../../core/services/contact.service';
 import { IMAGES, SiteImage } from '../../data/images';
 import { HoneyId, POLLEN_REPORTS, SPECIES, pollenShares } from '../../data/pollen.data';
+import { WhatsappIconComponent } from '../../shared/components/icons/whatsapp-icon';
 import { SectionHeadingComponent } from '../../shared/components/section-heading/section-heading';
 import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
 
@@ -11,13 +12,11 @@ interface HoneyCard {
   id: HoneyId;
   image: SiteImage;
   position: string;
-  /** Color del acento (badge y nombre científico). */
-  accent: 'terracotta' | 'cream';
 }
 
 @Component({
   selector: 'app-honeys',
-  imports: [SectionHeadingComponent, RevealOnScrollDirective],
+  imports: [SectionHeadingComponent, RevealOnScrollDirective, WhatsappIconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './honeys.html',
 })
@@ -27,8 +26,8 @@ export class HoneysComponent {
   protected readonly t = this.i18n.t;
 
   protected readonly cards: HoneyCard[] = [
-    { id: 'tineo', image: IMAGES.tineoFrame, position: '50% 55%', accent: 'terracotta' },
-    { id: 'ulmo', image: IMAGES.ulmoJar, position: '60% 50%', accent: 'cream' },
+    { id: 'tineo', image: IMAGES.tineoFrame, position: '50% 25%' },
+    { id: 'ulmo', image: IMAGES.ulmoJar, position: '60% 50%' },
   ];
 
   /** Pestaña activa en móvil (en escritorio se ven ambas fichas). */

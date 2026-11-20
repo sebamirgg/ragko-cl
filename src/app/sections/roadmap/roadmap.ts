@@ -9,6 +9,15 @@ import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scrol
   imports: [SectionHeadingComponent, RevealOnScrollDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './roadmap.html',
+  styles: `
+    /* Línea del tiempo: se desvanece hacia el futuro */
+    .timeline-line {
+      background: linear-gradient(180deg, #b8722c 0%, rgba(184, 114, 44, 0.35) 70%, rgba(184, 114, 44, 0.08) 100%);
+    }
+    .timeline-line--h {
+      background: linear-gradient(90deg, #b8722c 0%, rgba(184, 114, 44, 0.35) 70%, rgba(184, 114, 44, 0.08) 100%);
+    }
+  `,
 })
 export class RoadmapComponent {
   protected readonly t = inject(I18nService).t;

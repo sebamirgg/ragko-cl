@@ -4,66 +4,65 @@
 
 /* =====================================================================
    TEMAS
-   Paleta de marca: crema #F6E8C7 · terracota #CD8651.
+   Paleta de marca: miel ámbar profundo · crema natural · carbón suave ·
+   dorado apagado y verde botánico como acentos (ver tailwind.config.js).
    Cada sección declara .theme-light o .theme-dark y los componentes usan
    los mismos nombres de color (bg-graphite, text-bone, text-accent…),
    que se resuelven según el tema. Valores en canales RGB para admitir opacidad.
    ===================================================================== */
 :root,
 .theme-light {
-  --c-obsidian: 246 232 199; /* #F6E8C7 crema de marca: fondo principal / pozos internos */
-  --c-charcoal: 241 221 178; /* #F1DDB2 arena: fondo alternativo */
-  --c-graphite: 255 248 233; /* #FFF8E9 crema clara: tarjetas (nunca blanco puro) */
-  --c-line: 220 192 143; /* #DCC08F arena tostada: bordes */
-  --c-bone: 43 33 24; /* #2B2118 café profundo: texto (≥ 11:1 en todas las superficies) */
-  --c-muted: 94 77 61; /* #5E4D3D texto secundario (≥ 5,6:1) */
-  --c-accent: 138 71 25; /* #8A4719 terracota profunda: texto de acento (≥ 4,9:1) */
-  --c-hl: 138 79 34; /* #8A4F22 resaltados */
-  --c-honey: 140 90 16; /* #8C5A10 dorado tostado legible */
-  /* Tarjeta cálida: borde terracota + sombra tostada */
-  --card-border: rgba(205, 134, 81, 0.38);
-  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 4px 12px -6px rgba(122, 74, 34, 0.2),
-    0 22px 44px -22px rgba(122, 74, 34, 0.38);
+  --c-obsidian: 246 232 199; /* #F6E8C7 crema natural: fondo principal / pozos internos */
+  --c-charcoal: 240 224 189; /* #F0E0BD arena: fondo alternativo */
+  --c-graphite: 252 246 233; /* #FCF6E9 crema clara: tarjetas (nunca blanco puro) */
+  --c-line: 222 199 156; /* #DEC79C arena tostada: bordes finos */
+  --c-bone: 30 26 22; /* #1E1A16 carbón suave: texto (≥ 13:1) */
+  --c-muted: 92 78 64; /* #5C4E40 texto secundario (≥ 5,6:1) */
+  --c-accent: 142 84 24; /* #8E5418 ámbar profundo: texto de acento (≥ 4,9:1) */
+  --c-hl: 132 80 30; /* #84501E resaltados */
+  --c-honey: 140 96 30; /* #8C601E dorado tostado legible */
+  --card-border: rgba(184, 114, 44, 0.24);
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 2px 6px -2px rgba(90, 60, 30, 0.08),
+    0 24px 48px -28px rgba(90, 60, 30, 0.35);
+  --hairline: rgba(30, 26, 22, 0.12);
   color-scheme: light;
 }
 
 .theme-dark {
-  --c-obsidian: 23 18 14; /* #17120E café nocturno */
-  --c-charcoal: 30 23 18; /* #1E1712 */
-  --c-graphite: 38 30 23; /* #261E17 tarjetas */
-  --c-line: 61 48 37; /* #3D3025 bordes */
-  --c-bone: 251 243 227; /* #FBF3E3 texto */
-  --c-muted: 188 174 156; /* #BCAE9C texto secundario (8:1) */
-  --c-accent: 205 134 81; /* #CD8651 terracota de marca (6:1) */
-  --c-hl: 246 232 199; /* #F6E8C7 crema de marca */
-  --c-honey: 233 178 92; /* #E9B25C */
-  --card-border: rgb(61 48 37);
-  --card-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.6);
+  --c-obsidian: 26 23 20; /* #1A1714 carbón suave */
+  --c-charcoal: 32 28 24; /* #201C18 */
+  --c-graphite: 42 37 32; /* #2A2520 tarjetas */
+  --c-line: 64 56 47; /* #40382F bordes */
+  --c-bone: 248 241 228; /* #F8F1E4 texto */
+  --c-muted: 186 174 158; /* #BAAE9E texto secundario (≥ 7:1) */
+  --c-accent: 214 160 96; /* #D6A060 miel dorada apagada (≥ 7:1) */
+  --c-hl: 246 232 199; /* #F6E8C7 crema natural */
+  --c-honey: 227 178 102; /* #E3B266 */
+  --card-border: rgba(246, 232, 199, 0.1);
+  --card-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+  --hairline: rgba(246, 232, 199, 0.12);
   color-scheme: dark;
 }
 
 /* =====================================================================
    SUPERFICIES CLARAS
-   Nada de blanco plano: crema de marca con degradados muy sutiles y un
-   resplandor terracota/miel en las esquinas que da volumen. Dos variantes
-   (crema y arena) para alternar secciones claras contiguas.
+   Crema natural con un degradado muy sutil; dos variantes (crema y arena)
+   para alternar secciones claras contiguas.
    ===================================================================== */
 .surface-cream {
   background-color: #f6e8c7;
   background-image:
-    radial-gradient(ellipse 55% 45% at 0% 0%, rgba(205, 134, 81, 0.14), transparent 70%),
-    radial-gradient(ellipse 50% 50% at 100% 100%, rgba(233, 178, 92, 0.18), transparent 70%),
-    linear-gradient(180deg, #f8ecd0 0%, #f6e8c7 45%, #f1dfb8 100%);
+    radial-gradient(ellipse 55% 45% at 0% 0%, rgba(184, 114, 44, 0.08), transparent 70%),
+    linear-gradient(180deg, #f8edd2 0%, #f6e8c7 50%, #f3e2bd 100%);
 }
 .surface-sand {
-  background-color: #f1ddb2;
+  background-color: #f0e0bd;
   background-image:
-    radial-gradient(ellipse 50% 45% at 100% 0%, rgba(205, 134, 81, 0.16), transparent 70%),
-    radial-gradient(ellipse 55% 50% at 0% 100%, rgba(255, 248, 233, 0.55), transparent 70%),
-    linear-gradient(180deg, #eed8aa 0%, #f1ddb2 50%, #f4e3be 100%);
+    radial-gradient(ellipse 50% 45% at 100% 0%, rgba(184, 114, 44, 0.09), transparent 70%),
+    linear-gradient(180deg, #eddcb6 0%, #f0e0bd 50%, #f3e5c4 100%);
 }
 
-/* Filo superior de cada sección clara: hilo terracota que marca la transición */
+/* Filo superior de cada sección clara: hilo ámbar muy fino que marca la transición */
 .section-edge::before {
   content: '';
   position: absolute;
@@ -71,49 +70,170 @@
   right: 0;
   top: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(205, 134, 81, 0.75) 20%, rgba(205, 134, 81, 0.75) 80%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(184, 114, 44, 0.45) 20%, rgba(184, 114, 44, 0.45) 80%, transparent);
   z-index: 1;
 }
-.section-edge::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 1px;
-  height: 28px;
-  background: linear-gradient(180deg, rgba(122, 74, 34, 0.08), transparent);
+
+/* =====================================================================
+   PATRÓN DE PANAL MINIMALISTA
+   Líneas de 1 px, sin relleno, opacidad 6%. Solo en secciones estratégicas
+   (Territorio y Contacto). El trazo se adapta al tema de la sección.
+   ===================================================================== */
+.honeycomb-fine {
   pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48.5' height='84' viewBox='0 0 48.5 84'%3E%3Cpath d='M24.25 0 48.5 14v28L24.25 56 0 42V14zM24.25 56v28' fill='none' stroke='%231E1A16' stroke-opacity='.06' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 48.5px 84px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, #000 35%, transparent 100%);
+}
+.theme-dark .honeycomb-fine {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48.5' height='84' viewBox='0 0 48.5 84'%3E%3Cpath d='M24.25 0 48.5 14v28L24.25 56 0 42V14zM24.25 56v28' fill='none' stroke='%23F6E8C7' stroke-opacity='.05' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* =====================================================================
+   PANAL DE ABEJA (secciones oscuras)
+   Trazo más marcado que el patrón fino; las máscaras lo concentran en
+   bordes/esquinas para no competir con el texto.
+   ===================================================================== */
+.honeycomb-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0 34.64 10v20L17.32 40 0 30V10zM17.32 40v20' fill='none' stroke='%23E9B25C' stroke-opacity='.10' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 46px 80px;
+}
+.honeycomb-top {
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0.25) 100%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0.25) 100%);
+}
+.honeycomb-corner-tr {
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 100% 0%, #000 25%, transparent 85%);
+  mask-image: radial-gradient(ellipse 75% 85% at 100% 0%, #000 25%, transparent 85%);
+}
+.honeycomb-corner-bl {
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 0% 100%, #000 25%, transparent 85%);
+  mask-image: radial-gradient(ellipse 75% 85% at 0% 100%, #000 25%, transparent 85%);
 }
 
 @layer components {
-  /* Tarjeta con presencia: guía la vista hacia la información */
+  /* Tarjeta con presencia: borde ámbar fino + sombra cálida y difusa */
   .card-warm {
     background-color: rgb(var(--c-graphite));
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
   }
 
-  /* Antetítulo en píldora: jerarquía clara sobre fondos claros u oscuros */
+  /* Antetítulo editorial: línea fina + versalitas espaciadas */
   .kicker-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.35rem 0.85rem;
-    border-radius: 9999px;
-    border: 1px solid rgba(205, 134, 81, 0.45);
-    background: rgba(205, 134, 81, 0.1);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
+    gap: 0.75rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: rgb(var(--c-accent));
   }
   .kicker-pill::before {
     content: '';
-    width: 0.45rem;
-    height: 0.45rem;
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  /* Títulos de sección: serif con carácter, interlineado apretado */
+  .display-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    color: rgb(var(--c-bone));
+    font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
+    text-wrap: balance;
+  }
+
+  /* Bajada de sección: limpia y aireada */
+  .lead {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgb(var(--c-muted));
+  }
+
+  /* Botón principal de alto contraste (carbón sobre claro, crema sobre oscuro) */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
     border-radius: 9999px;
-    background: #cd8651;
+    padding: 1rem 1.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: #1e1a16;
+    color: #f6e8c7;
+    box-shadow: 0 14px 30px -14px rgba(30, 26, 22, 0.55);
+    transition: background-color 0.35s ease, color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .btn-primary:hover {
+    background: #9a5b1e;
+    color: #fcf6e9;
+    transform: translateY(-1px);
+    box-shadow: 0 18px 36px -14px rgba(154, 91, 30, 0.6);
+  }
+  .theme-dark .btn-primary {
+    background: #f6e8c7;
+    color: #1e1a16;
+    box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6);
+  }
+  .theme-dark .btn-primary:hover {
+    background: #e3a857;
+    color: #1e1a16;
+  }
+
+  /* Botón secundario: contorno fino */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 9999px;
+    padding: 1rem 1.6rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(var(--c-bone));
+    border: 1px solid rgb(var(--c-bone) / 0.25);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  .btn-ghost:hover {
+    border-color: rgb(var(--c-accent));
+    background-color: rgb(var(--c-bone) / 0.05);
+  }
+
+  /* Botón circular con icono (redes sociales) */
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 9999px;
+    color: rgb(var(--c-bone));
+    border: 1px solid rgb(var(--c-bone) / 0.2);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .icon-btn:hover {
+    color: rgb(var(--c-accent));
+    border-color: rgb(var(--c-accent));
+    transform: translateY(-2px);
+  }
+
+  /* Etiqueta pequeña tipo ficha técnica */
+  .spec-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--c-muted));
   }
 }
 
@@ -131,55 +251,31 @@
     overflow-x: hidden;
   }
 
+  /* Cormorant usa cifras antiguas por defecto: forzamos cifras de caja alta en datos */
+  .font-serif,
+  .display-title {
+    font-variant-numeric: lining-nums;
+  }
+
   ::selection {
-    background: rgba(205, 134, 81, 0.35);
+    background: rgba(184, 114, 44, 0.3);
   }
 }
 
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #f6e8c7; }
-::-webkit-scrollbar-thumb { background: linear-gradient(#e0a860, #cd8651); border-radius: 4px; }
-
-/* =====================================================================
-   PANAL DE ABEJA (solo en secciones oscuras)
-   Trazo más grueso y contrastado para que el hexágono se distinga;
-   las máscaras lo concentran en bordes/esquinas para no competir con el texto.
-   ===================================================================== */
-.honeycomb-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0 34.64 10v20L17.32 40 0 30V10zM17.32 40v20' fill='none' stroke='%23E9B25C' stroke-opacity='.26' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-size: 46px 80px;
-}
-
-.honeycomb-top {
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 90%);
-  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 90%);
-}
-.honeycomb-corner-tr {
-  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 100% 0%, #000 15%, transparent 78%);
-  mask-image: radial-gradient(ellipse 60% 70% at 100% 0%, #000 15%, transparent 78%);
-}
-.honeycomb-corner-bl {
-  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 0% 100%, #000 15%, transparent 78%);
-  mask-image: radial-gradient(ellipse 60% 70% at 0% 100%, #000 15%, transparent 78%);
-}
+::-webkit-scrollbar-thumb { background: linear-gradient(#d9a35f, #b8722c); border-radius: 4px; }
 
 /* =====================================================================
    DETALLES DE MARCA
    ===================================================================== */
 .ragko-medallion {
   background-color: #f6e8c7;
-  border: 2.5px solid #cd8651;
-  box-shadow: 0 0 0 5px rgb(var(--c-graphite)), 0 12px 30px rgba(43, 33, 24, 0.22);
+  border: 1.5px solid #b8722c;
+  box-shadow: 0 0 0 4px rgb(var(--c-graphite)), 0 12px 30px rgba(30, 26, 22, 0.2);
 }
 .theme-dark .ragko-medallion {
-  box-shadow: 0 0 0 5px rgb(var(--c-graphite)), 0 12px 30px rgba(0, 0, 0, 0.55);
-}
-
-.whatsapp-glow {
-  box-shadow: 0 10px 35px -5px rgba(205, 134, 81, 0.4), 0 0 0 1px rgba(246, 232, 199, 0.3);
-}
-.whatsapp-glow:hover {
-  box-shadow: 0 16px 45px -4px rgba(205, 134, 81, 0.55), 0 0 0 1px rgba(246, 232, 199, 0.5);
+  box-shadow: 0 0 0 4px rgba(246, 232, 199, 0.08), 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* Ornamento: líneas con hexágono central */
@@ -208,7 +304,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-up {
-  animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Revelado al hacer scroll (la clase .reveal la agrega la directiva solo en el navegador,
