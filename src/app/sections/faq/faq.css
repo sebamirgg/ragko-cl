@@ -1,0 +1,23 @@
+/* Acordeón: altura animada con grid-template-rows */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.panel.is-open {
+  grid-template-rows: 1fr;
+}
+.panel > div {
+  overflow: hidden;
+}
+
+.hex-shape {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.item.is-open .hex-shape {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel, .hex-shape { transition: none; }
+}

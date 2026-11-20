@@ -1,0 +1,47 @@
+<section id="ruta-do" aria-labelledby="ruta-title" class="relative py-24 sm:py-32 bg-charcoal border-b border-line overflow-hidden">
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <app-section-heading
+      class="max-w-3xl mx-auto mb-16"
+      titleId="ruta-title"
+      [kicker]="t().roadmap.kicker"
+      [title]="t().roadmap.title"
+      [subtitle]="t().roadmap.subtitle" />
+
+    <!-- Cuatro fases -->
+    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+      @for (step of t().roadmap.steps; track $index; let i = $index; let even = $even) {
+        <li appReveal [revealDelay]="i * 100"
+            class="bg-graphite p-6 rounded-3xl border border-line border-t-4"
+            [class.border-t-terracotta]="even"
+            [class.border-t-cream]="!even">
+          <div class="flex items-center justify-between gap-2 text-xs font-bold mb-3"
+               [class.text-terracotta]="even" [class.text-cream]="!even">
+            <span class="uppercase">{{ t().roadmap.phase }} 0{{ i + 1 }}</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-obsidian"
+                  [class.text-cream]="even" [class.text-terracotta]="!even">{{ step.months }}</span>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-bone mb-2">{{ step.title }}</h3>
+          <p class="text-xs text-muted leading-relaxed">{{ step.desc }}</p>
+        </li>
+      }
+    </ol>
+
+    <!-- Referentes internacionales -->
+    <div class="bg-obsidian rounded-3xl p-6 sm:p-8 border border-line" appReveal>
+      <div class="text-xs font-bold uppercase tracking-[0.2em] text-terracotta mb-5">{{ t().roadmap.benchKicker }}</div>
+      <div class="grid md:grid-cols-2 gap-6">
+        @for (bench of t().roadmap.benchmarks; track bench.code) {
+          <div class="bg-graphite p-5 rounded-2xl border border-line flex items-start gap-4">
+            <div class="w-11 h-11 rounded-full bg-cream border-2 border-terracotta text-obsidian flex items-center justify-center font-bold text-xs shrink-0">
+              {{ bench.code }}
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-bone">{{ bench.name }}</h4>
+              <p class="text-xs text-muted mt-1 leading-relaxed">{{ bench.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

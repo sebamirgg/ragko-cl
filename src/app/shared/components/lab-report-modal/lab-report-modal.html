@@ -1,0 +1,65 @@
+@if (ui.labReportOpen()) {
+  <div (click)="ui.closeLabReport()" class="fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lab-modal-title"
+      (click)="$event.stopPropagation()"
+      class="bg-graphite text-bone rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-terracotta animate-fade-up max-h-[90vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-4 border-b border-line pb-4 mb-5">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-terracotta">{{ t().lab.kicker }}</span>
+          <h3 id="lab-modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-cream">{{ t().lab.title }}</h3>
+        </div>
+        <button
+          type="button"
+          (click)="ui.closeLabReport()"
+          [attr.aria-label]="t().common.close"
+          class="shrink-0 w-9 h-9 rounded-full bg-obsidian text-cream hover:bg-terracotta hover:text-obsidian flex items-center justify-center transition cursor-pointer">
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs text-muted">
+        <p>
+          {{ t().lab.introBefore }} <strong class="text-bone">Meliflora SpA</strong> {{ t().lab.introAfter }}
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          @for (item of reports; track item.honey) {
+            <div class="p-4 rounded-2xl bg-charcoal border border-line">
+              <div class="font-bold text-cream text-sm">
+                {{ i18n.format(t().lab.reportTitle, { report: item.report.report, honey: t().honeys[item.honey].name }) }}
+              </div>
+              <div class="text-[11px] text-terracotta mb-2">
+                {{ i18n.format(t().lab.sampleLine, { sample: item.report.sample, grains: i18n.integer(item.report.totalGrains) }) }}
+              </div>
+              <ul class="space-y-1">
+                @for (share of item.shares; track share.species) {
+                  <li>
+                    •
+                    @if (share.isPrimary) {
+                      <strong class="text-bone">{{ species[share.species].scientific }} ({{ t().pollen.names[share.species] }}): {{ i18n.decimal(share.percentage) }}%</strong>
+                    } @else {
+                      {{ species[share.species].scientific }} ({{ t().pollen.names[share.species] }}): {{ i18n.decimal(share.percentage) }}%
+                    }
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap justify-end gap-3">
+        <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
+           class="px-5 py-2.5 rounded-full bg-terracotta text-obsidian text-xs font-bold uppercase tracking-wider hover:bg-cream transition">
+          {{ t().lab.requestButton }}
+        </a>
+        <button type="button" (click)="ui.closeLabReport()"
+                class="px-5 py-2.5 rounded-full bg-obsidian border border-line text-bone text-xs font-bold uppercase tracking-wider cursor-pointer">
+          {{ t().common.close }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

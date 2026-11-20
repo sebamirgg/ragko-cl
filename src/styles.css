@@ -1,1 +1,113 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+   BASE
+   ===================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem; /* compensa el header fijo al navegar por anclas */
+  }
+
+  body {
+    @apply bg-obsidian text-bone font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(242, 181, 68, 0.35);
+    color: #f8f9fa;
+  }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0e1012; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#f2b544, #e08244); border-radius: 4px; }
+
+/* =====================================================================
+   PANAL DE ABEJA (fondo decorativo)
+   ===================================================================== */
+.honeycomb-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpath d='M17.32 0 34.64 10v20L17.32 40 0 30V10zM17.32 40v20' fill='none' stroke='%23F2B544' stroke-opacity='.11' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 46px 80px;
+}
+
+/* Variantes de desvanecimiento para ir alternando entre secciones */
+.honeycomb-top {
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+}
+.honeycomb-corner-tr {
+  -webkit-mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 10%, transparent 75%);
+}
+.honeycomb-corner-bl {
+  -webkit-mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 10%, transparent 75%);
+}
+
+/* =====================================================================
+   DETALLES DE MARCA
+   ===================================================================== */
+.ragko-medallion {
+  background-color: #fce8c3;
+  border: 2.5px solid #e08244;
+  box-shadow: 0 0 0 5px #1a1d21, 0 12px 30px rgba(0, 0, 0, 0.55);
+}
+
+.whatsapp-glow {
+  box-shadow: 0 10px 35px -5px rgba(224, 130, 68, 0.35), 0 0 0 1px rgba(252, 232, 195, 0.25);
+}
+.whatsapp-glow:hover {
+  box-shadow: 0 16px 45px -4px rgba(224, 130, 68, 0.55), 0 0 0 1px rgba(252, 232, 195, 0.5);
+}
+
+/* Ornamento: líneas doradas con hexágono central */
+.hex-ornament {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f2b544;
+}
+.hex-ornament::before,
+.hex-ornament::after {
+  content: '';
+  height: 1px;
+  width: 56px;
+  background: linear-gradient(90deg, transparent, rgba(242, 181, 68, 0.7));
+}
+.hex-ornament::after {
+  background: linear-gradient(90deg, rgba(242, 181, 68, 0.7), transparent);
+}
+
+/* =====================================================================
+   ANIMACIONES
+   ===================================================================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Revelado al hacer scroll (la clase .reveal la agrega la directiva solo en el navegador,
+   así el HTML renderizado en servidor siempre es visible aunque falle el JS) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-fade-up { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

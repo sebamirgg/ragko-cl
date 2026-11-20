@@ -1,0 +1,63 @@
+<section id="ciencia" aria-labelledby="ciencia-title" class="relative py-24 sm:py-32 bg-charcoal border-b border-line overflow-hidden">
+  <div class="absolute inset-0 honeycomb-bg honeycomb-corner-tr pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14" appReveal>
+      <div class="max-w-2xl space-y-3">
+        <span class="block text-xs font-bold uppercase tracking-[0.24em] text-terracotta">{{ t().science.kicker }}</span>
+        <h2 id="ciencia-title" class="font-serif text-3xl sm:text-5xl font-semibold text-bone leading-tight">{{ t().science.title }}</h2>
+        <p class="text-sm sm:text-base text-muted">{{ t().science.subtitle }}</p>
+      </div>
+      <button type="button" (click)="ui.openLabReport()"
+              class="self-start lg:self-end inline-flex items-center gap-2.5 bg-graphite hover:bg-cream text-cream hover:text-obsidian border border-terracotta font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition cursor-pointer shadow-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <span>{{ t().science.reportButton }}</span>
+      </button>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      @for (item of reports; track item.honey; let i = $index) {
+        <article class="bg-graphite rounded-3xl p-6 sm:p-8 border border-line" appReveal [revealDelay]="i * 120">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4 mb-6">
+            <div>
+              <span class="text-[11px] font-mono uppercase text-terracotta font-bold">
+                {{ i18n.format(t().science.reportLabel, { report: item.report.report }) }}
+              </span>
+              <h3 class="font-serif text-2xl font-semibold text-bone">
+                {{ item.honey === 'ulmo' ? t().science.ulmoTitle : t().science.tineoTitle }}
+              </h3>
+            </div>
+            <div class="text-left sm:text-right text-xs text-muted">
+              <div>{{ t().science.total }}: <strong class="text-cream">{{ i18n.integer(item.report.totalGrains) }} {{ t().science.grains }}</strong></div>
+              <div>{{ i18n.format(t().science.sample, { sample: item.report.sample }) }}</div>
+            </div>
+          </div>
+
+          <ul class="space-y-4">
+            @for (share of item.shares; track share.species) {
+              <li>
+                <div class="flex justify-between gap-3 text-xs mb-1.5">
+                  <div>
+                    <span class="font-semibold text-bone">{{ t().pollen.names[share.species] }}</span>
+                    <span class="italic text-muted ml-1.5">({{ species[share.species].scientific }})</span>
+                  </div>
+                  <div class="font-mono shrink-0">
+                    <span class="text-muted mr-2">{{ share.grains }} {{ t().science.grainsShort }}</span>
+                    <span [class]="share.isPrimary ? 'text-cream font-bold' : 'text-bone'">{{ i18n.decimal(share.percentage) }}%</span>
+                  </div>
+                </div>
+                <div class="w-full h-2.5 bg-obsidian rounded-full overflow-hidden">
+                  <div [style.width.%]="share.percentage"
+                       [class]="share.isPrimary ? 'bg-cream' : 'bg-terracotta'"
+                       class="h-full rounded-full transition-all duration-700"></div>
+                </div>
+              </li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>

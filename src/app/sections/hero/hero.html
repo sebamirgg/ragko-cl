@@ -1,0 +1,126 @@
+<section id="hero" aria-labelledby="hero-title" class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden bg-obsidian">
+  <!-- Fotografía de fondo -->
+  <div class="absolute inset-0 z-0">
+    <img
+      [src]="images.heroApiary.src"
+      [alt]="t().hero.backgroundAlt"
+      [width]="images.heroApiary.width"
+      [height]="images.heroApiary.height"
+      fetchpriority="high"
+      decoding="async"
+      class="w-full h-full object-cover object-center scale-105 opacity-45" />
+    <div class="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/[0.88] to-obsidian/50"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-obsidian/70"></div>
+  </div>
+
+  <app-bee flight="a" class="absolute hidden md:block w-9 h-8 top-[18%] right-[8%] z-[5] opacity-80" />
+  <app-bee flight="b" class="absolute hidden lg:block w-6 h-5 bottom-[14%] left-[46%] z-[5] opacity-60" />
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+      <!-- Narrativa principal -->
+      <div class="lg:col-span-7 space-y-7 animate-fade-up">
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-graphite/90 border border-terracotta/40 text-xs tracking-[0.2em] uppercase text-cream">
+          <span class="w-2 h-2 rounded-full bg-terracotta animate-pulse"></span>
+          <span>{{ t().hero.kicker }}</span>
+        </div>
+
+        <h1 id="hero-title" class="font-serif text-4xl sm:text-6xl lg:text-[66px] font-semibold leading-[1.06] tracking-tight text-bone">
+          {{ t().hero.title }}
+        </h1>
+
+        <p class="text-base sm:text-lg text-muted leading-relaxed max-w-2xl font-light">
+          {{ t().hero.subtitle }}
+        </p>
+
+        <!-- Medallones identitarios -->
+        <div class="pt-2">
+          <div class="text-[10px] uppercase tracking-[0.24em] text-terracotta font-bold mb-3.5">
+            {{ t().hero.medallionsLabel }}
+          </div>
+          <div class="flex flex-wrap items-center gap-4 sm:gap-5">
+            <a href="#mieles" class="group flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ragko-medallion flex items-center justify-center group-hover:-translate-y-1 transition-transform duration-300">
+                <span class="text-xl sm:text-2xl font-bold text-terracotta tracking-tight">Ra</span>
+              </div>
+              <span class="text-[11px] font-semibold text-bone/90 group-hover:text-cream transition">{{ t().hero.medallions.products }}</span>
+            </a>
+            <a href="#ciencia" class="group flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ragko-medallion flex items-center justify-center group-hover:-translate-y-1 transition-transform duration-300">
+                <span class="text-xl sm:text-2xl font-bold text-terracotta">g</span>
+              </div>
+              <span class="text-[11px] font-semibold text-bone/90 group-hover:text-cream transition">{{ t().hero.medallions.quality }}</span>
+            </a>
+            <a href="#territorio" class="group flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ragko-medallion flex items-center justify-center group-hover:-translate-y-1 transition-transform duration-300">
+                <span class="text-xl sm:text-2xl font-bold text-terracotta">k</span>
+                <app-ragko-mark class="w-3.5 h-3.5 text-terracotta mt-1" [strokeWidth]="9" />
+              </div>
+              <span class="text-[11px] font-semibold text-bone/90 group-hover:text-cream transition">{{ t().hero.medallions.origin }}</span>
+            </a>
+            <a href="#contacto" class="group flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ragko-medallion flex items-center justify-center group-hover:-translate-y-1 transition-transform duration-300">
+                <app-ragko-mark class="w-8 h-8 text-terracotta" />
+              </div>
+              <span class="text-[11px] font-semibold text-bone/90 group-hover:text-cream transition">{{ t().hero.medallions.alliances }}</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center gap-4 pt-3">
+          <a [href]="contact.whatsappUrl()" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-3 bg-terracotta hover:bg-cream text-obsidian font-bold text-sm px-7 py-4 rounded-full transition-all duration-300 whatsapp-glow">
+            <app-whatsapp-icon class="w-5 h-5" />
+            <span>{{ t().hero.ctaWhatsapp }}</span>
+          </a>
+          <a href="#galeria"
+             class="inline-flex items-center gap-2 bg-graphite/85 hover:bg-line text-bone border border-line hover:border-terracotta/50 font-medium text-sm px-7 py-4 rounded-full transition">
+            <span>{{ t().hero.ctaExplore }}</span>
+            <svg class="w-4 h-4 text-terracotta" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta de producto -->
+      <div class="lg:col-span-5 animate-fade-up" style="animation-delay: 120ms">
+        <div class="relative rounded-3xl bg-charcoal border border-line p-5 sm:p-6 shadow-2xl group overflow-hidden">
+          <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden">
+            <img
+              [src]="images.honeycombCloseUp.src"
+              [alt]="t().hero.card.imageAlt"
+              [width]="images.honeycombCloseUp.width"
+              [height]="images.honeycombCloseUp.height"
+              decoding="async"
+              class="w-full h-full object-cover object-[50%_40%] group-hover:scale-105 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent"></div>
+            <div class="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-terracotta/60 text-[11px] font-bold text-cream tracking-wider uppercase">
+              {{ t().hero.card.seal }}
+            </div>
+            <div class="absolute bottom-4 left-4 right-4">
+              <span class="text-[10px] uppercase tracking-[0.22em] text-terracotta font-bold block">{{ t().hero.card.kicker }}</span>
+              <p class="font-serif text-2xl sm:text-3xl font-semibold text-bone">{{ t().hero.card.title }}</p>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-2 gap-3.5 text-xs">
+            <div class="p-3.5 rounded-2xl bg-graphite border border-line">
+              <span class="text-muted block text-[11px]">{{ t().hero.card.stat1Label }}</span>
+              <span class="font-bold text-cream text-lg">{{ t().hero.card.stat1Value }}</span>
+              <span class="text-[10px] text-terracotta block font-medium">{{ t().hero.card.stat1Note }}</span>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-graphite border border-line">
+              <span class="text-muted block text-[11px]">{{ t().hero.card.stat2Label }}</span>
+              <span class="font-bold text-bone text-lg">{{ t().hero.card.stat2Value }}</span>
+              <span class="text-[10px] text-terracotta block font-medium">{{ t().hero.card.stat2Note }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
